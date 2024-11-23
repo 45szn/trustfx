@@ -38,7 +38,9 @@ export default function ForgotPasswordPage() {
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
         <div className="space-y-2">
           <Label htmlFor="email">Email</Label>
-          <Input id="email" {...register("email")} placeholder="m@example.com" type="email" />
+          <Input id="email" {...register("email")} placeholder="m@example.com" type="email" className={`${
+              errors.email ? "border-red-500" : "border-gray-300"
+            } focus:ring-0 focus:border-gray-300`} />
           {errors.email && <p className="text-red-500 text-sm">{errors.email.message}</p>}
         </div>
         <Button className="w-full" type="submit" disabled={isLoading}>
@@ -47,7 +49,7 @@ export default function ForgotPasswordPage() {
       </form>
       <div className="text-center text-sm">
         Remember your password?{" "}
-        <Link className="underline" href="/auth/login">
+        <Link className="underline" href="/login">
           Login
         </Link>
       </div>
