@@ -1,4 +1,5 @@
 "use client";
+export const dynamic = "force-dynamic";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -36,8 +37,12 @@ export default function ForgotPasswordPage() {
   const onSubmit = async (data: ForgotPasswordFormValues) => {
     setServerError(null);
     try {
+      if (typeof window === "undefined") {
+        throw new Error("This action can only run in the browser.");
+      }
+  
       const actionCodeSettings = {
-        url: `http://localhost:3000/resetPassword`,
+        url: `${process.env.NEXT_PUBLIC_BASE_URL}/resetPassword`,
         handleCodeInApp: true,
       };
   
@@ -46,12 +51,11 @@ export default function ForgotPasswordPage() {
       toast({
         description: "Reset link sent! Please check your email.",
       });
-      // router.push("/dashHome");
 
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
-      console.error("Registration error:", error.message);
-      setServerError(error.message || "An error occurred during registration.");
+      console.error("Error sending reset email:", error.message);
+      setServerError(error.message || "An error occurred. Please try again.");
     }
   };
 
