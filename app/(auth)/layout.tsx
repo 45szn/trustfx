@@ -1,5 +1,5 @@
-import { ReactNode } from 'react'
-import { PageTransition } from '@/components/PageTransition';
+import { ReactNode } from "react";
+import { PageTransition } from "@/components/PageTransition";
 
 export default function AuthLayout({ children }: { children: ReactNode }) {
   return (
@@ -8,6 +8,5 @@ export default function AuthLayout({ children }: { children: ReactNode }) {
         <PageTransition>{children}</PageTransition>
       </div>
     </div>
-  )
+  );
 }
-

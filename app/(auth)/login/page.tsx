@@ -9,7 +9,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { useState } from "react";
 import { Alert, AlertDescription } from "@/components/ui/alert";
-import { useToast } from "@/hooks/use-toast"
+import { useToast } from "@/hooks/use-toast";
 
 const loginSchema = z.object({
   email: z.string().email({ message: "Invalid email address" }),
@@ -46,7 +46,8 @@ export default function Login() {
       await new Promise((resolve) => setTimeout(resolve, 1000));
       reset();
       toast({
-        description: "Login successfully!",})
+        description: "Login successfully!",
+      });
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (error) {
       setServerError("An error occurred during login. Please try again.");

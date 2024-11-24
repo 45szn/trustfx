@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "prettier": "npx prettier --write ./src/**/*.{js,ts,jsx,tsx}"
+    "prettier": "npx prettier --write ./app/**/*.{js,ts,jsx,tsx}"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.1.0",
