@@ -8,6 +8,11 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { useState } from "react";
+import { Loader } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { sendPasswordResetEmail } from "firebase/auth";
+import { auth } from "@/firebase";
 
 const forgotPasswordSchema = z.object({
   email: z.string().email({ message: "Invalid email address" }),
@@ -16,21 +21,38 @@ const forgotPasswordSchema = z.object({
 type ForgotPasswordFormValues = z.infer<typeof forgotPasswordSchema>;
 
 export default function ForgotPasswordPage() {
-  const [isLoading, setIsLoading] = useState(false);
+  const [serverError, setServerError] = useState<string | null>(null);
+  const { toast } = useToast();
+
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitting },
+    reset,
   } = useForm<ForgotPasswordFormValues>({
     resolver: zodResolver(forgotPasswordSchema),
   });
 
   const onSubmit = async (data: ForgotPasswordFormValues) => {
-    setIsLoading(true);
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-    console.log(data);
-    setIsLoading(false);
+    setServerError(null);
+    try {
+      const actionCodeSettings = {
+        url: `http://localhost:3000/resetPassword`,
+        handleCodeInApp: true,
+      };
+  
+      await sendPasswordResetEmail(auth, data.email, actionCodeSettings);
+      reset();
+      toast({
+        description: "Reset link sent! Please check your email.",
+      });
+      // router.push("/dashHome");
+
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
+      console.error("Registration error:", error.message);
+      setServerError(error.message || "An error occurred during registration.");
+    }
   };
 
   return (
@@ -58,8 +80,22 @@ export default function ForgotPasswordPage() {
             <p className="text-red-500 text-sm">{errors.email.message}</p>
           )}
         </div>
-        <Button className="w-full" type="submit" disabled={isLoading}>
-          {isLoading ? "Sending reset link..." : "Send reset link"}
+
+        {serverError && (
+          <Alert variant="destructive">
+            <AlertDescription>{serverError}</AlertDescription>
+          </Alert>
+        )}
+
+        <Button className="w-full" type="submit" disabled={isSubmitting}>
+          {isSubmitting ? (
+            <>
+              <Loader className="mr-2 h-4 w-4 animate-spin" />
+              Sending reset link...
+            </>
+          ) : (
+            "Send reset link"
+          )}
         </Button>
       </form>
       <div className="text-center text-sm">

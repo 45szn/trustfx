@@ -38,7 +38,7 @@ type RegisterFormValues = z.infer<typeof registerSchema>;
 
 export default function Register() {
   const [serverError, setServerError] = useState<string | null>(null);
-  const [passwordVisible, setPasswordVisible] = useState(false);
+  const [passwordVisible, setPasswordVisible] = useState(true);
   const router = useRouter();
   const { toast } = useToast();
 
@@ -121,7 +121,7 @@ export default function Register() {
           <div className="relative">
             <Input
               id="password"
-              type={passwordVisible ? "text" : "password"}
+              type={passwordVisible ? "password" : "true"}
               {...register("password")}
               placeholder="Enter your password"
               className={`${
@@ -153,7 +153,7 @@ export default function Register() {
               id="confirm-password"
               {...register("confirmPassword")}
               placeholder="Confirm your password"
-              type={passwordVisible ? "text" : "password"}
+              type={passwordVisible ? "password" : "true"}
               className={`${
                 errors.confirmPassword ? "border-red-500" : "border-gray-300"
               } focus:ring-0 focus:border-gray-300 pr-10`}
@@ -187,8 +187,8 @@ export default function Register() {
         <Button className="w-full" type="submit" disabled={isSubmitting}>
           {isSubmitting ? (
             <>
-              <Loader className="mr-2 h-4 w-4 animate-spin" /> Creating
-              account...
+              <Loader className="mr-2 h-4 w-4 animate-spin" />
+              Creating account...
             </>
           ) : (
             "Create account"
