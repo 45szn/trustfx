@@ -40,6 +40,10 @@ export default function ForgotPasswordPage() {
       if (typeof window === "undefined") {
         throw new Error("This action can only run in the browser.");
       }
+
+      if (!auth) {
+        throw new Error("Auth is not initialized. Ensure this is running on the client.");
+      }
   
       const actionCodeSettings = {
         url: `${process.env.NEXT_PUBLIC_BASE_URL}/resetPassword`,

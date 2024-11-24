@@ -57,6 +57,11 @@ export default function ResetPassword() {
       if (!oobCode) {
         throw new Error("Invalid or missing reset code.");
       }
+
+      if (!auth) {
+        throw new Error("Auth is not initialized. Ensure this is running on the client.");
+      }
+      
       // Confirm the password reset
       await confirmPasswordReset(auth, oobCode, data.newPassword);
       reset();
