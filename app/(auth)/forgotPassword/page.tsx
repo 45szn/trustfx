@@ -1,5 +1,4 @@
 "use client";
-export const dynamic = "force-dynamic";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -39,10 +38,6 @@ export default function ForgotPasswordPage() {
     try {
       if (typeof window === "undefined") {
         throw new Error("This action can only run in the browser.");
-      }
-
-      if (!auth) {
-        throw new Error("Auth is not initialized. Ensure this is running on the client.");
       }
   
       const actionCodeSettings = {

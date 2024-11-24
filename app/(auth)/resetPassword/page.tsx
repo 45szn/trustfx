@@ -1,5 +1,4 @@
 "use client";
-export const dynamic = "force-dynamic";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -61,7 +60,7 @@ export default function ResetPassword() {
       if (!auth) {
         throw new Error("Auth is not initialized. Ensure this is running on the client.");
       }
-      
+
       // Confirm the password reset
       await confirmPasswordReset(auth, oobCode, data.newPassword);
       reset();
