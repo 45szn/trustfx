@@ -10,6 +10,10 @@ import * as z from "zod";
 import { useState } from "react";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { useToast } from "@/hooks/use-toast";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "@/firebase";
+import { useRouter } from "next/navigation";
+import { Loader, Eye, EyeOff } from "lucide-react";
 
 const loginSchema = z.object({
   email: z.string().email({ message: "Invalid email address" }),
@@ -25,7 +29,8 @@ type LoginFormValues = z.infer<typeof loginSchema>;
 
 export default function Login() {
   const [serverError, setServerError] = useState<string | null>(null);
-
+  const [passwordVisible, setPasswordVisible] = useState(false);
+  const router = useRouter();
   const { toast } = useToast();
 
   const {
@@ -40,17 +45,24 @@ export default function Login() {
   const onSubmit = async (data: LoginFormValues) => {
     setServerError(null);
     try {
-      // Here you would typically send a request to your authentication API
-      console.log("Login data:", data);
-      // Simulating an API call
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+      // Log in user in Firebase
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        data.email,
+        data.password,
+      );
+      console.log("User logged in:", userCredential.user);
+
       reset();
       toast({
-        description: "Login successfully!",
+        description: "Logged in successfully!",
       });
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    } catch (error) {
-      setServerError("An error occurred during login. Please try again.");
+      router.push("/dashHome");
+
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
+      console.error("Login error:", error.message);
+      setServerError(error.message || "An error occurred during login.");
     }
   };
 
@@ -79,17 +91,32 @@ export default function Login() {
             <p className="text-sm text-red-500">{errors.email.message}</p>
           )}
         </div>
-        <div className="space-y-2">
+
+        <div className="space-y-2 relative">
           <Label htmlFor="password">Password</Label>
-          <Input
-            id="password"
-            type="password"
-            {...register("password")}
-            placeholder="Enter your password"
-            className={`${
-              errors.password ? "border-red-500" : "border-gray-300"
-            } focus:ring-0 focus:border-gray-300`}
-          />
+          <div className="relative">
+            <Input
+              id="password"
+              type={passwordVisible ? "text" : "password"}
+              {...register("password")}
+              placeholder="Enter your password"
+              className={`${
+                errors.password ? "border-red-500" : "border-gray-300"
+              } focus:ring-0 focus:border-gray-300 pr-10`}
+            />
+            <button
+              type="button"
+              onClick={() => setPasswordVisible(!passwordVisible)}
+              className="absolute inset-y-0 right-0 flex items-center px-3 text-gray-500 hover:text-gray-700"
+              tabIndex={-1}
+            >
+              {passwordVisible ? (
+                <EyeOff className="w-5 h-5" />
+              ) : (
+                <Eye className="w-5 h-5" />
+              )}
+            </button>
+          </div>
           {errors.password && (
             <p className="text-sm text-red-500">{errors.password.message}</p>
           )}
@@ -100,13 +127,20 @@ export default function Login() {
             <AlertDescription>{serverError}</AlertDescription>
           </Alert>
         )}
+
         <Button type="submit" className="w-full" disabled={isSubmitting}>
-          {isSubmitting ? "Logging in..." : "Log in"}
+          {isSubmitting ? (
+            <>
+              <Loader className="mr-2 h-4 w-4 animate-spin" /> Logging in...
+            </>
+          ) : (
+            "Log in"
+          )}
         </Button>
       </form>
 
       <div className="text-center text-sm">
-        <Link className="underline" href="/forgot-password">
+        <Link className="underline" href="/forgotPassword">
           Forgot password?
         </Link>
       </div>
