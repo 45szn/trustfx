@@ -42,7 +42,7 @@ export default function ForgotPasswordPage() {
   
       const actionCodeSettings = {
         url: `${process.env.NEXT_PUBLIC_BASE_URL}/resetPassword`,
-        handleCodeInApp: false,
+        handleCodeInApp: true,
       };
   
       await sendPasswordResetEmail(auth, data.email, actionCodeSettings);
