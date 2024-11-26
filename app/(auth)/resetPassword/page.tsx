@@ -68,6 +68,7 @@ function ResetPasswordForm() {
         description: "Password reset successfully!",
       });
       router.push("/login");
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       console.error("reset error:", error.message);
       setServerError(error.message || "An error occurred while resetting.");
