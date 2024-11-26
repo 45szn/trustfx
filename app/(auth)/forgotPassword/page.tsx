@@ -53,8 +53,13 @@ export default function ForgotPasswordPage() {
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
-      console.error("Error sending reset email:", error.message);
-      setServerError(error.message || "An error occurred. Please try again.");
+      if (error.code === "auth/too-many-requests") {
+        setServerError(
+          "Too many attempts. Please wait a while before trying again."
+        );
+      } else {
+        setServerError(error.message || "An error occurred. Please try again.");
+      }
     }
   };
 
