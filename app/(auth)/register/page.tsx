@@ -75,41 +75,13 @@ export default function Register() {
       router.push("/Dashboard");
   
       return user; 
+
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       console.error("Registration error:", error.message);
       setServerError(error.message || "An error occurred during registration.");
     }
   };
-
-  // const onSubmit = async (data: RegisterFormValues) => {
-  //   setServerError(null);
-  //   try {
-  //     // Create user in Firebase
-  //     const userCredential = await createUserWithEmailAndPassword(
-  //       auth,
-  //       data.email,
-  //       data.password,
-  //     );
-  //     const user = userCredential.user;
-  //     console.log("User registered:", user);
-
-  //     await updateProfile(user, {
-  //       displayName: name,
-  //     });
-    
-  //     reset();
-  //     toast({
-  //       description: "Account registered successfully!",
-  //     });
-  //     router.push("/dashHome");
-
-  //     return user; 
-  //     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  //   } catch (error: any) {
-  //     console.error("Registration error:", error.message);
-  //     setServerError(error.message || "An error occurred during registration.");
-  //   }
-  // };
 
   return (
     <div className="space-y-6">
