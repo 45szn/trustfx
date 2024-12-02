@@ -57,7 +57,7 @@ export default function Login() {
       toast({
         description: "Logged in successfully!",
       });
-      router.push("/dashHome");
+      router.push("/Dashboard");
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
@@ -123,12 +123,16 @@ export default function Login() {
         </div>
 
         {serverError && (
-          <Alert variant="destructive">
+          <Alert variant="destructive" className="mt-2">
             <AlertDescription>{serverError}</AlertDescription>
           </Alert>
         )}
 
-        <Button type="submit" className="w-full mt-10 bg-gray-100 text-[#161616] hover:bg-[#b0b0b0]" disabled={isSubmitting}>
+        <Button
+          type="submit"
+          className="w-full mt-10 bg-gray-100 text-[#161616] hover:bg-[#b0b0b0]"
+          disabled={isSubmitting}
+        >
           {isSubmitting ? (
             <>
               <Loader className="mr-2 h-4 w-4 animate-spin" /> Logging in...

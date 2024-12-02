@@ -2,7 +2,7 @@
 import React from "react";
 import useAuth from "@/hooks/useAuth";
 
-const Dashboard = () => {
+const Transactions = () => {
   const { user } = useAuth();
 
   if (!user) {
@@ -11,9 +11,9 @@ const Dashboard = () => {
 
   return (
     <div>
-      <h1 className="text-5xl font-bold">Welcome {user.email}!</h1>
+      <h1 className="text-xl font-bold">Transactions</h1>
     </div>
   );
 };
 
-export default Dashboard;
+export default Transactions;

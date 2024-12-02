@@ -57,7 +57,9 @@ function ResetPasswordForm() {
       }
 
       if (!auth) {
-        throw new Error("Auth is not initialized. Ensure this is running on the client.");
+        throw new Error(
+          "Auth is not initialized. Ensure this is running on the client.",
+        );
       }
 
       // Confirm the password reset
@@ -67,7 +69,7 @@ function ResetPasswordForm() {
         description: "Password reset successfully!",
       });
       router.push("/login");
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       console.error("reset error:", error.message);
       setServerError(error.message || "An error occurred while resetting.");
@@ -153,7 +155,11 @@ function ResetPasswordForm() {
           </Alert>
         )}
 
-        <Button className="w-full mt-16 bg-gray-100 text-[#161616] hover:bg-[#b0b0b0]" type="submit" disabled={isSubmitting}>
+        <Button
+          className="w-full mt-16 bg-gray-100 text-[#161616] hover:bg-[#b0b0b0]"
+          type="submit"
+          disabled={isSubmitting}
+        >
           {isSubmitting ? (
             <>
               <Loader className="mr-2 h-4 w-4 animate-spin" />
