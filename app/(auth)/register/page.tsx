@@ -10,7 +10,7 @@ import * as z from "zod";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { Alert, AlertDescription } from "@/components/ui/alert";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth } from "@/firebase";
 import { useRouter } from "next/navigation";
 import { Loader, Eye, EyeOff } from "lucide-react";
@@ -58,15 +58,23 @@ export default function Register() {
       const userCredential = await createUserWithEmailAndPassword(
         auth,
         data.email,
-        data.password,
+        data.password
       );
-      console.log("User registered:", userCredential.user);
-
+      const user = userCredential.user;
+      console.log("User registered:", user);
+  
+      // Update the user's profile with the display name
+      await updateProfile(user, {
+        displayName: data.name, // Correctly reference `data.name`
+      });
+  
       reset();
       toast({
         description: "Account registered successfully!",
       });
-      router.push("/dashHome");
+      router.push("/Dashboard");
+  
+      return user; 
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
@@ -184,7 +192,11 @@ export default function Register() {
           </Alert>
         )}
 
-        <Button className="w-full mt-10 bg-gray-100 text-[#161616] hover:bg-[#b0b0b0]" type="submit" disabled={isSubmitting}>
+        <Button
+          className="w-full mt-10 bg-gray-100 text-[#161616] hover:bg-[#b0b0b0]"
+          type="submit"
+          disabled={isSubmitting}
+        >
           {isSubmitting ? (
             <>
               <Loader className="mr-2 h-4 w-4 animate-spin" />

@@ -39,23 +39,23 @@ export default function ForgotPasswordPage() {
       if (typeof window === "undefined") {
         throw new Error("This action can only run in the browser.");
       }
-  
+
       const actionCodeSettings = {
         url: `${process.env.NEXT_PUBLIC_BASE_URL}/resetPassword`,
         handleCodeInApp: true,
       };
-  
+
       await sendPasswordResetEmail(auth, data.email, actionCodeSettings);
       reset();
       toast({
         description: "Reset link sent! Please check your email.",
       });
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       if (error.code === "auth/too-many-requests") {
         setServerError(
-          "Too many attempts. Please wait a while before trying again."
+          "Too many attempts. Please wait a while before trying again.",
         );
       } else {
         setServerError(error.message || "An error occurred. Please try again.");
@@ -95,7 +95,11 @@ export default function ForgotPasswordPage() {
           </Alert>
         )}
 
-        <Button className="w-full mt-10 bg-gray-100 text-[#161616] hover:bg-[#b0b0b0]" type="submit" disabled={isSubmitting}>
+        <Button
+          className="w-full mt-10 bg-gray-100 text-[#161616] hover:bg-[#b0b0b0]"
+          type="submit"
+          disabled={isSubmitting}
+        >
           {isSubmitting ? (
             <>
               <Loader className="mr-2 h-4 w-4 animate-spin" />
