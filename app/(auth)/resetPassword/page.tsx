@@ -1,10 +1,9 @@
-// app/(auth)/resetPassword/page.tsx
 "use client";
 
 import { Suspense, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+// import { Label } from "@/components/ui/label";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -77,23 +76,25 @@ function ResetPasswordForm() {
 
   return (
     <div className="space-y-6">
-      <div className="space-y-2 text-center">
-        <h1 className="text-3xl font-bold">Reset Password</h1>
-        <p className="text-gray-500 dark:text-gray-400">
+      <div className="space-y-2">
+        <h1 className="text-3xl text-gray-100 font-bold">Reset Password</h1>
+        <p className="text-gray-200 dark:text-gray-400">
           Enter your new password below
         </p>
       </div>
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-8 mt-10">
         <div className="space-y-2">
-          <Label htmlFor="new-password">New Password</Label>
+          {/* <Label htmlFor="new-password">New Password</Label> */}
           <div className="relative">
             <Input
               id="new-password"
+              placeholder="Password"
               type={passwordVisible ? "password" : "text"}
               {...register("newPassword")}
               className={`${
                 errors.newPassword ? "border-red-500" : "border-gray-300"
-              } focus:ring-0 focus:border-gray-300 pr-10`}
+              } focus:ring-0 focus:border-b border-b rounded-none text-white`}
             />
             <button
               type="button"
@@ -114,15 +115,16 @@ function ResetPasswordForm() {
           )}
         </div>
         <div className="space-y-2">
-          <Label htmlFor="confirm-password">Confirm New Password</Label>
+          {/* <Label htmlFor="confirm-password">Confirm New Password</Label> */}
           <div className="relative">
             <Input
               id="confirm-password"
+              placeholder="Confirm Password"
               {...register("confirmPassword")}
               type={passwordVisible ? "password" : "text"}
               className={`${
                 errors.confirmPassword ? "border-red-500" : "border-gray-300"
-              } focus:ring-0 focus:border-gray-300 pr-10`}
+              } focus:ring-0 focus:border-b border-b rounded-none text-white`}
             />
             <button
               type="button"
@@ -151,7 +153,7 @@ function ResetPasswordForm() {
           </Alert>
         )}
 
-        <Button className="w-full" type="submit" disabled={isSubmitting}>
+        <Button className="w-full mt-16 bg-gray-100 text-[#161616] hover:bg-[#b0b0b0]" type="submit" disabled={isSubmitting}>
           {isSubmitting ? (
             <>
               <Loader className="mr-2 h-4 w-4 animate-spin" />
@@ -162,7 +164,8 @@ function ResetPasswordForm() {
           )}
         </Button>
       </form>
-      <div className="text-center text-sm">
+
+      <div className="text-center text-sm text-gray-100">
         Remember your password?{" "}
         <Link className="underline" href="/login">
           Login
