@@ -2,12 +2,27 @@
 import { ReactNode } from "react";
 import { PageTransition } from "@/components/PageTransition";
 import useAuth from "@/hooks/useAuth";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import { useEffect } from "react";
+import {
+  SidebarProvider,
+  SidebarTrigger,
+  SidebarInset,
+} from "@/components/ui/sidebar";
+import { AppSidebar } from "@/components/ui/app-sidebar";
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb";
 
 export default function DashboardLayout({ children }: { children: ReactNode }) {
   const { user, loading } = useAuth();
   const router = useRouter();
+  const pathname = usePathname();
 
   useEffect(() => {
     if (!loading && !user) {
@@ -20,37 +35,43 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
   }
 
   if (!user) {
-    return null; // Or handle this case differently, e.g., redirect
+    return null;
   }
 
+  const breadcrumbs = pathname.split("/").filter(Boolean);
+
   return (
-    <div className="flex items-center justify-center bg-gray-100">
-      {/* <h1 className="text-8xl font-bold">Welcome {user.displayName}!</h1> */}
-      <PageTransition>{children}</PageTransition>
-    </div>
+    <SidebarProvider>
+      <AppSidebar />
+      <SidebarInset>
+        <header className="flex h-10 shrink-0 items-center gap-2 border-b px-2">
+          <SidebarTrigger className="-ml-1" />
+          <Breadcrumb>
+            <BreadcrumbList>
+              {breadcrumbs.map((crumb, index) => {
+                const href = `/${breadcrumbs.slice(0, index + 1).join("/")}`;
+                return (
+                  <BreadcrumbItem key={href}>
+                    {index === breadcrumbs.length - 1 ? (
+                      <BreadcrumbPage className="lowercase">
+                        {crumb}
+                      </BreadcrumbPage>
+                    ) : (
+                      <>
+                        <BreadcrumbLink href={href} className="lowercase">
+                          {crumb}
+                        </BreadcrumbLink>
+                        <BreadcrumbSeparator />
+                      </>
+                    )}
+                  </BreadcrumbItem>
+                );
+              })}
+            </BreadcrumbList>
+          </Breadcrumb>
+        </header>
+        <PageTransition>{children}</PageTransition>
+      </SidebarInset>
+    </SidebarProvider>
   );
 }
-
-// // protected routes
-// import useAuth from "@/hooks/useAuth";
-// import { useRouter } from "next/navigation";
-// import { useEffect } from "react";
-
-// const ProtectedPage = () => {
-// const { user, loading } = useAuth();
-// const router = useRouter();
-
-// useEffect(() => {
-//   if (!loading && !user) {
-//     router.push("/login"); // Redirect to login if not authenticated
-//   }
-// }, [user, loading, router]);
-
-// if (loading) {
-//   return <p>Loading...</p>;
-// }
-
-//   return <p>Welcome, {user.email}!</p>;
-// };
-
-// export default ProtectedPage;

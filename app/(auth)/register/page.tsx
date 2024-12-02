@@ -184,7 +184,11 @@ export default function Register() {
           </Alert>
         )}
 
-        <Button className="w-full mt-10 bg-gray-100 text-[#161616] hover:bg-[#b0b0b0]" type="submit" disabled={isSubmitting}>
+        <Button
+          className="w-full mt-10 bg-gray-100 text-[#161616] hover:bg-[#b0b0b0]"
+          type="submit"
+          disabled={isSubmitting}
+        >
           {isSubmitting ? (
             <>
               <Loader className="mr-2 h-4 w-4 animate-spin" />
