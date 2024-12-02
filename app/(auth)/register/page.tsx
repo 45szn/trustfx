@@ -10,7 +10,7 @@ import * as z from "zod";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { Alert, AlertDescription } from "@/components/ui/alert";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth } from "@/firebase";
 import { useRouter } from "next/navigation";
 import { Loader, Eye, EyeOff } from "lucide-react";
@@ -58,22 +58,58 @@ export default function Register() {
       const userCredential = await createUserWithEmailAndPassword(
         auth,
         data.email,
-        data.password,
+        data.password
       );
-      console.log("User registered:", userCredential.user);
-
+      const user = userCredential.user;
+      console.log("User registered:", user);
+  
+      // Update the user's profile with the display name
+      await updateProfile(user, {
+        displayName: data.name, // Correctly reference `data.name`
+      });
+  
       reset();
       toast({
         description: "Account registered successfully!",
       });
-      router.push("/dashHome");
-
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      router.push("/Dashboard");
+  
+      return user; 
     } catch (error: any) {
       console.error("Registration error:", error.message);
       setServerError(error.message || "An error occurred during registration.");
     }
   };
+
+  // const onSubmit = async (data: RegisterFormValues) => {
+  //   setServerError(null);
+  //   try {
+  //     // Create user in Firebase
+  //     const userCredential = await createUserWithEmailAndPassword(
+  //       auth,
+  //       data.email,
+  //       data.password,
+  //     );
+  //     const user = userCredential.user;
+  //     console.log("User registered:", user);
+
+  //     await updateProfile(user, {
+  //       displayName: name,
+  //     });
+    
+  //     reset();
+  //     toast({
+  //       description: "Account registered successfully!",
+  //     });
+  //     router.push("/dashHome");
+
+  //     return user; 
+  //     // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  //   } catch (error: any) {
+  //     console.error("Registration error:", error.message);
+  //     setServerError(error.message || "An error occurred during registration.");
+  //   }
+  // };
 
   return (
     <div className="space-y-6">
