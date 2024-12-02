@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+// import { Label } from "@/components/ui/label";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -77,23 +77,23 @@ export default function Register() {
 
   return (
     <div className="space-y-6">
-      <div className="space-y-2 text-center">
-        <h1 className="text-3xl font-bold">Create an account</h1>
-        <p className="text-[gray-500] dark:text-gray-400">
+      <div className="space-y-2">
+        <h1 className="text-3xl text-gray-100 font-bold">Create an account</h1>
+        <p className="text-gray-200 dark:text-gray-400">
           Enter your information below to create your account
         </p>
       </div>
 
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+      <form onSubmit={handleSubmit(onSubmit)} className="mt-10 space-y-8">
         <div className="space-y-2">
-          <Label htmlFor="name">Name</Label>
+          {/* <Label htmlFor="name">Name</Label> */}
           <Input
             id="name"
             {...register("name")}
             placeholder="John Doe"
             className={`${
               errors.name ? "border-red-500" : "border-gray-300"
-            } focus:ring-0 focus:border-gray-300`}
+            } focus:ring-0 focus:border-b border-b rounded-none text-white`}
           />
           {errors.name && (
             <p className="text-red-500 text-sm">{errors.name.message}</p>
@@ -101,7 +101,7 @@ export default function Register() {
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="email">Email</Label>
+          {/* <Label htmlFor="email">Email</Label> */}
           <Input
             id="email"
             {...register("email")}
@@ -109,7 +109,7 @@ export default function Register() {
             type="email"
             className={`${
               errors.email ? "border-red-500" : "border-gray-300"
-            } focus:ring-0 focus:border-gray-300`}
+            } focus:ring-0 focus:border-b border-b rounded-none text-white`}
           />
           {errors.email && (
             <p className="text-red-500 text-sm">{errors.email.message}</p>
@@ -117,7 +117,7 @@ export default function Register() {
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="password">Password</Label>
+          {/* <Label htmlFor="password">Password</Label> */}
           <div className="relative">
             <Input
               id="password"
@@ -126,7 +126,7 @@ export default function Register() {
               placeholder="Enter your password"
               className={`${
                 errors.password ? "border-red-500" : "border-gray-300"
-              } focus:ring-0 focus:border-gray-300 pr-10`}
+              } focus:ring-0 focus:border-b border-b rounded-none text-white`}
             />
             <button
               type="button"
@@ -147,7 +147,7 @@ export default function Register() {
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="confirm-password">Confirm Password</Label>
+          {/* <Label htmlFor="confirm-password">Confirm Password</Label> */}
           <div className="relative">
             <Input
               id="confirm-password"
@@ -156,7 +156,7 @@ export default function Register() {
               type={passwordVisible ? "password" : "true"}
               className={`${
                 errors.confirmPassword ? "border-red-500" : "border-gray-300"
-              } focus:ring-0 focus:border-gray-300 pr-10`}
+              } focus:ring-0 focus:border-b border-b rounded-none text-white`}
             />
             <button
               type="button"
@@ -184,7 +184,7 @@ export default function Register() {
           </Alert>
         )}
 
-        <Button className="w-full" type="submit" disabled={isSubmitting}>
+        <Button className="w-full mt-10 bg-gray-100 text-[#161616] hover:bg-[#b0b0b0]" type="submit" disabled={isSubmitting}>
           {isSubmitting ? (
             <>
               <Loader className="mr-2 h-4 w-4 animate-spin" />
@@ -196,7 +196,7 @@ export default function Register() {
         </Button>
       </form>
 
-      <div className="text-center text-sm">
+      <div className="text-center text-sm text-gray-100">
         Already have an account?{" "}
         <Link className="underline" href="/login">
           Login

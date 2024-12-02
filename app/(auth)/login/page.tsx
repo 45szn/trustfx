@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+// import { Label } from "@/components/ui/label";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -68,24 +68,24 @@ export default function Login() {
 
   return (
     <div className="space-y-6">
-      <div className="space-y-2 text-center">
-        <h1 className="text-3xl font-bold">Login</h1>
-        <p className="text-gray-500 dark:text-gray-400">
-          Enter your email below to login to your account
+      <div className="space-y-2">
+        <h1 className="text-3xl text-gray-100 font-bold">Login</h1>
+        <p className="text-gray-200 dark:text-gray-400">
+          Enter your details below to login to your account.
         </p>
       </div>
 
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+      <form onSubmit={handleSubmit(onSubmit)} className="!mt-10">
         <div className="space-y-2">
-          <Label htmlFor="email">Email</Label>
+          {/* <Label htmlFor="email">Email</Label> */}
           <Input
             id="email"
             type="email"
             {...register("email")}
-            placeholder="Enter your email"
+            placeholder="Email"
             className={`${
               errors.email ? "border-red-500" : "border-gray-300"
-            } focus:ring-0 focus:border-gray-300`}
+            } focus:ring-0 focus:border-b border-b rounded-none text-white`}
           />
           {errors.email && (
             <p className="text-sm text-red-500">{errors.email.message}</p>
@@ -93,16 +93,16 @@ export default function Login() {
         </div>
 
         <div className="space-y-2 relative">
-          <Label htmlFor="password">Password</Label>
-          <div className="relative">
+          {/* <Label htmlFor="password">Password</Label> */}
+          <div className="relative mt-12">
             <Input
               id="password"
               type={passwordVisible ? "text" : "password"}
               {...register("password")}
-              placeholder="Enter your password"
+              placeholder="Password"
               className={`${
                 errors.password ? "border-red-500" : "border-gray-300"
-              } focus:ring-0 focus:border-gray-300 pr-10`}
+              } focus:ring-0 focus:border-b border-b rounded-none text-white`}
             />
             <button
               type="button"
@@ -128,7 +128,7 @@ export default function Login() {
           </Alert>
         )}
 
-        <Button type="submit" className="w-full" disabled={isSubmitting}>
+        <Button type="submit" className="w-full mt-10 bg-gray-100 text-[#161616] hover:bg-[#b0b0b0]" disabled={isSubmitting}>
           {isSubmitting ? (
             <>
               <Loader className="mr-2 h-4 w-4 animate-spin" /> Logging in...
@@ -140,12 +140,12 @@ export default function Login() {
       </form>
 
       <div className="text-center text-sm">
-        <Link className="underline" href="/forgotPassword">
+        <Link className="underline text-gray-100" href="/forgotPassword">
           Forgot password?
         </Link>
       </div>
 
-      <div className="text-center text-sm">
+      <div className="text-center text-sm text-gray-100">
         Don&apos;t have an account?{" "}
         <Link className="underline" href="/register">
           Register

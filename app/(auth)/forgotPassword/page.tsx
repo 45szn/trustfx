@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+// import { Label } from "@/components/ui/label";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -42,7 +42,7 @@ export default function ForgotPasswordPage() {
   
       const actionCodeSettings = {
         url: `${process.env.NEXT_PUBLIC_BASE_URL}/resetPassword`,
-        handleCodeInApp: false,
+        handleCodeInApp: true,
       };
   
       await sendPasswordResetEmail(auth, data.email, actionCodeSettings);
@@ -53,23 +53,28 @@ export default function ForgotPasswordPage() {
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
-      console.error("Error sending reset email:", error.message);
-      setServerError(error.message || "An error occurred. Please try again.");
+      if (error.code === "auth/too-many-requests") {
+        setServerError(
+          "Too many attempts. Please wait a while before trying again."
+        );
+      } else {
+        setServerError(error.message || "An error occurred. Please try again.");
+      }
     }
   };
 
   return (
     <div className="space-y-6">
-      <div className="space-y-2 text-center">
-        <h1 className="text-3xl font-bold">Forgot Password</h1>
-        <p className="text-gray-500 dark:text-gray-400">
+      <div className="space-y-2">
+        <h1 className="text-3xl text-gray-100 font-bold">Forgot Password</h1>
+        <p className="text-gray-200 dark:text-gray-400">
           Enter your email address and we&apos;ll send you a link to reset your
-          password
+          password.
         </p>
       </div>
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
         <div className="space-y-2">
-          <Label htmlFor="email">Email</Label>
+          {/* <Label htmlFor="email">Email</Label> */}
           <Input
             id="email"
             {...register("email")}
@@ -77,7 +82,7 @@ export default function ForgotPasswordPage() {
             type="email"
             className={`${
               errors.email ? "border-red-500" : "border-gray-300"
-            } focus:ring-0 focus:border-gray-300`}
+            } focus:ring-0 focus:border-b border-b rounded-none text-white`}
           />
           {errors.email && (
             <p className="text-red-500 text-sm">{errors.email.message}</p>
@@ -90,7 +95,7 @@ export default function ForgotPasswordPage() {
           </Alert>
         )}
 
-        <Button className="w-full" type="submit" disabled={isSubmitting}>
+        <Button className="w-full mt-10 bg-gray-100 text-[#161616] hover:bg-[#b0b0b0]" type="submit" disabled={isSubmitting}>
           {isSubmitting ? (
             <>
               <Loader className="mr-2 h-4 w-4 animate-spin" />
@@ -101,7 +106,7 @@ export default function ForgotPasswordPage() {
           )}
         </Button>
       </form>
-      <div className="text-center text-sm">
+      <div className="text-center text-sm text-gray-100">
         Remember your password?{" "}
         <Link className="underline" href="/login">
           Login
