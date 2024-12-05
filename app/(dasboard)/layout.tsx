@@ -1,4 +1,5 @@
 "use client";
+
 import { ReactNode } from "react";
 import { PageTransition } from "@/components/PageTransition";
 import useAuth from "@/hooks/useAuth";
@@ -30,10 +31,6 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
     }
   }, [user, loading, router]);
 
-  if (loading) {
-    return <p>Loading...</p>;
-  }
-
   if (!user) {
     return null;
   }
@@ -41,37 +38,37 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
   const breadcrumbs = pathname.split("/").filter(Boolean);
 
   return (
-    <SidebarProvider>
-      <AppSidebar />
-      <SidebarInset>
-        <header className="flex h-10 shrink-0 items-center gap-2 border-b px-2">
-          <SidebarTrigger className="-ml-1" />
-          <Breadcrumb>
-            <BreadcrumbList>
-              {breadcrumbs.map((crumb, index) => {
-                const href = `/${breadcrumbs.slice(0, index + 1).join("/")}`;
-                return (
-                  <BreadcrumbItem key={href}>
-                    {index === breadcrumbs.length - 1 ? (
-                      <BreadcrumbPage className="lowercase">
-                        {crumb}
-                      </BreadcrumbPage>
-                    ) : (
-                      <>
-                        <BreadcrumbLink href={href} className="lowercase">
-                          {crumb}
-                        </BreadcrumbLink>
-                        <BreadcrumbSeparator />
-                      </>
-                    )}
-                  </BreadcrumbItem>
-                );
-              })}
-            </BreadcrumbList>
-          </Breadcrumb>
-        </header>
-        <PageTransition>{children}</PageTransition>
-      </SidebarInset>
-    </SidebarProvider>
+    <div>
+      <SidebarProvider>
+        <AppSidebar />
+        <SidebarInset>
+          <header className="flex h-10 shrink-0 items-center gap-2 border-b px-2">
+            <SidebarTrigger className="-ml-1" />
+            <Breadcrumb>
+              <BreadcrumbList>
+                {breadcrumbs.map((crumb, index) => {
+                  const href = `/${breadcrumbs.slice(0, index + 1).join("/")}`;
+                  return (
+                    <BreadcrumbItem key={href}>
+                      {index === breadcrumbs.length - 1 ? (
+                        <BreadcrumbPage className="lowercase">{crumb}</BreadcrumbPage>
+                      ) : (
+                        <>
+                          <BreadcrumbLink href={href} className="lowercase">
+                            {crumb}
+                          </BreadcrumbLink>
+                          <BreadcrumbSeparator />
+                        </>
+                      )}
+                    </BreadcrumbItem>
+                  );
+                })}
+              </BreadcrumbList>
+            </Breadcrumb>
+          </header>
+          <PageTransition>{children}</PageTransition>
+        </SidebarInset>
+      </SidebarProvider>
+    </div>
   );
 }
