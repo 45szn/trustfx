@@ -19,6 +19,7 @@ import {
   SidebarFooter,
   SidebarHeader,
   useSidebar,
+  // SidebarTrigger
 } from "@/components/ui/sidebar";
 import { 
   DropdownMenu, 
@@ -65,7 +66,7 @@ export function AppSidebar() {
 
   return (
     <Sidebar collapsible="icon">
-      <SidebarHeader className="p-4">
+      <SidebarHeader className="p-4 mt-6">
         <div className="w-full flex justify-start gap-4 items-center">
           <Building2 className="h-8 w-8" />
           <span className={`text-2xl font-bold text-gray-800 ${state === "collapsed" ? "hidden" : ""}`}>TrustFX</span>

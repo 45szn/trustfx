@@ -19,6 +19,7 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
+import { Search, Moon, Bell, CircleUserRound } from "lucide-react";
 
 export default function DashboardLayout({ children }: { children: ReactNode }) {
   const { user, loading } = useAuth();
@@ -41,17 +42,20 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
     <div>
       <SidebarProvider>
         <AppSidebar />
-        <SidebarInset>
-          <header className="flex h-10 shrink-0 items-center gap-2 border-b px-2">
-            <SidebarTrigger className="-ml-1" />
-            <Breadcrumb>
+        <SidebarInset className="container">
+          <header className="flex shrink-0 items-center justify-between p-4 border-b pl-1 sticky lg:justify-normal lg:h-5">
+            <SidebarTrigger className="" />
+
+            <Breadcrumb className="hidden lg:block">
               <BreadcrumbList>
                 {breadcrumbs.map((crumb, index) => {
                   const href = `/${breadcrumbs.slice(0, index + 1).join("/")}`;
                   return (
                     <BreadcrumbItem key={href}>
                       {index === breadcrumbs.length - 1 ? (
-                        <BreadcrumbPage className="lowercase">{crumb}</BreadcrumbPage>
+                        <BreadcrumbPage className="lowercase">
+                          {crumb}
+                        </BreadcrumbPage>
                       ) : (
                         <>
                           <BreadcrumbLink href={href} className="lowercase">
@@ -65,8 +69,22 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
                 })}
               </BreadcrumbList>
             </Breadcrumb>
+
+            <div className="flex gap-3 lg:hidden">
+              <div className="flex gap-3">
+                <Search />
+                <Moon />
+                <Bell />
+              </div>
+
+              <div>
+                <CircleUserRound className="cursor-pointer" />
+              </div>
+            </div>
           </header>
-          <PageTransition>{children}</PageTransition>
+          <PageTransition>
+            <div className="p-4">{children}</div>
+          </PageTransition>
         </SidebarInset>
       </SidebarProvider>
     </div>
