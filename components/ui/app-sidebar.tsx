@@ -19,24 +19,25 @@ import {
   SidebarFooter,
   SidebarHeader,
   useSidebar,
+  // SidebarTrigger
 } from "@/components/ui/sidebar";
 import { 
   DropdownMenu, 
   DropdownMenuTrigger, 
   DropdownMenuContent, 
-  DropdownMenuItem } from "@/components/ui/dropdown-menu"
-// import { Button } from "@/components/ui/button"
+  DropdownMenuItem
+} from "@/components/ui/dropdown-menu";
 
 const items = [
-  {
-    title: "Dashboard",
-    url: "/Dashboard",
-    icon: LayoutDashboard,
-  },
   {
     title: "Portfolio",
     url: "/Portfolio",
     icon: User2Icon,
+  },
+  {
+    title: "Dashboard",
+    url: "/Dashboard",
+    icon: LayoutDashboard,
   },
   {
     title: "Transactions",
@@ -65,19 +66,19 @@ export function AppSidebar() {
 
   return (
     <Sidebar collapsible="icon">
-      <SidebarHeader className="p-2">
-        <div className="w-full flex justify-start gap-2 items-center px-2">
-          <Building2 className="h-6 w-6" />
-          <span className={`ml-2 text-xl font-bold text-gray-600 ${state === "collapsed" ? "hidden" : ""}`}>TrustFX</span>
+      <SidebarHeader className="p-4 mt-6">
+        <div className="w-full flex justify-start gap-4 items-center">
+          <Building2 className="h-8 w-8" />
+          <span className={`text-2xl font-bold text-gray-800 ${state === "collapsed" ? "hidden" : ""}`}>TrustFX</span>
         </div>
       </SidebarHeader>
       <SidebarContent>
         <SidebarGroup>
           <SidebarGroupContent className="mt-5">
-            <SidebarMenu>
+            <SidebarMenu className='gap-3'>
               {items.map((item) => (
                 <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton asChild>
+                  <SidebarMenuButton asChild className='text-base text-gray-800 h-10 hover:bg-gray-200'>
                     <a href={item.url}>
                       <item.icon />
                       <span>{item.title}</span>

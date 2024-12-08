@@ -58,23 +58,23 @@ export default function Register() {
       const userCredential = await createUserWithEmailAndPassword(
         auth,
         data.email,
-        data.password
+        data.password,
       );
       const user = userCredential.user;
       console.log("User registered:", user);
-  
+
       // Update the user's profile with the display name
       await updateProfile(user, {
         displayName: data.name, // Correctly reference `data.name`
       });
-  
+
       reset();
       toast({
         description: "Account registered successfully!",
       });
       router.push("/Dashboard");
-  
-      return user; 
+
+      return user;
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {

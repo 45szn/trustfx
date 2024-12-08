@@ -1,18 +1,22 @@
 "use client";
 import React from "react";
 import useAuth from "@/hooks/useAuth";
+import DashHead from "@/components/DashHead";
 
 const Portfolio = () => {
   const { user } = useAuth();
 
   if (!user) {
-    return null; // Or handle this case differently, e.g., redirect
+    return null;
   }
 
   return (
-    <div>
-      <h1 className="text-xl font-bold">Profile!</h1>
-    </div>
+    <>
+      <DashHead title="Portfolio" />
+      <h1 className="text-xl font-bold">
+        Welcome {user.displayName || user.email}!
+      </h1>
+    </>
   );
 };
 
