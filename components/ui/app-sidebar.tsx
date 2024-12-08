@@ -19,7 +19,6 @@ import {
   SidebarFooter,
   SidebarHeader,
   useSidebar,
-  // SidebarTrigger
 } from "@/components/ui/sidebar";
 import { 
   DropdownMenu, 
@@ -50,8 +49,8 @@ const items = [
     icon: ChartNoAxesCombined,
   },
   {
-    title: "Notification",
-    url: "/Notification",
+    title: "Notifications",
+    url: "/Notifications",
     icon: Bell,
   },
   {
