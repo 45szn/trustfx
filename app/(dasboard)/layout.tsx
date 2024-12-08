@@ -19,7 +19,9 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
-import { Search, Moon, Bell, CircleUserRound } from "lucide-react";
+import { Search, Moon, CircleUserRound } from "lucide-react";
+import { NotificationsPopover } from "@/components/Notifications";
+import { Button } from "@/components/ui/button";
 
 export default function DashboardLayout({ children }: { children: ReactNode }) {
   const { user, loading } = useAuth();
@@ -71,15 +73,19 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
             </Breadcrumb>
 
             <div className="flex gap-3 lg:hidden">
-              <div className="flex gap-3">
-                <Search />
-                <Moon />
-                <Bell />
+              <div className="flex gap-2">
+                <Button variant="outline" size="icon" className="relative">
+                  <Search className="h-4 w-4" />
+                </Button>
+                <Button variant="outline" size="icon" className="relative">
+                  <Moon className="h-4 w-4" />
+                </Button>
+                <NotificationsPopover />
               </div>
 
-              <div>
-                <CircleUserRound className="cursor-pointer" />
-              </div>
+              <Button variant="outline" size="icon" className="relative">
+                <CircleUserRound className="h-4 w-4" />
+              </Button>
             </div>
           </header>
           <PageTransition>
