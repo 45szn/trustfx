@@ -1,6 +1,7 @@
-import { Search, Moon, CircleUserRound } from "lucide-react";
+import { Moon, CircleUserRound } from "lucide-react";
 import { NotificationsPopover } from "@/components/Notifications";
 import { Button } from "@/components/ui/button";
+import { SearchInput } from "@/components/SearchInput";
 
 interface HeaderProps {
   title: string;
@@ -13,9 +14,7 @@ const DashHead: React.FC<HeaderProps> = ({ title }) => {
 
       <div className="hidden gap-3 lg:flex">
               <div className="flex gap-2">
-                <Button variant="outline" size="icon" className="relative">
-                  <Search className="h-4 w-4" />
-                </Button>
+              <SearchInput />
                 <Button variant="outline" size="icon" className="relative">
                   <Moon className="h-4 w-4" />
                 </Button>
