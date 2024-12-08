@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import useAuth from "@/hooks/useAuth";
+import DashHead from "@/components/DashHead";
 
 const Notifications = () => {
   const { user } = useAuth();
@@ -10,9 +11,9 @@ const Notifications = () => {
   }
 
   return (
-    <div>
-      <h1 className="text-xl font-bold">Notifications</h1>
-    </div>
+    <>
+      <DashHead title="Notfications" />
+    </>
   );
 };
 

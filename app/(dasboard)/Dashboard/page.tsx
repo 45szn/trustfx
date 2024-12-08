@@ -1,43 +1,20 @@
 "use client";
 import React from "react";
 import useAuth from "@/hooks/useAuth";
+import DashHead from "@/components/DashHead";
 
 const Dashboard = () => {
   const { user } = useAuth();
 
   if (!user) {
-    return null; // Handle unauthenticated user case
+    return null;
   }
 
   return (
-    <div>
-      <h1 className="text-xl font-bold">
-        Welcome {user.displayName || user.email}!
-      </h1>
+    <div className="container">
+      <DashHead title="Dashboard" />
     </div>
   );
 };
 
 export default Dashboard;
-
-
-
-// "use client";
-// import React from "react";
-// import useAuth from "@/hooks/useAuth";
-
-// const Dashboard = () => {
-//   const { user } = useAuth();
-
-//   if (!user) {
-//     return null; // Or handle this case differently, e.g., redirect
-//   }
-
-//   return (
-//     <div>
-//       <h1 className="text-xl font-bold">Welcome {user.email}!</h1>
-//     </div>
-//   );
-// };
-
-// export default Dashboard;
