@@ -1,10 +1,11 @@
+import Homepage from "@/components/Homepage";
+
 export default function Home() {
   return (
     <>
       <main>
-        <h1 className="text-xl font-bold">Welcome!!!</h1>
+        <Homepage />
       </main>
-      <footer className=""></footer>
     </>
   );
 }
