@@ -5,7 +5,17 @@ const Homepage = () => {
   return (
     <div>
       <Navbar />
-      <h1 className="text-xl font-bold">Welcome!!!</h1>
+      <div className="mt-16 mx-auto">
+        <div>
+          <video
+            src="/investment.mp4"
+            loop
+            muted
+            autoPlay
+            className="w-full h-[40rem] object-cover"
+          ></video>
+        </div>
+      </div>
     </div>
   )
 }
