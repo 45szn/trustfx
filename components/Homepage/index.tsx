@@ -14,7 +14,8 @@ const Homepage = () => {
 
           <Image src={buildings4} width={1000} height={1000} alt={'public'} className='w-full h-screen object-cover' />
 
-          <div className="absolute top-44 container mx-auto px-4 w-full z-20">
+          <div className="container mx-auto px-4 lg:px-0">
+          <div className="absolute top-44 z-20">
             <AnimatedText
               text="BUILT ON TRUST, DRIVEN BY RESULTS."
               className="text-5xl font-bold leading-[3.5rem] text-white"
@@ -22,6 +23,8 @@ const Homepage = () => {
               wordDelay={300}
             />
           </div>
+          </div>
+
           
           {/* <div className='absolute top-44 container mx-auto px-4 w-full'>
             <h1 className='text-5xl font-bold leading-[3.5rem] text-white'>
