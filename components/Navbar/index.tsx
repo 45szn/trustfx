@@ -40,7 +40,7 @@ export default function Navbar() {
               {navItems.map((item, index) => (
                 item.name === "Register" ? (
                   <Link key={item.name} href={item.href}>
-                    <Button className="bg-white text-[#161616] hover:text-gray-50 hover:bg-gray-800 font-semibold  transition-all">
+                    <Button className="bg-white text-gray-900 hover:text-gray-50 hover:bg-gray-800 font-semibold  transition-all">
                       {item.name}
                     </Button>
                   </Link>
@@ -48,7 +48,7 @@ export default function Navbar() {
                   <Link
                     key={item.name}
                     href={item.href}
-                    className="relative text-[#161616] px-3 py-2 text-sm font-medium transition-all duration-300 group"
+                    className="relative text-gray-900 px-3 py-2 text-sm font-medium transition-all duration-300 group"
                     style={{ animationDelay: `${index * 100}ms` }}
                   >
                     {item.name}
@@ -95,7 +95,7 @@ export default function Navbar() {
                 key={item.name}
                 href={item.href}
                 onClick={() => setIsOpen(false)}
-                className={`block px-3 py-2 text-base font-medium text-[#161616] hover:bg-gray-300 rounded-md transition-all duration-300 transform ${isOpen ? "translate-x-0 opacity-100" : "-translate-x-4 opacity-0"}`}
+                className={`block px-3 py-2 text-base font-medium text-white hover:bg-gray-200 rounded-md transition-all duration-300 transform ${isOpen ? "translate-x-0 opacity-100" : "-translate-x-4 opacity-0"}`}
                 style={{ transitionDelay: isOpen ? `${index * 100}ms` : "0ms" }}
               >
                 {item.name}
@@ -107,7 +107,7 @@ export default function Navbar() {
 
       {isOpen && (
         <div
-          className="fixed inset-0 md:hidden transition-opacity duration-300"
+          className="fixed inset-0 md:hidden transiton-all duration-300 z-1"
           onClick={() => setIsOpen(false)}
           style={{ top: "57px" }}
         />
