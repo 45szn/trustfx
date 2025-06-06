@@ -111,7 +111,7 @@ export default function Navbar() {
                 key={item.name}
                 href={item.href}
                 onClick={() => setIsOpen(false)}
-                className={`block px-3 py-2 text-base font-medium text-white hover:bg-gray-200 rounded-md transition-all duration-300 transform ${
+                className={`block px-3 py-2 text-base font-medium text-[#161616] hover:bg-gray-200 rounded-md transition-all duration-300 transform ${
                   isOpen
                     ? "translate-x-0 opacity-100"
                     : "-translate-x-4 opacity-0"
