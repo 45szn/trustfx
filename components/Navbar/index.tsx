@@ -28,7 +28,7 @@ export default function Navbar() {
           <div className="flex-shrink-0">
             <Link
               href="/"
-              className="text-[#161616] font-bold text-xl tracking-wider transition-colors duration-300"
+              className="text-[#161616] font-bold text-xl tracking-wider transition-colors duration-300 lg:text-2xl"
             >
               TRUSTFX
             </Link>
