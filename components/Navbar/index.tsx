@@ -1,22 +1,12 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 10);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -31,16 +21,14 @@ export default function Navbar() {
   ];
 
   return (
-    <nav className="fixed top-0 w-full px-4 z-50 backdrop-blur-sm border-b border-gray-800 xl:px-0">
-      <div className="w-full">
+    <nav className="fixed top-0 w-full px-4 z-50 backdrop-blur-md border-b border-gray-800 xl:px-0">
+      <div className="w-full opacity-100">
         <div className="flex container mx-auto items-center justify-between h-16">
           {/* Logo */}
           <div className="flex-shrink-0">
             <Link
               href="/"
-              className={`text-[#161616] font-bold text-xl tracking-wider transition-colors duration-300 lg:text-2xl ${
-                scrolled ? "text-white" : "text-gray-900"
-              }`}
+              className="text-[#161616] font-bold text-xl tracking-wider transition-colors duration-300 lg:text-2xl"
             >
               TRUSTFX
             </Link>
@@ -60,17 +48,11 @@ export default function Navbar() {
                   <Link
                     key={item.name}
                     href={item.href}
-                    className={`relative px-3 py-2 text-sm font-medium transition-all duration-300 group ${
-                      scrolled ? "text-white" : "text-gray-900"
-                    }`}
+                    className="relative px-3 py-2 text-sm text-[#161616] font-medium transition-all duration-300 group lg:text-base"
                     style={{ animationDelay: `${index * 100}ms` }}
                   >
                     {item.name}
-                    <span
-                      className={`absolute bottom-0 left-0 w-0 h-0.5 bg-[#161616] transition-all duration-300 group-hover:w-full ${
-                        scrolled ? "bg-white" : "bg-gray-900"
-                      }`}
-                    ></span>
+                    <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#161616] transition-all duration-300 group-hover:w-full"></span>
                   </Link>
                 )
               )}
