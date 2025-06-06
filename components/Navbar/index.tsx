@@ -31,7 +31,7 @@ export default function Navbar() {
   ];
 
   return (
-    <nav className="fixed top-0 w-full px-4 z-50 backdrop-blur-sm border-b border-gray-800 lg:px-0">
+    <nav className="fixed top-0 w-full px-4 z-50 backdrop-blur-sm border-b border-gray-800 xl:px-0">
       <div className="w-full">
         <div className="flex container mx-auto items-center justify-between h-16">
           {/* Logo */}
