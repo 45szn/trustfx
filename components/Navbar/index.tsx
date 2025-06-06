@@ -1,16 +1,26 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import Link from "next/link"
-import { Menu, X } from "lucide-react"
-import { Button } from "@/components/ui/button"
+import { useEffect, useState } from "react";
+import Link from "next/link";
+import { Menu, X } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 export default function Navbar() {
-  const [isOpen, setIsOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 10);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const toggleMenu = () => {
-    setIsOpen(!isOpen)
-  }
+    setIsOpen(!isOpen);
+  };
 
   const navItems = [
     { name: "Home", href: "/" },
@@ -18,17 +28,19 @@ export default function Navbar() {
     { name: "Contact", href: "/#" },
     { name: "Testimonials", href: "/testimonials" },
     { name: "Register", href: "/register" },
-  ]
+  ];
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 backdrop-blur-sm border-b border-gray-800">
-      <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-16">
+    <nav className="fixed top-0 w-full px-4 z-50 backdrop-blur-sm border-b border-gray-800 lg:px-0">
+      <div className="w-full">
+        <div className="flex container mx-auto items-center justify-between h-16">
           {/* Logo */}
           <div className="flex-shrink-0">
             <Link
               href="/"
-              className="text-[#161616] font-bold text-xl tracking-wider transition-colors duration-300 lg:text-2xl"
+              className={`text-[#161616] font-bold text-xl tracking-wider transition-colors duration-300 lg:text-2xl ${
+                scrolled ? "text-white" : "text-gray-900"
+              }`}
             >
               TRUSTFX
             </Link>
@@ -37,7 +49,7 @@ export default function Navbar() {
           {/* Desktop Navigation */}
           <div className="hidden lg:block">
             <div className="ml-10 flex items-baseline space-x-8">
-              {navItems.map((item, index) => (
+              {navItems.map((item, index) =>
                 item.name === "Register" ? (
                   <Link key={item.name} href={item.href}>
                     <Button className="bg-white text-gray-900 hover:text-gray-50 hover:bg-gray-800 font-semibold  transition-all">
@@ -48,14 +60,20 @@ export default function Navbar() {
                   <Link
                     key={item.name}
                     href={item.href}
-                    className="relative text-gray-900 px-3 py-2 text-sm font-medium transition-all duration-300 group"
+                    className={`relative px-3 py-2 text-sm font-medium transition-all duration-300 group ${
+                      scrolled ? "text-white" : "text-gray-900"
+                    }`}
                     style={{ animationDelay: `${index * 100}ms` }}
                   >
                     {item.name}
-                    <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#161616] transition-all duration-300 group-hover:w-full"></span>
+                    <span
+                      className={`absolute bottom-0 left-0 w-0 h-0.5 bg-[#161616] transition-all duration-300 group-hover:w-full ${
+                        scrolled ? "bg-white" : "bg-gray-900"
+                      }`}
+                    ></span>
                   </Link>
                 )
-              ))}
+              )}
             </div>
           </div>
 
@@ -68,8 +86,16 @@ export default function Navbar() {
               className="text-[#161616] hover:text-[#161616] transition-all duration-300"
             >
               <div className="relative w-6 h-6">
-                <Menu className={`absolute inset-0 !w-full !h-full transition-all duration-300 cursor-pointer ${isOpen ? "rotate-90 opacity-0" : "rotate-0 opacity-100"}`} />
-                <X className={`absolute inset-0 !w-full !h-full transition-all duration-300 cursor-pointer ${isOpen ? "rotate-0 opacity-100" : "-rotate-90 opacity-0"}`} />
+                <Menu
+                  className={`absolute inset-0 !w-full !h-full transition-all duration-300 cursor-pointer ${
+                    isOpen ? "rotate-90 opacity-0" : "rotate-0 opacity-100"
+                  }`}
+                />
+                <X
+                  className={`absolute inset-0 !w-full !h-full transition-all duration-300 cursor-pointer ${
+                    isOpen ? "rotate-0 opacity-100" : "-rotate-90 opacity-0"
+                  }`}
+                />
               </div>
             </Button>
           </div>
@@ -77,15 +103,23 @@ export default function Navbar() {
       </div>
 
       {/* Mobile Navigation Menu */}
-      <div className={`lg:hidden transition-all duration-500 ease-in-out ${isOpen ? "max-h-64 opacity-100 backdrop-blur-sm" : "max-h-0 opacity-0"} overflow-hidden`}>
+      <div
+        className={`lg:hidden transition-all duration-500 ease-in-out ${
+          isOpen ? "max-h-64 opacity-100 backdrop-blur-sm" : "max-h-0 opacity-0"
+        } overflow-hidden`}
+      >
         <div className="px-2 pt-2 pb-3 space-y-2 sm:px-3 border-t border-gray-800">
-          {navItems.map((item, index) => (
+          {navItems.map((item, index) =>
             item.name === "Register" ? (
               <Link
                 key={item.name}
                 href={item.href}
                 onClick={() => setIsOpen(false)}
-                className={`block max-w-[30rem] px-3 py-2 font-semibold text-center text-white bg-[#161616] hover:bg-gray-700 rounded-md transition-all duration-300 transform ${isOpen ? "translate-x-0 opacity-100" : "-translate-x-4 opacity-0"}`}
+                className={`block max-w-[30rem] px-3 py-2 font-semibold text-center text-white bg-[#161616] hover:bg-gray-700 rounded-md transition-all duration-300 transform ${
+                  isOpen
+                    ? "translate-x-0 opacity-100"
+                    : "-translate-x-4 opacity-0"
+                }`}
                 style={{ transitionDelay: isOpen ? `${index * 100}ms` : "0ms" }}
               >
                 {item.name}
@@ -95,13 +129,17 @@ export default function Navbar() {
                 key={item.name}
                 href={item.href}
                 onClick={() => setIsOpen(false)}
-                className={`block px-3 py-2 text-base font-medium text-white hover:bg-gray-200 rounded-md transition-all duration-300 transform ${isOpen ? "translate-x-0 opacity-100" : "-translate-x-4 opacity-0"}`}
+                className={`block px-3 py-2 text-base font-medium text-white hover:bg-gray-200 rounded-md transition-all duration-300 transform ${
+                  isOpen
+                    ? "translate-x-0 opacity-100"
+                    : "-translate-x-4 opacity-0"
+                }`}
                 style={{ transitionDelay: isOpen ? `${index * 100}ms` : "0ms" }}
               >
                 {item.name}
               </Link>
             )
-          ))}
+          )}
         </div>
       </div>
 
@@ -113,5 +151,5 @@ export default function Navbar() {
         />
       )}
     </nav>
-  )
+  );
 }
