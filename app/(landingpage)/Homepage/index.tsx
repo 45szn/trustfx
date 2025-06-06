@@ -1,11 +1,12 @@
 import React from "react";
-import Navbar from "../Navbar";
+import Navbar from "../../../components/Navbar";
 import Image from "next/image";
 import buildings4 from "@/public/buildings4.jpg";
-import AnimatedText from "../AnimatedText";
+import AnimatedText from "../components/AnimatedText";
 import Link from "next/link";
-import { Button } from "../ui/button";
-import AnimatedCounter from "../AnimatedCounter";
+import { Button } from "../../../components/ui/button";
+import AnimatedCounter from "../components/AnimatedCounter";
+import Plans from "@/components/Plans";
 
 const Homepage = () => {
   return (
@@ -100,6 +101,10 @@ const Homepage = () => {
               </div>
             </div>
           </div>
+        </section>
+
+        <section>
+          <Plans />
         </section>
       </div>
     </div>
