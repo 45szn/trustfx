@@ -1,26 +1,25 @@
 import React from "react";
-import Navbar from "../../../components/Navbar";
-import Image from "next/image";
-import buildings4 from "@/public/buildings4.jpg";
-import AnimatedText from "../components/AnimatedText";
-import Link from "next/link";
-import { Button } from "../../../components/ui/button";
-import AnimatedCounter from "../components/AnimatedCounter";
+// import Navbar from "../../../components/Navbar";
+// import Image from "next/image";
+// import buildings4 from "@/public/buildings4.jpg";
+// import AnimatedText from "./components/AnimatedText";
+// import Link from "next/link";
+// import { Button } from "../../components/ui/button";
+import AnimatedCounter from "./components/AnimatedCounter";
 import Plans from "@/components/Plans";
-import WhyTrustFx from "../components/WhyTrustfx";
-import FAQSection from "../components/FAQs";
-import Testimonials from "../Testimonials";
-import Footer from "../components/Footer";
+import WhyTrustFx from "./components/WhyTrustfx";
+import FAQSection from "./components/FAQs";
+import Testimonials from "./Testimonials/page";
+import Footer from "./components/Footer";
 
 const Homepage = () => {
   return (
     <div>
-      <Navbar />
-      <div className="mt-16 mx-auto">
-        <section>
+      {/* <Navbar /> */}
+      <div className="mx-auto">
+        {/* <section>
           <div className="w-full h-screen relative">
             <div className="absolute inset-0 bg-black opacity-50 z-0" />
-
             <Image
               src={buildings4}
               width={1000}
@@ -30,7 +29,7 @@ const Homepage = () => {
             />
 
             <div className="container mx-auto px-4 xl:px-0">
-              <div className="absolute top-44 z-20">
+              <div className="absolute top-36 z-20 lg:top-44">
                 <AnimatedText
                   text={[
                     "BUILT",
@@ -56,7 +55,7 @@ const Homepage = () => {
               </div>
             </div>
           </div>
-        </section>
+        </section> */}
 
         <section>
           <div className="container mx-auto px-4 my-20 lg:px-0 lg:my-40">
@@ -156,7 +155,7 @@ const Homepage = () => {
         <Testimonials />
 
         <FAQSection />
-        
+
         <Footer />
       </div>
     </div>
