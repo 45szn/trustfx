@@ -13,10 +13,10 @@ export default function Navbar() {
   };
 
   const navItems = [
-    { name: "Home", href: "/" },
-    { name: "Plans", href: "/#" },
+    { name: "About", href: "/about" },
+    { name: "Plans", href: "/plans" },
+    { name: "Testimonials", href: "/#" },
     { name: "Contact", href: "/#" },
-    { name: "Testimonials", href: "/testimonials" },
     { name: "Register", href: "/register" },
   ];
 
@@ -111,7 +111,7 @@ export default function Navbar() {
                 key={item.name}
                 href={item.href}
                 onClick={() => setIsOpen(false)}
-                className={`block px-3 py-2 text-base font-medium text-[#161616] hover:bg-gray-200 rounded-md transition-all duration-300 transform ${
+                className={`block px-3 py-2 text-base font-medium text-[#161616] hover:bg-gray-200 rounded-md transition-all duration-300 transform z-10 ${
                   isOpen
                     ? "translate-x-0 opacity-100"
                     : "-translate-x-4 opacity-0"
@@ -127,7 +127,7 @@ export default function Navbar() {
 
       {isOpen && (
         <div
-          className="fixed inset-0 md:hidden transiton-all duration-300 z-1"
+          className="fixed inset-0 md:hidden transiton-all duration-300 z-[-20]"
           onClick={() => setIsOpen(false)}
           style={{ top: "57px" }}
         />
