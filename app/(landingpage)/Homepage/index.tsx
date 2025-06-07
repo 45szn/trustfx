@@ -9,6 +9,8 @@ import AnimatedCounter from "../components/AnimatedCounter";
 import Plans from "@/components/Plans";
 import WhyTrustFx from "../components/WhyTrustfx";
 import FAQSection from "../components/FAQs";
+import Testimonials from "../Testimonials";
+import Footer from "../components/Footer";
 
 const Homepage = () => {
   return (
@@ -151,7 +153,11 @@ const Homepage = () => {
           </div>
         </section>
 
+        <Testimonials />
+
         <FAQSection />
+        
+        <Footer />
       </div>
     </div>
   );
