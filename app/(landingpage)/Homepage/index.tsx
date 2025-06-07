@@ -8,6 +8,7 @@ import { Button } from "../../../components/ui/button";
 import AnimatedCounter from "../components/AnimatedCounter";
 import Plans from "@/components/Plans";
 import WhyTrustFx from "../components/WhyTrustfx";
+import FAQSection from "../components/FAQs";
 
 const Homepage = () => {
   return (
@@ -149,6 +150,8 @@ const Homepage = () => {
             </div>
           </div>
         </section>
+
+        <FAQSection />
       </div>
     </div>
   );
