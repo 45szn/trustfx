@@ -30,7 +30,7 @@ export default function Navbar() {
               href="/"
               className="text-[#161616] font-bold text-xl tracking-wider transition-colors duration-300 lg:text-2xl"
             >
-              TRUSTFX
+              TrustFx
             </Link>
           </div>
 
