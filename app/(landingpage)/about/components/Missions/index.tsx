@@ -1,32 +1,32 @@
-"use client"
+"use client";
 
-import { useEffect, useState, useRef } from "react"
-import { Card, CardContent } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Target, Heart, Lightbulb, Users } from "lucide-react"
+import { useEffect, useState, useRef } from "react";
+import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Target, Heart, Lightbulb, Users } from "lucide-react";
 
 export default function AboutMission() {
-  const [isVisible, setIsVisible] = useState(false)
-  const sectionRef = useRef<HTMLDivElement>(null)
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            setIsVisible(true)
+            setIsVisible(true);
           }
-        })
+        });
       },
       { threshold: 0.2 },
-    )
+    );
 
     if (sectionRef.current) {
-      observer.observe(sectionRef.current)
+      observer.observe(sectionRef.current);
     }
 
-    return () => observer.disconnect()
-  }, [])
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <section className="py-20 bg-gradient-to-br from-white to-gray-50">
@@ -44,9 +44,10 @@ export default function AboutMission() {
             className={`max-w-4xl mx-auto transition-all duration-1000 delay-300 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
           >
             <p className="text-xl text-gray-600 leading-relaxed mb-8">
-              We believe that investing shouldn&apos;t be a gamble — it should be a smart, guided journey toward financial
-              independence. Our mission is to make high-quality investment opportunities accessible to everyone, not
-              just the wealthy few.
+              We believe that investing shouldn&apos;t be a gamble — it should
+              be a smart, guided journey toward financial independence. Our
+              mission is to make high-quality investment opportunities
+              accessible to everyone, not just the wealthy few.
             </p>
           </div>
         </div>
@@ -57,33 +58,37 @@ export default function AboutMission() {
             {
               icon: Target,
               title: "Purpose-Driven",
-              description: "Every investment strategy is designed with your long-term financial goals in mind.",
+              description:
+                "Every investment strategy is designed with your long-term financial goals in mind.",
               gradient: "from-blue-500 to-cyan-500",
               delay: 0,
             },
             {
               icon: Heart,
               title: "People First",
-              description: "We put our investors' success and security above everything else.",
+              description:
+                "We put our investors' success and security above everything else.",
               gradient: "from-red-500 to-pink-500",
               delay: 200,
             },
             {
               icon: Lightbulb,
               title: "Innovation",
-              description: "Leveraging cutting-edge technology to deliver superior investment outcomes.",
+              description:
+                "Leveraging cutting-edge technology to deliver superior investment outcomes.",
               gradient: "from-yellow-500 to-orange-500",
               delay: 400,
             },
             {
               icon: Users,
               title: "Accessibility",
-              description: "Making professional-grade investing available to everyone, regardless of wealth.",
+              description:
+                "Making professional-grade investing available to everyone, regardless of wealth.",
               gradient: "from-green-500 to-emerald-500",
               delay: 600,
             },
           ].map((value, index) => {
-            const IconComponent = value.icon
+            const IconComponent = value.icon;
             return (
               <Card
                 key={index}
@@ -96,11 +101,15 @@ export default function AboutMission() {
                   >
                     <IconComponent className="w-8 h-8" />
                   </div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-4">{value.title}</h3>
-                  <p className="text-gray-600 leading-relaxed">{value.description}</p>
+                  <h3 className="text-xl font-bold text-gray-900 mb-4">
+                    {value.title}
+                  </h3>
+                  <p className="text-gray-600 leading-relaxed">
+                    {value.description}
+                  </p>
                 </CardContent>
               </Card>
-            )
+            );
           })}
         </div>
 
@@ -112,11 +121,14 @@ export default function AboutMission() {
             <CardContent className="p-12 text-center">
               <div className="max-w-4xl mx-auto">
                 <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-6">
-                  &quot;Democratizing wealth creation through intelligent, secure, and transparent investing.&quot;
+                  &quot;Democratizing wealth creation through intelligent,
+                  secure, and transparent investing.&quot;
                 </h3>
                 <p className="text-lg text-gray-700 leading-relaxed">
-                  At TrustFx, we&apos;re not just managing investments — we&apos;re building a community of empowered investors
-                  who have the tools, knowledge, and support they need to achieve financial independence.
+                  At TrustFx, we&apos;re not just managing investments —
+                  we&apos;re building a community of empowered investors who
+                  have the tools, knowledge, and support they need to achieve
+                  financial independence.
                 </p>
               </div>
             </CardContent>
@@ -124,5 +136,5 @@ export default function AboutMission() {
         </div>
       </div>
     </section>
-  )
+  );
 }
