@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import Link from "next/link";
 
 const features = [
   {
@@ -241,10 +242,13 @@ export default function WhyTrustFx() {
                 their financial future. Your success is our mission.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <button className="px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-500 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 group">
-                  Start Investing Today
-                  <TrendingUp className="inline-block w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
-                </button>
+                <Link href={"/register"}>
+                  <button className="px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-500 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 group">
+                    Start Investing Today
+                    <TrendingUp className="inline-block w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
+                  </button>
+                </Link>
+
                 <button className="px-8 py-4 border-2 border-gray-300 text-gray-700 font-semibold rounded-xl hover:border-gray-400 hover:bg-gray-50 transition-all duration-300">
                   Learn More About Security
                 </button>

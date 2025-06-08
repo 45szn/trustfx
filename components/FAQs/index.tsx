@@ -1,11 +1,19 @@
-"use client"
+"use client";
 
-import { useState, useRef, useEffect } from "react"
-import { ChevronDown, Search, HelpCircle, MessageCircle, Mail, Phone } from "lucide-react"
-import { Card, CardContent } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
+import { useState, useRef, useEffect } from "react";
+import {
+  ChevronDown,
+  Search,
+  HelpCircle,
+  MessageCircle,
+  Mail,
+  Phone,
+} from "lucide-react";
+import { Card, CardContent } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import Link from "next/link";
 
 const faqs = [
   {
@@ -48,30 +56,33 @@ const faqs = [
     category: "Deposits",
     popular: true,
   },
-]
+];
 
-const categories = ["All", "Withdrawals", "Deposits", "Account"]
+const categories = ["All", "Withdrawals", "Deposits", "Account"];
 
 export default function FAQSection() {
-  const [openItems, setOpenItems] = useState<number[]>([])
-  const [searchTerm, setSearchTerm] = useState("")
-  const [selectedCategory, setSelectedCategory] = useState("All")
-  const [visibleItems, setVisibleItems] = useState<number[]>([])
-  const sectionRef = useRef<HTMLDivElement>(null)
+  const [openItems, setOpenItems] = useState<number[]>([]);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("All");
+  const [visibleItems, setVisibleItems] = useState<number[]>([]);
+  const sectionRef = useRef<HTMLDivElement>(null);
 
   // Filter FAQs based on search and category
   const filteredFAQs = faqs.filter((faq) => {
     const matchesSearch =
       faq.question.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      faq.answer.toLowerCase().includes(searchTerm.toLowerCase())
-    const matchesCategory = selectedCategory === "All" || faq.category === selectedCategory
-    return matchesSearch && matchesCategory
-  })
+      faq.answer.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesCategory =
+      selectedCategory === "All" || faq.category === selectedCategory;
+    return matchesSearch && matchesCategory;
+  });
 
   // Toggle accordion item
   const toggleItem = (id: number) => {
-    setOpenItems((prev) => (prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id]))
-  }
+    setOpenItems((prev) =>
+      prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id]
+    );
+  };
 
   // Intersection observer for animations
   useEffect(() => {
@@ -82,33 +93,33 @@ export default function FAQSection() {
             // Stagger the FAQ item animations
             filteredFAQs.forEach((faq, index) => {
               setTimeout(() => {
-                setVisibleItems((prev) => [...prev, faq.id])
-              }, index * 100)
-            })
+                setVisibleItems((prev) => [...prev, faq.id]);
+              }, index * 100);
+            });
           }
-        })
+        });
       },
-      { threshold: 0.1 },
-    )
+      { threshold: 0.1 }
+    );
 
     if (sectionRef.current) {
-      observer.observe(sectionRef.current)
+      observer.observe(sectionRef.current);
     }
 
-    return () => observer.disconnect()
-  }, [filteredFAQs])
+    return () => observer.disconnect();
+  }, [filteredFAQs]);
 
   // Reset visible items when filters change
   useEffect(() => {
-    setVisibleItems([])
+    setVisibleItems([]);
     setTimeout(() => {
       filteredFAQs.forEach((faq, index) => {
         setTimeout(() => {
-          setVisibleItems((prev) => [...prev, faq.id])
-        }, index * 50)
-      })
-    }, 100)
-  }, [searchTerm, selectedCategory])
+          setVisibleItems((prev) => [...prev, faq.id]);
+        }, index * 50);
+      });
+    }, 100);
+  }, [searchTerm, selectedCategory]);
 
   return (
     <section className="py-20 bg-gradient-to-br from-gray-50 to-white">
@@ -122,8 +133,8 @@ export default function FAQSection() {
             Frequently Asked Questions
           </h2>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Find quick answers to common questions about your TrustFx investment account, withdrawals, and platform
-            features.
+            Find quick answers to common questions about your TrustFx investment
+            account, withdrawals, and platform features.
           </p>
         </div>
 
@@ -164,19 +175,25 @@ export default function FAQSection() {
           {filteredFAQs.length === 0 ? (
             <div className="text-center py-12">
               <HelpCircle className="w-16 h-16 text-gray-300 mx-auto mb-4" />
-              <h3 className="text-xl font-semibold text-gray-600 mb-2">No FAQs found</h3>
-              <p className="text-gray-500">Try adjusting your search terms or category filter.</p>
+              <h3 className="text-xl font-semibold text-gray-600 mb-2">
+                No FAQs found
+              </h3>
+              <p className="text-gray-500">
+                Try adjusting your search terms or category filter.
+              </p>
             </div>
           ) : (
             filteredFAQs.map((faq, index) => {
-              const isOpen = openItems.includes(faq.id)
-              const isVisible = visibleItems.includes(faq.id)
+              const isOpen = openItems.includes(faq.id);
+              const isVisible = visibleItems.includes(faq.id);
 
               return (
                 <Card
                   key={faq.id}
                   className={`transition-all duration-700 ease-out transform ${
-                    isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+                    isVisible
+                      ? "opacity-100 translate-y-0"
+                      : "opacity-0 translate-y-8"
                   } hover:shadow-lg border-2 border-gray-100 hover:border-gray-200`}
                   style={{ transitionDelay: `${index * 50}ms` }}
                 >
@@ -188,10 +205,19 @@ export default function FAQSection() {
                       <div className="flex items-center justify-between">
                         <div className="flex-1">
                           <div className="flex items-center gap-3 mb-2">
-                            <h3 className="text-lg md:text-xl font-semibold text-gray-900 pr-8">{faq.question}</h3>
-                            {faq.popular && <Badge className="bg-orange-100 text-orange-800 text-xs">Popular</Badge>}
+                            <h3 className="text-lg md:text-xl font-semibold text-gray-900 pr-8">
+                              {faq.question}
+                            </h3>
+                            {faq.popular && (
+                              <Badge className="bg-orange-100 text-orange-800 text-xs">
+                                Popular
+                              </Badge>
+                            )}
                           </div>
-                          <Badge variant="outline" className="text-xs text-gray-600">
+                          <Badge
+                            variant="outline"
+                            className="text-xs text-gray-600"
+                          >
                             {faq.category}
                           </Badge>
                         </div>
@@ -211,13 +237,15 @@ export default function FAQSection() {
                     >
                       <div className="px-6 pb-6">
                         <div className="border-t border-gray-100 pt-4">
-                          <p className="text-gray-700 leading-relaxed text-lg">{faq.answer}</p>
+                          <p className="text-gray-700 leading-relaxed text-lg">
+                            {faq.answer}
+                          </p>
                         </div>
                       </div>
                     </div>
                   </CardContent>
                 </Card>
-              )
+              );
             })
           )}
         </div>
@@ -230,33 +258,45 @@ export default function FAQSection() {
                 <MessageCircle className="w-8 h-8" />
               </div>
             </div>
-            <h3 className="text-2xl font-bold text-gray-900 mb-4">Still have questions?</h3>
+            <h3 className="text-2xl font-bold text-gray-900 mb-4">
+              Still have questions?
+            </h3>
             <p className="text-gray-600 mb-8 max-w-2xl mx-auto text-lg">
-              Our support team is here to help you 24/7. Get in touch with us through your preferred channel.
+              Our support team is here to help you 24/7. Get in touch with us
+              through your preferred channel.
             </p>
+            
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button className="bg-gradient-to-r from-blue-500 to-purple-500 text-white font-semibold px-8 py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 group">
-                <MessageCircle className="w-5 h-5 mr-2 group-hover:scale-110 transition-transform" />
-                Live Chat Support
-              </Button>
-              <Button
-                variant="outline"
-                className="border-2 border-gray-300 text-gray-700 font-semibold px-8 py-3 rounded-xl hover:border-gray-400 hover:bg-gray-50 transition-all duration-300 group"
-              >
-                <Mail className="w-5 h-5 mr-2 group-hover:scale-110 transition-transform" />
-                Email Support
-              </Button>
-              <Button
-                variant="outline"
-                className="border-2 border-gray-300 text-gray-700 font-semibold px-8 py-3 rounded-xl hover:border-gray-400 hover:bg-gray-50 transition-all duration-300 group"
-              >
-                <Phone className="w-5 h-5 mr-2 group-hover:scale-110 transition-transform" />
-                Call Us
-              </Button>
+              <Link href={"/contact#livechat"}>
+                <Button className="bg-gradient-to-r from-blue-500 to-purple-500 text-white font-semibold px-8 py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 group">
+                  <MessageCircle className="w-5 h-5 mr-2 group-hover:scale-110 transition-transform" />
+                  Live Chat Support
+                </Button>
+              </Link>
+
+              <Link href={"/contact#emailsupport"}>
+                <Button
+                  variant="outline"
+                  className="border-2 border-gray-300 text-gray-700 font-semibold px-8 py-3 rounded-xl hover:border-gray-400 hover:bg-gray-50 transition-all duration-300 group"
+                >
+                  <Mail className="w-5 h-5 mr-2 group-hover:scale-110 transition-transform" />
+                  Email Support
+                </Button>
+              </Link>
+
+              <Link href={"/contact#callus"}>
+                <Button
+                  variant="outline"
+                  className="border-2 border-gray-300 text-gray-700 font-semibold px-8 py-3 rounded-xl hover:border-gray-400 hover:bg-gray-50 transition-all duration-300 group"
+                >
+                  <Phone className="w-5 h-5 mr-2 group-hover:scale-110 transition-transform" />
+                  Call Us
+                </Button>
+              </Link>
             </div>
           </CardContent>
         </Card>
       </div>
     </section>
-  )
+  );
 }

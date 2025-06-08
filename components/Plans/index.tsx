@@ -13,6 +13,9 @@ import {
   ArrowRight,
   Star,
 } from "lucide-react";
+import { useRouter } from "next/navigation"; // for routing
+import useAuth from "@/hooks/useAuth"; // your auth hook
+import Link from "next/link";
 
 const plans = [
   {
@@ -173,8 +176,24 @@ const getRiskColor = (risk: string) => {
 };
 
 export default function InvestmentPlans() {
+  const router = useRouter();
+  const { user, loading } = useAuth(); // get auth state
+
+  const handleGetStarted = (planName: string) => {
+    if (loading) return; // optionally block routing until auth finishes
+
+    const encodedPlan = encodeURIComponent(planName); // just in case
+
+    if (user) {
+      router.push(`/investments?plan=${encodedPlan}`);
+    } else {
+      router.push(`/register?investments=${encodedPlan}`);
+    }
+  };
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-gray-100 py-12 px-4">
+    <section>
+          <div className="min-h-screen bg-gradient-to-br from-slate-50 to-gray-100 py-12 px-4">
       <div className="container mx-auto max-w-7xl">
         {/* Header */}
         <div className="text-center mb-16">
@@ -295,6 +314,7 @@ export default function InvestmentPlans() {
 
                   {/* CTA Button */}
                   <Button
+                    onClick={() => handleGetStarted(plan.name)}
                     className={`w-full bg-gradient-to-r ${plan.gradient} hover:opacity-90 text-white font-semibold py-3 transition-all duration-300 group`}
                   >
                     Get Started
@@ -317,18 +337,24 @@ export default function InvestmentPlans() {
             timeline.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button variant="outline" size="lg" className="font-semibold">
-              Schedule Consultation
-            </Button>
-            <Button
-              size="lg"
-              className="bg-gradient-to-r from-blue-500 to-purple-600 text-white font-semibold"
-            >
-              Compare All Plans
-            </Button>
+            <Link href={"/contact"}>
+              <Button variant="outline" size="lg" className="font-semibold">
+                Schedule Consultation
+              </Button>
+            </Link>
+
+            <Link href="/plans#compare">
+              <Button
+                size="lg"
+                className="bg-gradient-to-r from-blue-500 to-purple-600 text-white font-semibold"
+              >
+                Compare All Plans
+              </Button>
+            </Link>
           </div>
         </div>
       </div>
     </div>
+    </section>
   );
 }

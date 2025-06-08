@@ -30,32 +30,32 @@ import {
 const items = [
   {
     title: "Portfolio",
-    url: "/Portfolio",
+    url: "/portfolio",
     icon: User2Icon,
   },
   {
     title: "Dashboard",
-    url: "/Dashboard",
+    url: "/dashboard",
     icon: LayoutDashboard,
   },
   {
     title: "Transactions",
-    url: "/Transactions",
+    url: "/transactions",
     icon: ArrowLeftRight,
   },
   {
     title: "Investments",
-    url: "/Investments",
+    url: "/investments",
     icon: ChartNoAxesCombined,
   },
   {
     title: "Notifications",
-    url: "/Notifications",
+    url: "/notifications",
     icon: Bell,
   },
   {
     title: "Settings",
-    url: "/Settings",
+    url: "/settings",
     icon: Settings,
   },
 ]

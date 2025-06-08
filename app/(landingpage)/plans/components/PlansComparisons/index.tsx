@@ -101,7 +101,7 @@ export default function PlansComparison() {
   }, []);
 
   return (
-    <section className="py-20 bg-gradient-to-br from-slate-50 to-gray-100">
+    <section id="compare" className="py-20 bg-gradient-to-br from-slate-50 to-gray-100">
       <div className="container mx-auto px-4 max-w-7xl">
         {/* Header */}
         <div className="text-center mb-16">
