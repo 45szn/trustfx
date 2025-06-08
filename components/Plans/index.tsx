@@ -20,6 +20,7 @@ import Link from "next/link";
 const plans = [
   {
     id: 1,
+    sectionid: "starter",
     name: "Starter Plan",
     emoji: "🌱",
     icon: Shield,
@@ -43,6 +44,7 @@ const plans = [
   },
   {
     id: 2,
+    sectionid: "growth",
     name: "Growth Plan",
     emoji: "🚀",
     icon: TrendingUp,
@@ -66,6 +68,7 @@ const plans = [
   },
   {
     id: 3,
+    sectionid: "premium",
     name: "Premium Plan",
     emoji: "💼",
     icon: Star,
@@ -89,6 +92,7 @@ const plans = [
   },
   {
     id: 4,
+    sectionid: 'impact',
     name: "Impact Plan",
     emoji: "🌍",
     icon: Globe,
@@ -112,6 +116,7 @@ const plans = [
   },
   {
     id: 5,
+    sectionid: "protrader",
     name: "Pro Trader Plan",
     emoji: "📈",
     icon: Bot,
@@ -135,6 +140,7 @@ const plans = [
   },
   {
     id: 6,
+    sectionid: "fixedreturn",
     name: "Fixed Return Plan",
     emoji: "🔐",
     icon: Lock,
@@ -214,6 +220,7 @@ export default function InvestmentPlans() {
             return (
               <Card
                 key={plan.id}
+                id={plan.sectionid}
                 className={`relative overflow-hidden transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 ${plan.bgColor} ${plan.borderColor} border-2`}
               >
                 {/* Popular Badge */}

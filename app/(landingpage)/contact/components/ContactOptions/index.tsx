@@ -18,6 +18,7 @@ export default function ContactOptions() {
   const [copiedText, setCopiedText] = useState<string | null>(null);
   const sectionRef = useRef<HTMLDivElement>(null);
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const contactOptions = [
     {
       id: 1,
@@ -116,7 +117,7 @@ export default function ContactOptions() {
     }
 
     return () => observer.disconnect();
-  }, []);
+  }, [contactOptions]);
 
   return (
     <section className="py-20 bg-gradient-to-br from-white to-gray-50">
