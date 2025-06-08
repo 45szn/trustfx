@@ -172,7 +172,7 @@ const getRiskColor = (risk: string) => {
   }
 };
 
-export default function Plans() {
+export default function InvestmentPlans() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-gray-100 py-12 px-4">
       <div className="container mx-auto max-w-7xl">
