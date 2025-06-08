@@ -1,5 +1,14 @@
 import React from 'react'
+import AboutMission from './components/Missions';
+import SetUsApart from './components/SetUsApart';
+import AboutStandards from './components/Standards';
 
 export default function AboutPage() {
-  return <div>About Us</div>;
+  return (
+    <>
+      <AboutMission />
+      <SetUsApart />
+      <AboutStandards />
+    </>
+  );
 }
