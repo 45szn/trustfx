@@ -105,7 +105,7 @@ const testimonials = [
   },
 ]
 
-export default function Testimonials() {
+export default function TestimonialSection() {
   const [currentIndex, setCurrentIndex] = useState(0)
   const sectionRef = useRef<HTMLDivElement>(null)
   const intervalRef = useRef<NodeJS.Timeout | null>(null)
