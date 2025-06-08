@@ -12,5 +12,3 @@ export default function Testimonials() {
     </>
   );
 };
-
-// export default Testimonials;
