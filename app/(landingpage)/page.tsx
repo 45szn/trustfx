@@ -3,7 +3,7 @@ import AnimatedCounter from "../../components/AnimatedCounter";
 import InvestmentPlans from "@/components/Plans";
 import WhyTrustFx from "./components/WhyTrustfx";
 import FAQSection from "../../components/FAQs";
-import Testimonials from "../../components/Testimonials";
+import TestimonialSection from "../../components/Testimonials";
 
 const Homepage = () => {
   return (
@@ -104,7 +104,7 @@ const Homepage = () => {
           </div>
         </section>
 
-        <Testimonials />
+        <TestimonialSection />
 
         <FAQSection />
       </div>
