@@ -1,16 +1,16 @@
 import React from "react";
 import WhatCustomersSays from "./components/WhatCustmersSays";
 import TestimonialsStats from "./components/Stats";
-import Testimonials from "@/components/Testimonials";
+import TestimonialSection from "@/components/Testimonials";
 
-const TestimonialsPage = () => {
+const Testimonials = () => {
   return (
     <>
       <WhatCustomersSays />
       <TestimonialsStats />
-      <Testimonials />
+      <TestimonialSection />
     </>
   );
 };
 
-export default TestimonialsPage;
+export default Testimonials;
