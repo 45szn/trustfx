@@ -6,6 +6,7 @@ import buildings4 from "@/public/buildings4.jpg";
 import AnimatedText from "./components/AnimatedText";
 import Link from "next/link";
 import { Button } from "../../components/ui/button";
+import Footer from "./components/Footer";
 
 export default function LandingPageLayout({
   children,
@@ -54,8 +55,10 @@ export default function LandingPageLayout({
           </div>
         </div>
       </section>
-      
+
       <PageTransition>{children}</PageTransition>
+
+      <Footer />
     </>
   );
 }
