@@ -1,7 +1,7 @@
-import React from 'react'
-import WhatCustomersSays from './components/WhatCustmersSays'
-import TestimonialsStats from './components/Stats'
-import Testimonials from '@/components/Testimonials'
+import React from "react";
+import WhatCustomersSays from "./components/WhatCustmersSays";
+import TestimonialsStats from "./components/Stats";
+import Testimonials from "@/components/Testimonials";
 
 const TestimonialsPage = () => {
   return (
@@ -10,7 +10,7 @@ const TestimonialsPage = () => {
       <TestimonialsStats />
       <Testimonials />
     </>
-  )
-}
+  );
+};
 
-export default TestimonialsPage
+export default TestimonialsPage;

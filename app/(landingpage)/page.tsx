@@ -2,7 +2,7 @@ import React from "react";
 import AnimatedCounter from "../../components/AnimatedCounter";
 import Plans from "@/components/Plans";
 import WhyTrustFx from "./components/WhyTrustfx";
-import FAQSection from "./components/FAQs";
+import FAQSection from "../../components/FAQs";
 import Testimonials from "../../components/Testimonials";
 
 const Homepage = () => {

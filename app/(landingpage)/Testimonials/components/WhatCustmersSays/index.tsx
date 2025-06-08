@@ -1,33 +1,40 @@
-"use client"
+"use client";
 
-import { useEffect, useState, useRef } from "react"
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
-import { Star, Quote, Users, TrendingUp, Shield, ArrowRight } from "lucide-react"
+import { useEffect, useState, useRef } from "react";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import {
+  Star,
+  Quote,
+  Users,
+  TrendingUp,
+  Shield,
+  ArrowRight,
+} from "lucide-react";
 import AnimatedText from "@/components/AnimatedText";
 
 export default function WhatCustomersSays() {
-  const [isVisible, setIsVisible] = useState(false)
-  const sectionRef = useRef<HTMLDivElement>(null)
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            setIsVisible(true)
+            setIsVisible(true);
           }
-        })
+        });
       },
       { threshold: 0.2 },
-    )
+    );
 
     if (sectionRef.current) {
-      observer.observe(sectionRef.current)
+      observer.observe(sectionRef.current);
     }
 
-    return () => observer.disconnect()
-  }, [])
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <section className="relative py-20 bg-gradient-to-br from-slate-900 via-blue-900 to-purple-900 overflow-hidden">
@@ -59,12 +66,13 @@ export default function WhatCustomersSays() {
               className={`transition-all duration-1000 delay-1000 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
             >
               <p className="text-xl md:text-2xl text-gray-300 leading-relaxed max-w-4xl mx-auto mb-8">
-                Real stories. Real results. See why investors from around the world trust TrustFx to grow and protect
-                their wealth.
+                Real stories. Real results. See why investors from around the
+                world trust TrustFx to grow and protect their wealth.
               </p>
               <p className="text-lg text-gray-400 leading-relaxed max-w-3xl mx-auto">
-                We believe the best proof of value is in the voices of those who&apos;ve experienced it. From beginners to
-                seasoned investors, our community shares what makes TrustFx different.
+                We believe the best proof of value is in the voices of those
+                who&apos;ve experienced it. From beginners to seasoned
+                investors, our community shares what makes TrustFx different.
               </p>
             </div>
           </div>
@@ -120,16 +128,17 @@ export default function WhatCustomersSays() {
             <div className="relative">
               <Quote className="w-16 h-16 text-blue-400/30 mx-auto mb-6" />
               <blockquote className="text-2xl md:text-3xl font-bold text-white/90 italic max-w-4xl mx-auto">
-                &quot;The best investment platform I&apos;ve ever used. TrustFx doesn&apos;t just manage money — they build
-                relationships.&quot;
+                &quot;The best investment platform I&apos;ve ever used. TrustFx
+                doesn&apos;t just manage money — they build relationships.&quot;
               </blockquote>
               <div className="mt-6 text-gray-400">
-                <span className="font-semibold">— Sarah M.</span>, Premium Plan Investor
+                <span className="font-semibold">— Sarah M.</span>, Premium Plan
+                Investor
               </div>
             </div>
           </div>
         </div>
       </div>
     </section>
-  )
+  );
 }

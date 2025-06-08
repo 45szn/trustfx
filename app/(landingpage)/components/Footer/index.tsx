@@ -1,12 +1,12 @@
-"use client"
+"use client";
 
-import type React from "react"
+import type React from "react";
 
-import { useState } from "react"
-import Link from "next/link"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Badge } from "@/components/ui/badge"
+import { useState } from "react";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Badge } from "@/components/ui/badge";
 import {
   Facebook,
   Twitter,
@@ -22,24 +22,24 @@ import {
   Award,
   Clock,
   ArrowUp,
-} from "lucide-react"
+} from "lucide-react";
 
 export default function Footer() {
-  const [email, setEmail] = useState("")
-  const [isSubscribed, setIsSubscribed] = useState(false)
+  const [email, setEmail] = useState("");
+  const [isSubscribed, setIsSubscribed] = useState(false);
 
   const handleNewsletterSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
+    e.preventDefault();
     if (email) {
-      setIsSubscribed(true)
-      setEmail("")
-      setTimeout(() => setIsSubscribed(false), 3000)
+      setIsSubscribed(true);
+      setEmail("");
+      setTimeout(() => setIsSubscribed(false), 3000);
     }
-  }
+  };
 
   const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" })
-  }
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
 
   return (
     <footer className="bg-gradient-to-br from-slate-900 via-gray-900 to-black text-white relative overflow-hidden">
@@ -59,11 +59,15 @@ export default function Footer() {
                 Get Market Insights & Investment Tips
               </h3>
               <p className="text-xl text-gray-300 mb-8">
-                Join 50,000+ investors receiving weekly market analysis and exclusive investment opportunities.
+                Join 50,000+ investors receiving weekly market analysis and
+                exclusive investment opportunities.
               </p>
             </div>
 
-            <form onSubmit={handleNewsletterSubmit} className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
+            <form
+              onSubmit={handleNewsletterSubmit}
+              className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto"
+            >
               <Input
                 type="email"
                 placeholder="Enter your email address"
@@ -102,7 +106,8 @@ export default function Footer() {
                   <h3 className="text-2xl font-bold">TrustFx</h3>
                 </div>
                 <p className="text-gray-300 leading-relaxed">
-                  Building wealth through intelligent investing. Your trusted partner for financial growth and security.
+                  Building wealth through intelligent investing. Your trusted
+                  partner for financial growth and security.
                 </p>
               </div>
 
@@ -125,7 +130,9 @@ export default function Footer() {
               <div className="space-y-3">
                 <div className="flex items-center gap-2">
                   <Shield className="w-5 h-5 text-green-400" />
-                  <span className="text-sm text-gray-300">SIPC Insured up to $500,000</span>
+                  <span className="text-sm text-gray-300">
+                    SIPC Insured up to $500,000
+                  </span>
                 </div>
                 <div className="flex items-center gap-2">
                   <Award className="w-5 h-5 text-yellow-400" />
@@ -133,42 +140,64 @@ export default function Footer() {
                 </div>
                 <div className="flex items-center gap-2">
                   <Clock className="w-5 h-5 text-blue-400" />
-                  <span className="text-sm text-gray-300">24/7 Customer Support</span>
+                  <span className="text-sm text-gray-300">
+                    24/7 Customer Support
+                  </span>
                 </div>
               </div>
             </div>
 
             {/* Investment Plans */}
             <div>
-              <h4 className="text-xl font-semibold mb-6 text-white">Investment Plans</h4>
+              <h4 className="text-xl font-semibold mb-6 text-white">
+                Investment Plans
+              </h4>
               <ul className="space-y-3">
                 <li>
-                  <Link href="/plans/starter" className="text-gray-300 hover:text-blue-400 transition-colors">
+                  <Link
+                    href="/plans/starter"
+                    className="text-gray-300 hover:text-blue-400 transition-colors"
+                  >
                     Starter Plan
                   </Link>
                 </li>
                 <li>
-                  <Link href="/plans/growth" className="text-gray-300 hover:text-blue-400 transition-colors">
+                  <Link
+                    href="/plans/growth"
+                    className="text-gray-300 hover:text-blue-400 transition-colors"
+                  >
                     Growth Plan
                   </Link>
                 </li>
                 <li>
-                  <Link href="/plans/premium" className="text-gray-300 hover:text-blue-400 transition-colors">
+                  <Link
+                    href="/plans/premium"
+                    className="text-gray-300 hover:text-blue-400 transition-colors"
+                  >
                     Premium Plan
                   </Link>
                 </li>
                 <li>
-                  <Link href="/plans/impact" className="text-gray-300 hover:text-blue-400 transition-colors">
+                  <Link
+                    href="/plans/impact"
+                    className="text-gray-300 hover:text-blue-400 transition-colors"
+                  >
                     Impact Plan
                   </Link>
                 </li>
                 <li>
-                  <Link href="/plans/pro-trader" className="text-gray-300 hover:text-blue-400 transition-colors">
+                  <Link
+                    href="/plans/pro-trader"
+                    className="text-gray-300 hover:text-blue-400 transition-colors"
+                  >
                     Pro Trader Plan
                   </Link>
                 </li>
                 <li>
-                  <Link href="/plans/fixed-return" className="text-gray-300 hover:text-blue-400 transition-colors">
+                  <Link
+                    href="/plans/fixed-return"
+                    className="text-gray-300 hover:text-blue-400 transition-colors"
+                  >
                     Fixed Return Plan
                   </Link>
                 </li>
@@ -180,32 +209,50 @@ export default function Footer() {
               <h4 className="text-xl font-semibold mb-6 text-white">Company</h4>
               <ul className="space-y-3">
                 <li>
-                  <Link href="/about" className="text-gray-300 hover:text-blue-400 transition-colors">
+                  <Link
+                    href="/about"
+                    className="text-gray-300 hover:text-blue-400 transition-colors"
+                  >
                     About Us
                   </Link>
                 </li>
                 <li>
-                  <Link href="/how-it-works" className="text-gray-300 hover:text-blue-400 transition-colors">
+                  <Link
+                    href="/how-it-works"
+                    className="text-gray-300 hover:text-blue-400 transition-colors"
+                  >
                     How It Works
                   </Link>
                 </li>
                 <li>
-                  <Link href="/security" className="text-gray-300 hover:text-blue-400 transition-colors">
+                  <Link
+                    href="/security"
+                    className="text-gray-300 hover:text-blue-400 transition-colors"
+                  >
                     Security
                   </Link>
                 </li>
                 <li>
-                  <Link href="/careers" className="text-gray-300 hover:text-blue-400 transition-colors">
+                  <Link
+                    href="/careers"
+                    className="text-gray-300 hover:text-blue-400 transition-colors"
+                  >
                     Careers
                   </Link>
                 </li>
                 <li>
-                  <Link href="/press" className="text-gray-300 hover:text-blue-400 transition-colors">
+                  <Link
+                    href="/press"
+                    className="text-gray-300 hover:text-blue-400 transition-colors"
+                  >
                     Press
                   </Link>
                 </li>
                 <li>
-                  <Link href="/blog" className="text-gray-300 hover:text-blue-400 transition-colors">
+                  <Link
+                    href="/blog"
+                    className="text-gray-300 hover:text-blue-400 transition-colors"
+                  >
                     Blog
                   </Link>
                 </li>
@@ -217,32 +264,50 @@ export default function Footer() {
               <h4 className="text-xl font-semibold mb-6 text-white">Support</h4>
               <ul className="space-y-3">
                 <li>
-                  <Link href="/help" className="text-gray-300 hover:text-blue-400 transition-colors">
+                  <Link
+                    href="/help"
+                    className="text-gray-300 hover:text-blue-400 transition-colors"
+                  >
                     Help Center
                   </Link>
                 </li>
                 <li>
-                  <Link href="/contact" className="text-gray-300 hover:text-blue-400 transition-colors">
+                  <Link
+                    href="/contact"
+                    className="text-gray-300 hover:text-blue-400 transition-colors"
+                  >
                     Contact Us
                   </Link>
                 </li>
                 <li>
-                  <Link href="/faq" className="text-gray-300 hover:text-blue-400 transition-colors">
+                  <Link
+                    href="/faq"
+                    className="text-gray-300 hover:text-blue-400 transition-colors"
+                  >
                     FAQ
                   </Link>
                 </li>
                 <li>
-                  <Link href="/live-chat" className="text-gray-300 hover:text-blue-400 transition-colors">
+                  <Link
+                    href="/live-chat"
+                    className="text-gray-300 hover:text-blue-400 transition-colors"
+                  >
                     Live Chat
                   </Link>
                 </li>
                 <li>
-                  <Link href="/tutorials" className="text-gray-300 hover:text-blue-400 transition-colors">
+                  <Link
+                    href="/tutorials"
+                    className="text-gray-300 hover:text-blue-400 transition-colors"
+                  >
                     Video Tutorials
                   </Link>
                 </li>
                 <li>
-                  <Link href="/webinars" className="text-gray-300 hover:text-blue-400 transition-colors">
+                  <Link
+                    href="/webinars"
+                    className="text-gray-300 hover:text-blue-400 transition-colors"
+                  >
                     Webinars
                   </Link>
                 </li>
@@ -308,16 +373,28 @@ export default function Footer() {
           <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-gray-400">
             <div className="flex flex-wrap items-center gap-6">
               <span>© 2024 TrustFx. All rights reserved.</span>
-              <Link href="/privacy" className="hover:text-white transition-colors">
+              <Link
+                href="/privacy"
+                className="hover:text-white transition-colors"
+              >
                 Privacy Policy
               </Link>
-              <Link href="/terms" className="hover:text-white transition-colors">
+              <Link
+                href="/terms"
+                className="hover:text-white transition-colors"
+              >
                 Terms of Service
               </Link>
-              <Link href="/cookies" className="hover:text-white transition-colors">
+              <Link
+                href="/cookies"
+                className="hover:text-white transition-colors"
+              >
                 Cookie Policy
               </Link>
-              <Link href="/disclaimer" className="hover:text-white transition-colors">
+              <Link
+                href="/disclaimer"
+                className="hover:text-white transition-colors"
+              >
                 Risk Disclaimer
               </Link>
             </div>
@@ -328,5 +405,5 @@ export default function Footer() {
         </div>
       </div>
     </footer>
-  )
+  );
 }

@@ -1,14 +1,23 @@
-"use client"
+"use client";
 
-import { useEffect, useState, useRef } from "react"
-import { Card, CardContent } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Users, DollarSign, ThumbsUp, Star, TrendingUp, Shield, Globe, Award } from "lucide-react"
+import { useEffect, useState, useRef } from "react";
+import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import {
+  Users,
+  DollarSign,
+  ThumbsUp,
+  Star,
+  TrendingUp,
+  Shield,
+  Globe,
+  Award,
+} from "lucide-react";
 import AnimatedCounter from "@/components/AnimatedCounter";
 
 export default function TestimonialsStats() {
-  const [isVisible, setIsVisible] = useState(false)
-  const sectionRef = useRef<HTMLDivElement>(null)
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef<HTMLDivElement>(null);
 
   const stats = [
     {
@@ -85,26 +94,26 @@ export default function TestimonialsStats() {
       gradient: "from-red-500 to-pink-500",
       delay: 1400,
     },
-  ]
+  ];
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            setIsVisible(true)
+            setIsVisible(true);
           }
-        })
+        });
       },
       { threshold: 0.1 },
-    )
+    );
 
     if (sectionRef.current) {
-      observer.observe(sectionRef.current)
+      observer.observe(sectionRef.current);
     }
 
-    return () => observer.disconnect()
-  }, [])
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <section className="py-20 bg-gradient-to-br from-white to-gray-50">
@@ -114,21 +123,29 @@ export default function TestimonialsStats() {
           <Badge className="mb-4 bg-gradient-to-r from-green-500 to-blue-500 text-white px-4 py-2 text-sm font-semibold">
             PROVEN RESULTS
           </Badge>
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">The Numbers Speak for Themselves</h2>
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+            The Numbers Speak for Themselves
+          </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Our success is measured by your success. Here are the metrics that matter most to our investor community.
+            Our success is measured by your success. Here are the metrics that
+            matter most to our investor community.
           </p>
         </div>
 
         {/* Stats Grid */}
-        <div ref={sectionRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div
+          ref={sectionRef}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
+        >
           {stats.map((stat, index) => {
-            const IconComponent = stat.icon
+            const IconComponent = stat.icon;
             return (
               <Card
                 key={index}
                 className={`transition-all duration-1000 hover:shadow-xl hover:-translate-y-2 ${
-                  isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+                  isVisible
+                    ? "opacity-100 translate-y-0"
+                    : "opacity-0 translate-y-8"
                 }`}
                 style={{ transitionDelay: `${stat.delay}ms` }}
               >
@@ -154,13 +171,17 @@ export default function TestimonialsStats() {
                   </div>
 
                   {/* Label */}
-                  <h3 className="text-lg font-semibold text-gray-900 mb-3">{stat.label}</h3>
+                  <h3 className="text-lg font-semibold text-gray-900 mb-3">
+                    {stat.label}
+                  </h3>
 
                   {/* Description */}
-                  <p className="text-sm text-gray-600 leading-relaxed">{stat.description}</p>
+                  <p className="text-sm text-gray-600 leading-relaxed">
+                    {stat.description}
+                  </p>
                 </CardContent>
               </Card>
-            )
+            );
           })}
         </div>
 
@@ -170,10 +191,12 @@ export default function TestimonialsStats() {
         >
           <Card className="bg-gradient-to-r from-blue-600 to-purple-600 text-white border-0">
             <CardContent className="p-12 text-center">
-              <h3 className="text-3xl font-bold mb-4">Ready to Join Our Success Story?</h3>
+              <h3 className="text-3xl font-bold mb-4">
+                Ready to Join Our Success Story?
+              </h3>
               <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
-                Become part of a community that&apos;s redefining what it means to invest with confidence and achieve real
-                results.
+                Become part of a community that&apos;s redefining what it means
+                to invest with confidence and achieve real results.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <button className="px-8 py-4 bg-white text-blue-600 font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
@@ -188,5 +211,5 @@ export default function TestimonialsStats() {
         </div>
       </div>
     </section>
-  )
+  );
 }
