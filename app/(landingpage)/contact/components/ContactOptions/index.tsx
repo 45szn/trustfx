@@ -18,9 +18,11 @@ export default function ContactOptions() {
   const [copiedText, setCopiedText] = useState<string | null>(null);
   const sectionRef = useRef<HTMLDivElement>(null);
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const contactOptions = [
     {
       id: 1,
+      sectionid: "emailsupport",
       icon: Mail,
       title: "Email Us",
       description: "For general inquiries or support",
@@ -41,6 +43,7 @@ export default function ContactOptions() {
     },
     {
       id: 2,
+      sectionid: "callus",
       icon: Phone,
       title: "Call or WhatsApp",
       description: "Our support team is available during business hours",
@@ -61,6 +64,7 @@ export default function ContactOptions() {
     },
     {
       id: 3,
+      sectionid: "livechat",
       icon: MessageCircle,
       title: "Live Chat",
       description: "Real-time help during market hours",
@@ -113,7 +117,7 @@ export default function ContactOptions() {
     }
 
     return () => observer.disconnect();
-  }, []);
+  }, [contactOptions]);
 
   return (
     <section className="py-20 bg-gradient-to-br from-white to-gray-50">
@@ -141,6 +145,7 @@ export default function ContactOptions() {
             return (
               <Card
                 key={option.id}
+                id={option.sectionid}
                 className={`relative overflow-hidden transition-all duration-1000 hover:shadow-xl hover:-translate-y-2 ${
                   isVisible
                     ? "opacity-100 translate-y-0 scale-100"

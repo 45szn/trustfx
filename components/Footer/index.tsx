@@ -155,7 +155,7 @@ export default function Footer() {
               <ul className="space-y-3">
                 <li>
                   <Link
-                    href="/plans/starter"
+                    href="/plans#starter"
                     className="text-gray-300 hover:text-blue-400 transition-colors"
                   >
                     Starter Plan
@@ -163,7 +163,7 @@ export default function Footer() {
                 </li>
                 <li>
                   <Link
-                    href="/plans/growth"
+                    href="/plans#growth"
                     className="text-gray-300 hover:text-blue-400 transition-colors"
                   >
                     Growth Plan
@@ -171,7 +171,7 @@ export default function Footer() {
                 </li>
                 <li>
                   <Link
-                    href="/plans/premium"
+                    href="/plans#premium"
                     className="text-gray-300 hover:text-blue-400 transition-colors"
                   >
                     Premium Plan
@@ -179,7 +179,7 @@ export default function Footer() {
                 </li>
                 <li>
                   <Link
-                    href="/plans/impact"
+                    href="/plans#impact"
                     className="text-gray-300 hover:text-blue-400 transition-colors"
                   >
                     Impact Plan
@@ -187,7 +187,7 @@ export default function Footer() {
                 </li>
                 <li>
                   <Link
-                    href="/plans/pro-trader"
+                    href="/plans#protrader"
                     className="text-gray-300 hover:text-blue-400 transition-colors"
                   >
                     Pro Trader Plan
@@ -195,7 +195,7 @@ export default function Footer() {
                 </li>
                 <li>
                   <Link
-                    href="/plans/fixed-return"
+                    href="/plans#fixedreturn"
                     className="text-gray-300 hover:text-blue-400 transition-colors"
                   >
                     Fixed Return Plan
