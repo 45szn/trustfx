@@ -3,7 +3,7 @@ import WhatCustomersSays from "./components/WhatCustmersSays";
 import TestimonialsStats from "./components/Stats";
 import TestimonialSection from "@/components/Testimonials";
 
-const Testimonials = () => {
+export default function Testimonials() {
   return (
     <>
       <WhatCustomersSays />
@@ -13,4 +13,4 @@ const Testimonials = () => {
   );
 };
 
-export default Testimonials;
+// export default Testimonials;
