@@ -1,20 +1,21 @@
-"use client"
+"use client";
 
-import { useEffect, useState, useRef } from "react"
-import { Card, CardContent } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { BarChart3, Shield, Handshake, CheckCircle } from "lucide-react"
+import { useEffect, useState, useRef } from "react";
+import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { BarChart3, Shield, Handshake, CheckCircle } from "lucide-react";
 
 export default function SetUsApart() {
-  const [visibleCards, setVisibleCards] = useState<number[]>([])
-  const sectionRef = useRef<HTMLDivElement>(null)
+  const [visibleCards, setVisibleCards] = useState<number[]>([]);
+  const sectionRef = useRef<HTMLDivElement>(null);
 
   const differentiators = [
     {
       id: 1,
       icon: BarChart3,
       title: "Data-Driven Approach",
-      description: "We combine advanced analytics with real-world market experience to drive consistent growth.",
+      description:
+        "We combine advanced analytics with real-world market experience to drive consistent growth.",
       features: [
         "AI-powered market analysis",
         "Real-time portfolio optimization",
@@ -54,7 +55,7 @@ export default function SetUsApart() {
       gradient: "from-purple-500 to-violet-600",
       bgGradient: "from-purple-50 to-violet-50",
     },
-  ]
+  ];
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -63,21 +64,21 @@ export default function SetUsApart() {
           if (entry.isIntersecting) {
             differentiators.forEach((diff, index) => {
               setTimeout(() => {
-                setVisibleCards((prev) => [...prev, diff.id])
-              }, index * 200)
-            })
+                setVisibleCards((prev) => [...prev, diff.id]);
+              }, index * 200);
+            });
           }
-        })
+        });
       },
       { threshold: 0.1 },
-    )
+    );
 
     if (sectionRef.current) {
-      observer.observe(sectionRef.current)
+      observer.observe(sectionRef.current);
     }
 
-    return () => observer.disconnect()
-  }, [])
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <section className="py-20 bg-gradient-to-br from-gray-50 to-white">
@@ -87,27 +88,34 @@ export default function SetUsApart() {
           <Badge className="mb-4 bg-gradient-to-r from-purple-500 to-pink-500 text-white px-4 py-2 text-sm font-semibold">
             OUR ADVANTAGES
           </Badge>
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">What Sets Us Apart</h2>
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+            What Sets Us Apart
+          </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            We&apos;ve built TrustFx on three core pillars that ensure your investment success and peace of mind.
+            We&apos;ve built TrustFx on three core pillars that ensure your
+            investment success and peace of mind.
           </p>
         </div>
 
         {/* Differentiators Grid */}
         <div ref={sectionRef} className="grid lg:grid-cols-3 gap-8">
           {differentiators.map((diff) => {
-            const IconComponent = diff.icon
-            const isVisible = visibleCards.includes(diff.id)
+            const IconComponent = diff.icon;
+            const isVisible = visibleCards.includes(diff.id);
 
             return (
               <Card
                 key={diff.id}
                 className={`relative overflow-hidden transition-all duration-1000 hover:shadow-2xl hover:-translate-y-2 ${
-                  isVisible ? "opacity-100 translate-y-0 scale-100" : "opacity-0 translate-y-12 scale-95"
+                  isVisible
+                    ? "opacity-100 translate-y-0 scale-100"
+                    : "opacity-0 translate-y-12 scale-95"
                 }`}
               >
                 {/* Background Gradient */}
-                <div className={`absolute inset-0 bg-gradient-to-br ${diff.bgGradient} opacity-50`} />
+                <div
+                  className={`absolute inset-0 bg-gradient-to-br ${diff.bgGradient} opacity-50`}
+                />
 
                 <CardContent className="relative p-8 h-full">
                   {/* Icon */}
@@ -118,8 +126,12 @@ export default function SetUsApart() {
                   </div>
 
                   {/* Content */}
-                  <h3 className="text-2xl font-bold text-gray-900 mb-4">{diff.title}</h3>
-                  <p className="text-gray-700 leading-relaxed mb-6">{diff.description}</p>
+                  <h3 className="text-2xl font-bold text-gray-900 mb-4">
+                    {diff.title}
+                  </h3>
+                  <p className="text-gray-700 leading-relaxed mb-6">
+                    {diff.description}
+                  </p>
 
                   {/* Features List */}
                   <ul className="space-y-3">
@@ -132,7 +144,7 @@ export default function SetUsApart() {
                   </ul>
                 </CardContent>
               </Card>
-            )
+            );
           })}
         </div>
 
@@ -140,9 +152,12 @@ export default function SetUsApart() {
         <div className="mt-16 text-center">
           <Card className="bg-gradient-to-r from-blue-600 to-purple-600 text-white border-0">
             <CardContent className="p-12">
-              <h3 className="text-3xl font-bold mb-4">Ready to Experience the Difference?</h3>
+              <h3 className="text-3xl font-bold mb-4">
+                Ready to Experience the Difference?
+              </h3>
               <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
-                Join thousands of investors who&apos;ve chosen TrustFx for secure, transparent, and profitable investing.
+                Join thousands of investors who&apos;ve chosen TrustFx for
+                secure, transparent, and profitable investing.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <button className="px-8 py-4 bg-white text-blue-600 font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
@@ -157,5 +172,5 @@ export default function SetUsApart() {
         </div>
       </div>
     </section>
-  )
+  );
 }
