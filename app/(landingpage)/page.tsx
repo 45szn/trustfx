@@ -1,9 +1,9 @@
 import React from "react";
-import AnimatedCounter from "./components/AnimatedCounter";
+import AnimatedCounter from "../../components/AnimatedCounter";
 import Plans from "@/components/Plans";
 import WhyTrustFx from "./components/WhyTrustfx";
 import FAQSection from "./components/FAQs";
-import Testimonials from "./Testimonials/page";
+import Testimonials from "../../components/Testimonials";
 
 const Homepage = () => {
   return (
