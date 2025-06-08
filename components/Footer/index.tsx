@@ -265,7 +265,7 @@ export default function Footer() {
               <ul className="space-y-3">
                 <li>
                   <Link
-                    href="/help"
+                    href="/contact"
                     className="text-gray-300 hover:text-blue-400 transition-colors"
                   >
                     Help Center
@@ -281,7 +281,7 @@ export default function Footer() {
                 </li>
                 <li>
                   <Link
-                    href="/faq"
+                    href="/about#faq"
                     className="text-gray-300 hover:text-blue-400 transition-colors"
                   >
                     FAQ
@@ -289,7 +289,7 @@ export default function Footer() {
                 </li>
                 <li>
                   <Link
-                    href="/live-chat"
+                    href="/contact#livechat"
                     className="text-gray-300 hover:text-blue-400 transition-colors"
                   >
                     Live Chat
@@ -297,7 +297,7 @@ export default function Footer() {
                 </li>
                 <li>
                   <Link
-                    href="/tutorials"
+                    href="/#"
                     className="text-gray-300 hover:text-blue-400 transition-colors"
                   >
                     Video Tutorials
@@ -305,7 +305,7 @@ export default function Footer() {
                 </li>
                 <li>
                   <Link
-                    href="/webinars"
+                    href="/#"
                     className="text-gray-300 hover:text-blue-400 transition-colors"
                   >
                     Webinars
@@ -374,25 +374,25 @@ export default function Footer() {
             <div className="flex flex-wrap items-center gap-6">
               <span>© 2024 TrustFx. All rights reserved.</span>
               <Link
-                href="/privacy"
+                href="/#"
                 className="hover:text-white transition-colors"
               >
                 Privacy Policy
               </Link>
               <Link
-                href="/terms"
+                href="/#"
                 className="hover:text-white transition-colors"
               >
                 Terms of Service
               </Link>
               <Link
-                href="/cookies"
+                href="/#"
                 className="hover:text-white transition-colors"
               >
                 Cookie Policy
               </Link>
               <Link
-                href="/disclaimer"
+                href="/#"
                 className="hover:text-white transition-colors"
               >
                 Risk Disclaimer
