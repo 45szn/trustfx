@@ -218,7 +218,7 @@ export default function Footer() {
                 </li>
                 <li>
                   <Link
-                    href="/how-it-works"
+                    href="/howitworks"
                     className="text-gray-300 hover:text-blue-400 transition-colors"
                   >
                     How It Works
@@ -232,7 +232,7 @@ export default function Footer() {
                     Security
                   </Link>
                 </li>
-                <li>
+                {/* <li>
                   <Link
                     href="/careers"
                     className="text-gray-300 hover:text-blue-400 transition-colors"
@@ -247,10 +247,10 @@ export default function Footer() {
                   >
                     Press
                   </Link>
-                </li>
+                </li> */}
                 <li>
                   <Link
-                    href="/blog"
+                    href="/blogs"
                     className="text-gray-300 hover:text-blue-400 transition-colors"
                   >
                     Blog
