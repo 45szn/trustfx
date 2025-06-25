@@ -1,13 +1,22 @@
-"use client"
+"use client";
 
-import { useEffect, useState, useRef } from "react"
-import { Card, CardContent } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Lock, Shield, Smartphone, Cloud, UserCheck, Database, AlertTriangle, CheckCircle } from "lucide-react"
+import { useEffect, useState, useRef } from "react";
+import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import {
+  Lock,
+  Shield,
+  Smartphone,
+  Cloud,
+  UserCheck,
+  Database,
+  AlertTriangle,
+  CheckCircle,
+} from "lucide-react";
 
 export default function SecurityFeatures() {
-  const [visibleCards, setVisibleCards] = useState<number[]>([])
-  const sectionRef = useRef<HTMLDivElement>(null)
+  const [visibleCards, setVisibleCards] = useState<number[]>([]);
+  const sectionRef = useRef<HTMLDivElement>(null);
 
   const securityFeatures = [
     {
@@ -89,7 +98,8 @@ export default function SecurityFeatures() {
       id: 6,
       icon: Smartphone,
       title: "📱 Mobile Security",
-      description: "Advanced mobile security features including biometric authentication and secure app architecture.",
+      description:
+        "Advanced mobile security features including biometric authentication and secure app architecture.",
       features: [
         "Biometric authentication (Face ID, Touch ID)",
         "App-level encryption and security",
@@ -99,7 +109,7 @@ export default function SecurityFeatures() {
       gradient: "from-teal-500 to-cyan-500",
       bgGradient: "from-teal-50 to-cyan-50",
     },
-  ]
+  ];
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -108,21 +118,21 @@ export default function SecurityFeatures() {
           if (entry.isIntersecting) {
             securityFeatures.forEach((feature, index) => {
               setTimeout(() => {
-                setVisibleCards((prev) => [...prev, feature.id])
-              }, index * 200)
-            })
+                setVisibleCards((prev) => [...prev, feature.id]);
+              }, index * 200);
+            });
           }
-        })
+        });
       },
       { threshold: 0.1 },
-    )
+    );
 
     if (sectionRef.current) {
-      observer.observe(sectionRef.current)
+      observer.observe(sectionRef.current);
     }
 
-    return () => observer.disconnect()
-  }, [])
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <section className="py-20 bg-gradient-to-br from-white to-gray-50">
@@ -132,28 +142,37 @@ export default function SecurityFeatures() {
           <Badge className="mb-4 bg-gradient-to-r from-green-500 to-blue-500 text-white px-4 py-2 text-sm font-semibold">
             SECURITY MEASURES
           </Badge>
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">Comprehensive Security Features</h2>
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+            Comprehensive Security Features
+          </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Every aspect of our platform is designed with security in mind. From data encryption to fraud prevention,
-            we&apos;ve got you covered.
+            Every aspect of our platform is designed with security in mind. From
+            data encryption to fraud prevention, we&apos;ve got you covered.
           </p>
         </div>
 
         {/* Security Features Grid */}
-        <div ref={sectionRef} className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div
+          ref={sectionRef}
+          className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
+        >
           {securityFeatures.map((feature) => {
-            const IconComponent = feature.icon
-            const isVisible = visibleCards.includes(feature.id)
+            const IconComponent = feature.icon;
+            const isVisible = visibleCards.includes(feature.id);
 
             return (
               <Card
                 key={feature.id}
                 className={`relative overflow-hidden transition-all duration-1000 hover:shadow-xl hover:-translate-y-2 ${
-                  isVisible ? "opacity-100 translate-y-0 scale-100" : "opacity-0 translate-y-12 scale-95"
+                  isVisible
+                    ? "opacity-100 translate-y-0 scale-100"
+                    : "opacity-0 translate-y-12 scale-95"
                 }`}
               >
                 {/* Background Gradient */}
-                <div className={`absolute inset-0 bg-gradient-to-br ${feature.bgGradient} opacity-50`} />
+                <div
+                  className={`absolute inset-0 bg-gradient-to-br ${feature.bgGradient} opacity-50`}
+                />
 
                 <CardContent className="relative p-8 h-full">
                   {/* Icon */}
@@ -164,8 +183,12 @@ export default function SecurityFeatures() {
                   </div>
 
                   {/* Content */}
-                  <h3 className="text-xl font-bold text-gray-900 mb-4">{feature.title}</h3>
-                  <p className="text-gray-700 leading-relaxed mb-6">{feature.description}</p>
+                  <h3 className="text-xl font-bold text-gray-900 mb-4">
+                    {feature.title}
+                  </h3>
+                  <p className="text-gray-700 leading-relaxed mb-6">
+                    {feature.description}
+                  </p>
 
                   {/* Features List */}
                   <ul className="space-y-3">
@@ -178,7 +201,7 @@ export default function SecurityFeatures() {
                   </ul>
                 </CardContent>
               </Card>
-            )
+            );
           })}
         </div>
 
@@ -193,13 +216,16 @@ export default function SecurityFeatures() {
               </div>
               <h3 className="text-3xl font-bold mb-4">🙌 Your Trust Matters</h3>
               <p className="text-xl text-green-100 mb-8 max-w-3xl mx-auto">
-                We understand that trust is earned — and security is how we keep it. At TrustFx, every line of code and
-                every decision is made with your protection in mind.
+                We understand that trust is earned — and security is how we keep
+                it. At TrustFx, every line of code and every decision is made
+                with your protection in mind.
               </p>
               <div className="grid md:grid-cols-3 gap-6 max-w-2xl mx-auto">
                 <div className="text-center">
                   <div className="text-2xl font-bold mb-1">Bank-Level</div>
-                  <div className="text-sm text-green-100">Security Standards</div>
+                  <div className="text-sm text-green-100">
+                    Security Standards
+                  </div>
                 </div>
                 <div className="text-center">
                   <div className="text-2xl font-bold mb-1">24/7</div>
@@ -215,5 +241,5 @@ export default function SecurityFeatures() {
         </div>
       </div>
     </section>
-  )
+  );
 }

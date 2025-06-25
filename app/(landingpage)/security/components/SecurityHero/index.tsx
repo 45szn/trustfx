@@ -1,34 +1,34 @@
-"use client"
+"use client";
 
-import { useEffect, useState, useRef } from "react"
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
-import { Shield, Lock, Eye, ArrowRight } from "lucide-react"
+import { useEffect, useState, useRef } from "react";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Shield, Lock, Eye, ArrowRight } from "lucide-react";
 import AnimatedText from "@/components/AnimatedText";
 import AnimatedCounter from "@/components/AnimatedCounter";
 
 export default function SecurityHero() {
-  const [isVisible, setIsVisible] = useState(false)
-  const sectionRef = useRef<HTMLDivElement>(null)
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            setIsVisible(true)
+            setIsVisible(true);
           }
-        })
+        });
       },
       { threshold: 0.2 },
-    )
+    );
 
     if (sectionRef.current) {
-      observer.observe(sectionRef.current)
+      observer.observe(sectionRef.current);
     }
 
-    return () => observer.disconnect()
-  }, [])
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <section className="relative py-20 bg-gradient-to-br from-slate-900 via-blue-900 to-purple-900 overflow-hidden">
@@ -60,11 +60,13 @@ export default function SecurityHero() {
               className={`transition-all duration-1000 delay-1000 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
             >
               <p className="text-xl md:text-2xl text-gray-300 leading-relaxed max-w-4xl mx-auto mb-8">
-                Your security is our top priority. We are committed to protecting your personal data, investments, and
-                every interaction you have with our platform.
+                Your security is our top priority. We are committed to
+                protecting your personal data, investments, and every
+                interaction you have with our platform.
               </p>
               <p className="text-lg text-gray-400 leading-relaxed max-w-3xl mx-auto">
-                We use advanced security measures and industry best practices to ensure your trust is well-placed.
+                We use advanced security measures and industry best practices to
+                ensure your trust is well-placed.
               </p>
             </div>
           </div>
@@ -78,7 +80,12 @@ export default function SecurityHero() {
                 <Lock className="w-8 h-8 text-green-400" />
               </div>
               <div className="text-2xl font-bold text-white mb-2">
-                <AnimatedCounter end={256} duration={2000} delay={1500} suffix="-bit" />
+                <AnimatedCounter
+                  end={256}
+                  duration={2000}
+                  delay={1500}
+                  suffix="-bit"
+                />
               </div>
               <div className="text-sm text-gray-300">SSL Encryption</div>
             </div>
@@ -87,7 +94,12 @@ export default function SecurityHero() {
                 <Shield className="w-8 h-8 text-blue-400" />
               </div>
               <div className="text-2xl font-bold text-white mb-2">
-                <AnimatedCounter end={99.9} duration={2000} delay={1700} suffix="%" />
+                <AnimatedCounter
+                  end={99.9}
+                  duration={2000}
+                  delay={1700}
+                  suffix="%"
+                />
               </div>
               <div className="text-sm text-gray-300">Uptime Security</div>
             </div>
@@ -96,7 +108,12 @@ export default function SecurityHero() {
                 <Eye className="w-8 h-8 text-purple-400" />
               </div>
               <div className="text-2xl font-bold text-white mb-2">
-                <AnimatedCounter end={24} duration={2000} delay={1900} suffix="/7" />
+                <AnimatedCounter
+                  end={24}
+                  duration={2000}
+                  delay={1900}
+                  suffix="/7"
+                />
               </div>
               <div className="text-sm text-gray-300">Monitoring</div>
             </div>
@@ -114,5 +131,5 @@ export default function SecurityHero() {
         </div>
       </div>
     </section>
-  )
+  );
 }
