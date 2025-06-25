@@ -279,14 +279,14 @@ export default function Footer() {
                     Contact Us
                   </Link>
                 </li>
-                <li>
+                {/* <li>
                   <Link
                     href="/about#faq"
                     className="text-gray-300 hover:text-blue-400 transition-colors"
                   >
                     FAQ
                   </Link>
-                </li>
+                </li> */}
                 <li>
                   <Link
                     href="/contact#livechat"
@@ -297,7 +297,7 @@ export default function Footer() {
                 </li>
                 <li>
                   <Link
-                    href="/#"
+                    href="/videotutorials"
                     className="text-gray-300 hover:text-blue-400 transition-colors"
                   >
                     Video Tutorials
@@ -305,7 +305,7 @@ export default function Footer() {
                 </li>
                 <li>
                   <Link
-                    href="/#"
+                    href="/webinars"
                     className="text-gray-300 hover:text-blue-400 transition-colors"
                   >
                     Webinars
@@ -374,25 +374,25 @@ export default function Footer() {
             <div className="flex flex-wrap items-center gap-6">
               <span>© 2024 TrustFx. All rights reserved.</span>
               <Link
-                href="/#"
+                href="/privacy"
                 className="hover:text-white transition-colors"
               >
                 Privacy Policy
               </Link>
               <Link
-                href="/#"
+                href="/termsofservices"
                 className="hover:text-white transition-colors"
               >
                 Terms of Service
               </Link>
               <Link
-                href="/#"
+                href="/legal#cookiepolicy"
                 className="hover:text-white transition-colors"
               >
                 Cookie Policy
               </Link>
               <Link
-                href="/#"
+                href="/legal#riskdisclaimer"
                 className="hover:text-white transition-colors"
               >
                 Risk Disclaimer
