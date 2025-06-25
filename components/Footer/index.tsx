@@ -265,7 +265,7 @@ export default function Footer() {
               <ul className="space-y-3">
                 <li>
                   <Link
-                    href="/contact"
+                    href="/helpcenter"
                     className="text-gray-300 hover:text-blue-400 transition-colors"
                   >
                     Help Center
