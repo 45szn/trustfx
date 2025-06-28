@@ -1,14 +1,13 @@
+// app/(landingpage)/blogs/[slug]/page.tsx
 import BlogPost from "../components/BlogPost";
 import RelatedPosts from "../components/RelatedPosts";
 import BlogNewsletter from "../components/BlogNewsletter";
 
 interface PageProps {
-  params: {
-    slug: string;
-  };
+  params: { slug: string };
 }
 
-export default function BlogPostPage({ params }: PageProps) {
+export default async function BlogPostPage({ params }: PageProps) {
   return (
     <>
       <BlogPost slug={params.slug} />
@@ -17,26 +16,3 @@ export default function BlogPostPage({ params }: PageProps) {
     </>
   );
 }
-
-
-
-
-// import BlogPost from "../components/BlogPost";
-// import RelatedPosts from "../components/RelatedPosts";
-// import BlogNewsletter from "../components/BlogNewsletter";
-
-// interface BlogPostPageProps {
-//   params: {
-//     slug: string
-//   }
-// }
-
-// export default function BlogPostPage({ params }: BlogPostPageProps) {
-//   return (
-//     <>
-//       <BlogPost slug={params.slug} />
-//       <RelatedPosts />
-//       <BlogNewsletter />
-//     </>
-//   )
-// }
