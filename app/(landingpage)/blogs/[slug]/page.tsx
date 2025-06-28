@@ -3,8 +3,9 @@ import BlogPost from "../components/BlogPost";
 import RelatedPosts from "../components/RelatedPosts";
 import BlogNewsletter from "../components/BlogNewsletter";
 
-// ✅ DO NOT type 'params' manually at the function level
-export default function BlogPostPage({ params }: { params: { slug: string } }) {
+export const dynamic = "force-static"; // Optional: if you use static generation
+
+const BlogPostPage = ({ params }: { params: { slug: string } }) => {
   return (
     <>
       <BlogPost slug={params.slug} />
@@ -12,7 +13,9 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
       <BlogNewsletter />
     </>
   );
-}
+};
+
+export default BlogPostPage;
 
 
 
