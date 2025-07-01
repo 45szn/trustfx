@@ -19,15 +19,15 @@
 
 
 // app/(landingpage)/blogs/[slug]/page.tsx
-import BlogPost from "../components/BlogPost";
+// import BlogPost from "../components/BlogPost";
 import RelatedPosts from "../components/RelatedPosts";
 import BlogNewsletter from "../components/BlogNewsletter";
 
-interface PageProps {
-  params: { slug: string };
-}
+// interface PageProps {
+//   params: { slug: string };
+// }
 
-export default async function BlogPostPage({ params }: PageProps) {
+export default async function BlogPostPage() {
   return (
     <>
       {/* <BlogPost slug={params.slug} /> */}
