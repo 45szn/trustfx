@@ -1,14 +1,15 @@
+// components/BlogGrid.tsx
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect } from "react";
 import { db } from "@/lib/firebase";
-import { collection, getDocs, query, orderBy } from "firebase/firestore"
+import { collection, getDocs, query, orderBy, Timestamp } from "firebase/firestore"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Calendar, Clock, ArrowRight, ChevronLeft, ChevronRight } from "lucide-react"
 import Image from "next/image"
-import Link from "next/link"
+import Link from "next/link";
 
 interface BlogPost {
   id: string
@@ -17,10 +18,11 @@ interface BlogPost {
   category: string
   author: string
   authorRole: string
-  publishDate: string
+  publishDate: Timestamp
   readTime: string
   image: string
   slug: string
+  formattedDate: string
 }
 
 export default function BlogGrid() {
@@ -31,23 +33,32 @@ export default function BlogGrid() {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const q = query(collection(db, "blogs"), orderBy("publishDate"))
+        const q = query(collection(db, "blogs"), orderBy("publishDate", "desc"))
         const querySnapshot = await getDocs(q)
 
-        const fetchedPosts: BlogPost[] = querySnapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        })) as BlogPost[]
+        const fetchedPosts: BlogPost[] = querySnapshot.docs.map((doc) => {
+          const data = doc.data();
+          const publishDate = (data.publishDate as Timestamp).toDate();
+          return {
+            id: doc.id,
+            ...data,
+            publishDate,
+            formattedDate: publishDate.toLocaleDateString("en-US", {
+              year: "numeric",
+              month: "short",
+              day: "numeric",
+            }),
+          };
+        }) as unknown as BlogPost[]
 
         setPosts(fetchedPosts)
-        console.log("posts:", posts);
       } catch (error) {
         console.error("Error fetching blog posts:", error)
       }
     }
 
     fetchPosts()
-  }, [posts])
+  }, []) // 🔁 only run once on mount
 
   const totalPages = Math.ceil(posts.length / postsPerPage)
 
@@ -104,7 +115,7 @@ export default function BlogGrid() {
                 <div className="flex items-center gap-4 text-sm text-gray-500 mb-4">
                   <div className="flex items-center gap-1">
                     <Calendar className="w-4 h-4" />
-                    <span>{post.publishDate}</span>
+                    <span>{post.formattedDate}</span>
                   </div>
                   <div className="flex items-center gap-1">
                     <Clock className="w-4 h-4" />
@@ -138,7 +149,6 @@ export default function BlogGrid() {
           ))}
         </div>
 
-        {/* Pagination */}
         {totalPages > 1 && (
           <div className="flex items-center justify-center gap-4">
             <Button
