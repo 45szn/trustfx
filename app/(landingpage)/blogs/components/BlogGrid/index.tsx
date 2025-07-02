@@ -1,6 +1,8 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
+import { db } from "@/lib/firebase";
+import { collection, getDocs, query, orderBy } from "firebase/firestore"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
@@ -8,96 +10,51 @@ import { Calendar, Clock, ArrowRight, ChevronLeft, ChevronRight } from "lucide-r
 import Image from "next/image"
 import Link from "next/link"
 
-const blogPosts = [
-  {
-    id: 3,
-    title: "Diversification Strategies for 2024: Building a Resilient Portfolio",
-    excerpt:
-      "Learn how to spread risk across different asset classes and geographical regions to protect your investments from market volatility.",
-    category: "Investment Strategies",
-    author: "Jennifer Walsh",
-    authorRole: "Portfolio Manager",
-    publishDate: "Dec 10, 2024",
-    readTime: "7 min read",
-    image: "/placeholder.svg?height=300&width=400",
-    slug: "diversification-strategies-2024",
-  },
-  {
-    id: 4,
-    title: "Understanding Cryptocurrency Integration in Traditional Portfolios",
-    excerpt:
-      "Explore how digital assets can complement traditional investments and the best practices for crypto allocation.",
-    category: "Technology",
-    author: "David Kim",
-    authorRole: "Crypto Specialist",
-    publishDate: "Dec 8, 2024",
-    readTime: "9 min read",
-    image: "/placeholder.svg?height=300&width=400",
-    slug: "cryptocurrency-traditional-portfolios",
-  },
-  {
-    id: 5,
-    title: "ESG Investing: Profit with Purpose in Modern Markets",
-    excerpt:
-      "Discover how Environmental, Social, and Governance factors are reshaping investment decisions and delivering strong returns.",
-    category: "Global Markets",
-    author: "Maria Santos",
-    authorRole: "ESG Research Director",
-    publishDate: "Dec 5, 2024",
-    readTime: "6 min read",
-    image: "/placeholder.svg?height=300&width=400",
-    slug: "esg-investing-profit-purpose",
-  },
-  {
-    id: 6,
-    title: "Risk Management 101: Protecting Your Investments",
-    excerpt:
-      "Master the fundamentals of investment risk management with practical strategies used by professional fund managers.",
-    category: "Education",
-    author: "Robert Chen",
-    authorRole: "Risk Management Expert",
-    publishDate: "Dec 3, 2024",
-    readTime: "8 min read",
-    image: "/placeholder.svg?height=300&width=400",
-    slug: "risk-management-101",
-  },
-  {
-    id: 7,
-    title: "The Psychology of Investing: Overcoming Emotional Biases",
-    excerpt:
-      "Understand common psychological traps that affect investment decisions and learn strategies to make more rational choices.",
-    category: "Education",
-    author: "Dr. Lisa Thompson",
-    authorRole: "Behavioral Finance Expert",
-    publishDate: "Nov 30, 2024",
-    readTime: "10 min read",
-    image: "/placeholder.svg?height=300&width=400",
-    slug: "psychology-investing-emotional-biases",
-  },
-  {
-    id: 8,
-    title: "Emerging Markets: Opportunities and Challenges in 2024",
-    excerpt:
-      "Analyze the potential of emerging market investments and strategies for navigating political and economic uncertainties.",
-    category: "Global Markets",
-    author: "Ahmed Hassan",
-    authorRole: "Emerging Markets Analyst",
-    publishDate: "Nov 28, 2024",
-    readTime: "7 min read",
-    image: "/placeholder.svg?height=300&width=400",
-    slug: "emerging-markets-opportunities-2024",
-  },
-]
+interface BlogPost {
+  id: string
+  title: string
+  excerpt: string
+  category: string
+  author: string
+  authorRole: string
+  publishDate: string
+  readTime: string
+  image: string
+  slug: string
+}
 
 export default function BlogGrid() {
+  const [posts, setPosts] = useState<BlogPost[]>([])
   const [currentPage, setCurrentPage] = useState(1)
   const postsPerPage = 6
-  const totalPages = Math.ceil(blogPosts.length / postsPerPage)
+
+  useEffect(() => {
+    const fetchPosts = async () => {
+      try {
+        const q = query(collection(db, "blogs"), orderBy("publishDate"))
+        const querySnapshot = await getDocs(q)
+
+        const fetchedPosts: BlogPost[] = querySnapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        })) as BlogPost[]
+
+        setPosts(fetchedPosts)
+        console.log("posts:", posts);
+      } catch (error) {
+        console.error("Error fetching blog posts:", error)
+      }
+    }
+
+    fetchPosts()
+  }, [posts])
+
+  const totalPages = Math.ceil(posts.length / postsPerPage)
 
   const getCurrentPosts = () => {
     const startIndex = (currentPage - 1) * postsPerPage
     const endIndex = startIndex + postsPerPage
-    return blogPosts.slice(startIndex, endIndex)
+    return posts.slice(startIndex, endIndex)
   }
 
   const goToPage = (page: number) => {
