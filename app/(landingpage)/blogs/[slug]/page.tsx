@@ -2,11 +2,11 @@ import BlogPost from "../components/BlogPost";
 import RelatedPosts from "../components/RelatedPosts";
 import BlogNewsletter from "../components/BlogNewsletter";
 
-interface PageProps {
-  params: { slug: string };
-}
+// interface PageProps {
+//   params: { slug: string };
+// }
 
-export default async function BlogPostPage({ params }: PageProps) {
+export default function BlogPostPage({ params }: { params: { slug: string } }) {
   return (
     <>
       <BlogPost slug={params.slug} />
