@@ -155,7 +155,7 @@ export default function PrivacyContact() {
               <Button
                 variant="outline"
                 size="lg"
-                className="border-2 border-white text-white hover:bg-white/10 font-semibold px-8 py-3"
+                className="border-2 border-white text-white bg-white/10 font-semibold px-8 py-3"
               >
                 Terms of Service
               </Button>
@@ -164,7 +164,7 @@ export default function PrivacyContact() {
               <Button
                 variant="outline"
                 size="lg"
-                className="border-2 border-white text-white hover:bg-white/10 font-semibold px-8 py-3"
+                className="border-2 border-white text-white bg-white/10 font-semibold px-8 py-3"
               >
                 Security Information
               </Button>
@@ -173,7 +173,7 @@ export default function PrivacyContact() {
               <Button
                 variant="outline"
                 size="lg"
-                className="border-2 border-white text-white hover:bg-white/10 font-semibold px-8 py-3"
+                className="border-2 border-white text-white bg-white/10 font-semibold px-8 py-3"
               >
                 Help Center
               </Button>
