@@ -13,7 +13,7 @@ import { Loader, Eye, EyeOff } from "lucide-react";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { useRouter, useSearchParams } from "next/navigation";
 import { confirmPasswordReset } from "firebase/auth";
-import { auth } from "@/firebase";
+import { auth } from "@/lib/firebase";
 
 const resetPasswordSchema = z
   .object({

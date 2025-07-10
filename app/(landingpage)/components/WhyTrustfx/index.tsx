@@ -249,9 +249,11 @@ export default function WhyTrustFx() {
                   </button>
                 </Link>
 
-                <button className="px-8 py-4 border-2 border-gray-300 text-gray-700 font-semibold rounded-xl hover:border-gray-400 hover:bg-gray-50 transition-all duration-300">
-                  Learn More About Security
-                </button>
+                <Link href={"/security"}>
+                  <button className="px-8 py-4 border-2 border-gray-300 text-gray-700 font-semibold rounded-xl hover:border-gray-400 hover:bg-gray-50 transition-all duration-300">
+                    Learn More About Security
+                  </button>
+                </Link>
               </div>
             </CardContent>
           </Card>
