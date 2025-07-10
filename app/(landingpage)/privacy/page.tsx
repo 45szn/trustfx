@@ -1,6 +1,6 @@
-import PrivacyHero from "./components/Hero"
-import PrivacyContent from "./components/Content"
-import PrivacyContact from "./components/Contact"
+import PrivacyHero from "./components/Hero";
+import PrivacyContent from "./components/Content";
+import PrivacyContact from "./components/Contact";
 
 export default function PrivacyPage() {
   return (
@@ -9,5 +9,5 @@ export default function PrivacyPage() {
       <PrivacyContent />
       <PrivacyContact />
     </>
-  )
+  );
 }

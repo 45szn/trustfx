@@ -1,7 +1,7 @@
-"use client"
+"use client";
 
-import { Badge } from "@/components/ui/badge"
-import { FileText, Calendar, Scale } from "lucide-react"
+import { Badge } from "@/components/ui/badge";
+import { FileText, Calendar, Scale } from "lucide-react";
 
 export default function TermsHero() {
   return (
@@ -13,11 +13,15 @@ export default function TermsHero() {
           </Badge>
           <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6 leading-tight">
             Terms of
-            <span className="bg-gradient-to-r from-slate-600 to-blue-600 bg-clip-text text-transparent"> Service</span>
+            <span className="bg-gradient-to-r from-slate-600 to-blue-600 bg-clip-text text-transparent">
+              {" "}
+              Service
+            </span>
           </h1>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-12 leading-relaxed">
-            Please read these terms carefully before using TrustFx services. By accessing our platform, you agree to be
-            bound by these terms and conditions.
+            Please read these terms carefully before using TrustFx services. By
+            accessing our platform, you agree to be bound by these terms and
+            conditions.
           </p>
 
           {/* Key Info */}
@@ -27,7 +31,9 @@ export default function TermsHero() {
                 <Calendar className="w-5 h-5" />
               </div>
               <div className="text-left">
-                <div className="font-semibold text-gray-900">Effective Date</div>
+                <div className="font-semibold text-gray-900">
+                  Effective Date
+                </div>
                 <div className="text-sm text-gray-600">December 15, 2024</div>
               </div>
             </div>
@@ -53,5 +59,5 @@ export default function TermsHero() {
         </div>
       </div>
     </section>
-  )
+  );
 }

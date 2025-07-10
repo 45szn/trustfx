@@ -1,21 +1,21 @@
-"use client"
+"use client";
 
-import type React from "react"
+import type React from "react";
 
-import { Badge } from "@/components/ui/badge"
-import { Input } from "@/components/ui/input"
-import { Button } from "@/components/ui/button"
-import { Search, TrendingUp, BookOpen, Users } from "lucide-react"
-import { useState } from "react"
+import { Badge } from "@/components/ui/badge";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { Search, TrendingUp, BookOpen, Users } from "lucide-react";
+import { useState } from "react";
 
 export default function BlogHero() {
-  const [searchTerm, setSearchTerm] = useState("")
+  const [searchTerm, setSearchTerm] = useState("");
 
   const handleSearch = (e: React.FormEvent) => {
-    e.preventDefault()
+    e.preventDefault();
     // Handle search functionality
-    console.log("Searching for:", searchTerm)
-  }
+    console.log("Searching for:", searchTerm);
+  };
 
   return (
     <section className="py-20 bg-gradient-to-br from-blue-50 via-white to-purple-50">
@@ -32,8 +32,8 @@ export default function BlogHero() {
             </span>
           </h1>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-12 leading-relaxed">
-            Stay informed with the latest market insights, investment strategies, and financial education from our team
-            of experts.
+            Stay informed with the latest market insights, investment
+            strategies, and financial education from our team of experts.
           </p>
 
           {/* Search Bar */}
@@ -83,5 +83,5 @@ export default function BlogHero() {
         </div>
       </div>
     </section>
-  )
+  );
 }

@@ -1,7 +1,7 @@
-"use client"
+"use client";
 
-import { motion } from "framer-motion"
-import { Scale, Shield, AlertTriangle } from "lucide-react"
+import { motion } from "framer-motion";
+import { Scale, Shield, AlertTriangle } from "lucide-react";
 
 export function LegalHero() {
   return (
@@ -30,11 +30,14 @@ export function LegalHero() {
             </div>
           </div>
 
-          <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">Legal Information</h1>
+          <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
+            Legal Information
+          </h1>
 
           <p className="text-xl text-gray-300 max-w-3xl mx-auto mb-8">
-            Important legal information including our Cookie Policy and Risk Disclaimers. Please read these carefully to
-            understand your rights and responsibilities.
+            Important legal information including our Cookie Policy and Risk
+            Disclaimers. Please read these carefully to understand your rights
+            and responsibilities.
           </p>
 
           <div className="flex flex-wrap justify-center gap-4 text-sm text-gray-400">
@@ -54,5 +57,5 @@ export function LegalHero() {
         </motion.div>
       </div>
     </section>
-  )
+  );
 }

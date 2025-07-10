@@ -1,8 +1,8 @@
-"use client"
+"use client";
 
-import { Card, CardContent } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Shield, Lock, Eye, FileCheck } from "lucide-react"
+import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Shield, Lock, Eye, FileCheck } from "lucide-react";
 
 export default function SecurityProcess() {
   return (
@@ -12,9 +12,12 @@ export default function SecurityProcess() {
           <Badge className="mb-4 bg-gradient-to-r from-yellow-400 to-orange-500 text-white px-4 py-2 text-sm font-semibold">
             SECURITY FIRST
           </Badge>
-          <h2 className="text-4xl md:text-5xl font-bold mb-6">How We Protect Your Investments</h2>
+          <h2 className="text-4xl md:text-5xl font-bold mb-6">
+            How We Protect Your Investments
+          </h2>
           <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-            Security isn&apos;t an afterthought—it&apos;s built into every aspect of our platform from the ground up.
+            Security isn&apos;t an afterthought—it&apos;s built into every
+            aspect of our platform from the ground up.
           </p>
         </div>
 
@@ -137,5 +140,5 @@ export default function SecurityProcess() {
         </div>
       </div>
     </section>
-  )
+  );
 }

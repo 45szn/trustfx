@@ -1,9 +1,7 @@
-import UnderConstruction from "@/components/UnderContruction"
+import UnderConstruction from "@/components/UnderContruction";
 
 const Webinars = () => {
-  return (
-    <UnderConstruction pageName={"Webinars"} />
-  )
-}
+  return <UnderConstruction pageName={"Webinars"} />;
+};
 
 export default Webinars;

@@ -1,7 +1,7 @@
-"use client"
+"use client";
 
-import { motion } from "framer-motion"
-import { useState } from "react"
+import { motion } from "framer-motion";
+import { useState } from "react";
 import {
   ChevronDown,
   ChevronUp,
@@ -15,8 +15,8 @@ import {
   Calendar,
   TrendingDown,
   Zap,
-} from "lucide-react"
-import { Card, CardContent } from "@/components/ui/card"
+} from "lucide-react";
+import { Card, CardContent } from "@/components/ui/card";
 
 const cookieSections = [
   {
@@ -93,7 +93,7 @@ For third-party cookies, you can often opt out directly through the provider's w
 
 **Note:** Disabling certain cookies may affect the functionality of our website and your user experience.`,
   },
-]
+];
 
 const riskSections = [
   {
@@ -203,19 +203,19 @@ We are not liable for delays or failures in performance resulting from circumsta
 **Maximum Liability**
 Our total liability to you for any claims related to our services is limited to the fees you have paid to us in the preceding 12 months.`,
   },
-]
+];
 
 export function LegalContent() {
-  const [expandedCookie, setExpandedCookie] = useState<string | null>(null)
-  const [expandedRisk, setExpandedRisk] = useState<string | null>(null)
+  const [expandedCookie, setExpandedCookie] = useState<string | null>(null);
+  const [expandedRisk, setExpandedRisk] = useState<string | null>(null);
 
   const toggleCookieSection = (sectionId: string) => {
-    setExpandedCookie(expandedCookie === sectionId ? null : sectionId)
-  }
+    setExpandedCookie(expandedCookie === sectionId ? null : sectionId);
+  };
 
   const toggleRiskSection = (sectionId: string) => {
-    setExpandedRisk(expandedRisk === sectionId ? null : sectionId)
-  }
+    setExpandedRisk(expandedRisk === sectionId ? null : sectionId);
+  };
 
   return (
     <section className="py-20">
@@ -235,9 +235,12 @@ export function LegalContent() {
                 <Cookie className="h-8 w-8 text-blue-600" />
               </div>
             </div>
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">Cookie Policy</h2>
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">
+              Cookie Policy
+            </h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Learn how we use cookies and similar technologies to improve your experience on our platform.
+              Learn how we use cookies and similar technologies to improve your
+              experience on our platform.
             </p>
           </div>
 
@@ -260,7 +263,9 @@ export function LegalContent() {
                         <div className="p-2 bg-blue-100 rounded-lg mr-4">
                           <section.icon className="h-5 w-5 text-blue-600" />
                         </div>
-                        <h3 className="text-lg font-semibold text-gray-900">{section.title}</h3>
+                        <h3 className="text-lg font-semibold text-gray-900">
+                          {section.title}
+                        </h3>
                       </div>
                       {expandedCookie === section.id ? (
                         <ChevronUp className="h-5 w-5 text-gray-500" />
@@ -278,7 +283,9 @@ export function LegalContent() {
                         className="px-6 pb-6"
                       >
                         <div className="prose prose-gray max-w-none">
-                          <div className="whitespace-pre-line text-gray-700 leading-relaxed">{section.content}</div>
+                          <div className="whitespace-pre-line text-gray-700 leading-relaxed">
+                            {section.content}
+                          </div>
                         </div>
                       </motion.div>
                     )}
@@ -303,9 +310,12 @@ export function LegalContent() {
                 <AlertTriangle className="h-8 w-8 text-red-600" />
               </div>
             </div>
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">Risk Disclaimers</h2>
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">
+              Risk Disclaimers
+            </h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Important information about the risks associated with investing and using our platform.
+              Important information about the risks associated with investing
+              and using our platform.
             </p>
           </div>
 
@@ -313,10 +323,14 @@ export function LegalContent() {
             <div className="flex items-start">
               <AlertTriangle className="h-6 w-6 text-red-600 mt-1 mr-3 flex-shrink-0" />
               <div>
-                <h3 className="text-lg font-semibold text-red-800 mb-2">Important Risk Warning</h3>
+                <h3 className="text-lg font-semibold text-red-800 mb-2">
+                  Important Risk Warning
+                </h3>
                 <p className="text-red-700">
-                  All investments carry risk and you may lose some or all of your money. Past performance does not
-                  guarantee future results. Please read all risk disclosures carefully before investing.
+                  All investments carry risk and you may lose some or all of
+                  your money. Past performance does not guarantee future
+                  results. Please read all risk disclosures carefully before
+                  investing.
                 </p>
               </div>
             </div>
@@ -341,7 +355,9 @@ export function LegalContent() {
                         <div className="p-2 bg-red-100 rounded-lg mr-4">
                           <section.icon className="h-5 w-5 text-red-600" />
                         </div>
-                        <h3 className="text-lg font-semibold text-gray-900">{section.title}</h3>
+                        <h3 className="text-lg font-semibold text-gray-900">
+                          {section.title}
+                        </h3>
                       </div>
                       {expandedRisk === section.id ? (
                         <ChevronUp className="h-5 w-5 text-gray-500" />
@@ -359,7 +375,9 @@ export function LegalContent() {
                         className="px-6 pb-6"
                       >
                         <div className="prose prose-gray max-w-none">
-                          <div className="whitespace-pre-line text-gray-700 leading-relaxed">{section.content}</div>
+                          <div className="whitespace-pre-line text-gray-700 leading-relaxed">
+                            {section.content}
+                          </div>
                         </div>
                       </motion.div>
                     )}
@@ -385,5 +403,5 @@ export function LegalContent() {
         </motion.div>
       </div>
     </section>
-  )
+  );
 }

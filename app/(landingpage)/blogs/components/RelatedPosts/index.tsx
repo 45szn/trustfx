@@ -1,16 +1,18 @@
-"use client"
+"use client";
 
-import { Card, CardContent } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Calendar, Clock, ArrowRight } from "lucide-react"
-import Image from "next/image"
-import Link from "next/link"
+import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Calendar, Clock, ArrowRight } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
 
 const relatedPosts = [
   {
     id: 2,
-    title: "Market Volatility in 2024: Strategies for Protecting Your Portfolio",
-    excerpt: "Navigate uncertain markets with proven strategies that have helped our investors maintain steady growth.",
+    title:
+      "Market Volatility in 2024: Strategies for Protecting Your Portfolio",
+    excerpt:
+      "Navigate uncertain markets with proven strategies that have helped our investors maintain steady growth.",
     category: "Market Analysis",
     author: "Michael Rodriguez",
     publishDate: "Dec 12, 2024",
@@ -32,8 +34,9 @@ const relatedPosts = [
   },
   {
     id: 6,
-    title: "Risk Management 101: Protecting Your Investments",
-    excerpt: "Master the fundamentals of investment risk management with practical strategies used by professionals.",
+    title: " 101: Protecting Your IRisk Managementnvestments",
+    excerpt:
+      "Master the fundamentals of investment risk management with practical strategies used by professionals.",
     category: "Education",
     author: "Robert Chen",
     publishDate: "Dec 3, 2024",
@@ -41,7 +44,7 @@ const relatedPosts = [
     image: "/placeholder.svg?height=200&width=300",
     slug: "risk-management-101",
   },
-]
+];
 
 export default function RelatedPosts() {
   return (
@@ -51,9 +54,12 @@ export default function RelatedPosts() {
           <Badge className="mb-4 bg-gradient-to-r from-green-500 to-blue-500 text-white px-4 py-2 text-sm font-semibold">
             RELATED ARTICLES
           </Badge>
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">Continue Reading</h2>
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+            Continue Reading
+          </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Explore more insights and strategies to enhance your investment knowledge.
+            Explore more insights and strategies to enhance your investment
+            knowledge.
           </p>
         </div>
 
@@ -82,7 +88,9 @@ export default function RelatedPosts() {
                 <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-blue-600 transition-colors line-clamp-2">
                   {post.title}
                 </h3>
-                <p className="text-gray-600 leading-relaxed mb-4 line-clamp-2">{post.excerpt}</p>
+                <p className="text-gray-600 leading-relaxed mb-4 line-clamp-2">
+                  {post.excerpt}
+                </p>
 
                 <div className="flex items-center gap-4 text-sm text-gray-500 mb-4">
                   <div className="flex items-center gap-1">
@@ -96,7 +104,9 @@ export default function RelatedPosts() {
                 </div>
 
                 <div className="flex items-center justify-between">
-                  <div className="text-sm font-semibold text-gray-900">{post.author}</div>
+                  <div className="text-sm font-semibold text-gray-900">
+                    {post.author}
+                  </div>
                   <Link href={`/blog/${post.slug}`}>
                     <button className="flex items-center gap-1 text-blue-600 font-semibold hover:text-blue-700 transition-colors group text-sm">
                       Read
@@ -110,5 +120,5 @@ export default function RelatedPosts() {
         </div>
       </div>
     </section>
-  )
+  );
 }

@@ -1,23 +1,23 @@
-"use client"
+"use client";
 
-import type React from "react"
+import type React from "react";
 
-import { useState } from "react"
-import { Card, CardContent } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Button } from "@/components/ui/button"
-import { Mail, CheckCircle } from "lucide-react"
+import { useState } from "react";
+import { Card, CardContent } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { Mail, CheckCircle } from "lucide-react";
 
 export default function BlogNewsletter() {
-  const [email, setEmail] = useState("")
-  const [isSubscribed, setIsSubscribed] = useState(false)
+  const [email, setEmail] = useState("");
+  const [isSubscribed, setIsSubscribed] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
+    e.preventDefault();
     // Handle newsletter subscription
-    setIsSubscribed(true)
-    setEmail("")
-  }
+    setIsSubscribed(true);
+    setEmail("");
+  };
 
   return (
     <section className="py-20 bg-gradient-to-br from-blue-600 to-purple-600">
@@ -30,9 +30,12 @@ export default function BlogNewsletter() {
               </div>
             </div>
 
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">Stay Informed with Our Newsletter</h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
+              Stay Informed with Our Newsletter
+            </h2>
             <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
-              Get weekly investment insights, market analysis, and exclusive content delivered straight to your inbox.
+              Get weekly investment insights, market analysis, and exclusive
+              content delivered straight to your inbox.
             </p>
 
             {!isSubscribed ? (
@@ -54,17 +57,21 @@ export default function BlogNewsletter() {
                   </Button>
                 </div>
                 <p className="text-sm text-blue-100 mt-4">
-                  Join 25,000+ investors who trust our insights. Unsubscribe anytime.
+                  Join 25,000+ investors who trust our insights. Unsubscribe
+                  anytime.
                 </p>
               </form>
             ) : (
               <div className="max-w-md mx-auto">
                 <div className="flex items-center justify-center gap-3 text-green-300 mb-4">
                   <CheckCircle className="w-6 h-6" />
-                  <span className="text-lg font-semibold">Successfully Subscribed!</span>
+                  <span className="text-lg font-semibold">
+                    Successfully Subscribed!
+                  </span>
                 </div>
                 <p className="text-blue-100">
-                  Thank you for subscribing. You&apos;ll receive our next newsletter within the week.
+                  Thank you for subscribing. You&apos;ll receive our next
+                  newsletter within the week.
                 </p>
               </div>
             )}
@@ -79,7 +86,9 @@ export default function BlogNewsletter() {
                 <div className="text-blue-100">Analysis & Tips</div>
               </div>
               <div className="text-center">
-                <div className="text-2xl font-bold text-white mb-2">Exclusive</div>
+                <div className="text-2xl font-bold text-white mb-2">
+                  Exclusive
+                </div>
                 <div className="text-blue-100">Investment Insights</div>
               </div>
             </div>
@@ -87,5 +96,5 @@ export default function BlogNewsletter() {
         </Card>
       </div>
     </section>
-  )
+  );
 }

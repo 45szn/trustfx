@@ -1,8 +1,18 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { Card, CardContent } from "@/components/ui/card"
-import { ChevronDown, FileText, Shield, CreditCard, AlertTriangle, Users, Globe, Gavel, Phone } from "lucide-react"
+import { useState } from "react";
+import { Card, CardContent } from "@/components/ui/card";
+import {
+  ChevronDown,
+  FileText,
+  Shield,
+  CreditCard,
+  AlertTriangle,
+  Users,
+  Globe,
+  Gavel,
+  Phone,
+} from "lucide-react";
 
 const sections = [
   {
@@ -453,25 +463,32 @@ const sections = [
       </ul>
     `,
   },
-]
+];
 
 export default function TermsContent() {
-  const [openSections, setOpenSections] = useState<string[]>(["acceptance"])
+  const [openSections, setOpenSections] = useState<string[]>(["acceptance"]);
 
   const toggleSection = (sectionId: string) => {
-    setOpenSections((prev) => (prev.includes(sectionId) ? prev.filter((id) => id !== sectionId) : [...prev, sectionId]))
-  }
+    setOpenSections((prev) =>
+      prev.includes(sectionId)
+        ? prev.filter((id) => id !== sectionId)
+        : [...prev, sectionId],
+    );
+  };
 
   return (
     <section className="py-20 bg-gradient-to-br from-gray-50 to-white">
       <div className="container mx-auto px-4 max-w-4xl">
         <div className="space-y-6">
           {sections.map((section) => {
-            const IconComponent = section.icon
-            const isOpen = openSections.includes(section.id)
+            const IconComponent = section.icon;
+            const isOpen = openSections.includes(section.id);
 
             return (
-              <Card key={section.id} className="border-2 border-gray-100 hover:border-gray-200 transition-colors">
+              <Card
+                key={section.id}
+                className="border-2 border-gray-100 hover:border-gray-200 transition-colors"
+              >
                 <CardContent className="p-0">
                   <button
                     onClick={() => toggleSection(section.id)}
@@ -482,7 +499,9 @@ export default function TermsContent() {
                         <div className="p-3 rounded-full bg-gradient-to-r from-slate-600 to-blue-600 text-white">
                           <IconComponent className="w-6 h-6" />
                         </div>
-                        <h2 className="text-xl md:text-2xl font-bold text-gray-900">{section.title}</h2>
+                        <h2 className="text-xl md:text-2xl font-bold text-gray-900">
+                          {section.title}
+                        </h2>
                       </div>
                       <ChevronDown
                         className={`w-6 h-6 text-gray-400 transition-transform duration-300 flex-shrink-0 ${
@@ -494,7 +513,9 @@ export default function TermsContent() {
 
                   <div
                     className={`overflow-hidden transition-all duration-500 ease-out ${
-                      isOpen ? "max-h-[2000px] opacity-100" : "max-h-0 opacity-0"
+                      isOpen
+                        ? "max-h-[2000px] opacity-100"
+                        : "max-h-0 opacity-0"
                     }`}
                   >
                     <div className="px-6 pb-6">
@@ -508,7 +529,7 @@ export default function TermsContent() {
                   </div>
                 </CardContent>
               </Card>
-            )
+            );
           })}
         </div>
 
@@ -520,19 +541,25 @@ export default function TermsContent() {
                 <AlertTriangle className="w-6 h-6" />
               </div>
               <div>
-                <h3 className="text-xl font-bold text-gray-900 mb-4">Important Legal Notice</h3>
+                <h3 className="text-xl font-bold text-gray-900 mb-4">
+                  Important Legal Notice
+                </h3>
                 <div className="space-y-3 text-gray-700">
                   <p>
-                    <strong>Investment Risk:</strong> All investments involve risk, including potential loss of
-                    principal. Past performance does not guarantee future results.
+                    <strong>Investment Risk:</strong> All investments involve
+                    risk, including potential loss of principal. Past
+                    performance does not guarantee future results.
                   </p>
                   <p>
-                    <strong>Regulatory Compliance:</strong> TrustFx is registered with applicable financial authorities
-                    and operates under strict regulatory oversight.
+                    <strong>Regulatory Compliance:</strong> TrustFx is
+                    registered with applicable financial authorities and
+                    operates under strict regulatory oversight.
                   </p>
                   <p>
-                    <strong>Professional Advice:</strong> These terms do not constitute investment advice. Consider
-                    consulting with qualified financial professionals before making investment decisions.
+                    <strong>Professional Advice:</strong> These terms do not
+                    constitute investment advice. Consider consulting with
+                    qualified financial professionals before making investment
+                    decisions.
                   </p>
                 </div>
               </div>
@@ -541,5 +568,5 @@ export default function TermsContent() {
         </Card>
       </div>
     </section>
-  )
+  );
 }

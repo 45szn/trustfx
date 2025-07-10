@@ -1,40 +1,55 @@
 // components/BlogGrid.tsx
-"use client"
+"use client";
 
 import { useState, useEffect } from "react";
 import { db } from "@/lib/firebase";
-import { collection, getDocs, query, orderBy, Timestamp } from "firebase/firestore"
-import { Card, CardContent } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
-import { Calendar, Clock, ArrowRight, ChevronLeft, ChevronRight } from "lucide-react"
-import Image from "next/image"
+import {
+  collection,
+  getDocs,
+  query,
+  orderBy,
+  Timestamp,
+} from "firebase/firestore";
+import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import {
+  Calendar,
+  Clock,
+  ArrowRight,
+  ChevronLeft,
+  ChevronRight,
+} from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 
 interface BlogPost {
-  id: string
-  title: string
-  excerpt: string
-  category: string
-  author: string
-  authorRole: string
-  publishDate: Timestamp
-  readTime: string
-  image: string
-  slug: string
-  formattedDate: string
+  id: string;
+  title: string;
+  excerpt: string;
+  category: string;
+  author: string;
+  authorRole: string;
+  publishDate: Timestamp;
+  readTime: string;
+  img: string;
+  slug: string;
+  formattedDate: string;
 }
 
 export default function BlogGrid() {
-  const [posts, setPosts] = useState<BlogPost[]>([])
-  const [currentPage, setCurrentPage] = useState(1)
-  const postsPerPage = 6
+  const [posts, setPosts] = useState<BlogPost[]>([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const postsPerPage = 6;
 
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const q = query(collection(db, "blogs"), orderBy("publishDate", "desc"))
-        const querySnapshot = await getDocs(q)
+        const q = query(
+          collection(db, "blogs"),
+          orderBy("publishDate", "desc"),
+        );
+        const querySnapshot = await getDocs(q);
 
         const fetchedPosts: BlogPost[] = querySnapshot.docs.map((doc) => {
           const data = doc.data();
@@ -49,28 +64,28 @@ export default function BlogGrid() {
               day: "numeric",
             }),
           };
-        }) as unknown as BlogPost[]
+        }) as unknown as BlogPost[];
 
-        setPosts(fetchedPosts)
+        setPosts(fetchedPosts);
       } catch (error) {
-        console.error("Error fetching blog posts:", error)
+        console.error("Error fetching blog posts:", error);
       }
-    }
+    };
 
-    fetchPosts()
-  }, []) // 🔁 only run once on mount
+    fetchPosts();
+  }, []); // 🔁 only run once on mount
 
-  const totalPages = Math.ceil(posts.length / postsPerPage)
+  const totalPages = Math.ceil(posts.length / postsPerPage);
 
   const getCurrentPosts = () => {
-    const startIndex = (currentPage - 1) * postsPerPage
-    const endIndex = startIndex + postsPerPage
-    return posts.slice(startIndex, endIndex)
-  }
+    const startIndex = (currentPage - 1) * postsPerPage;
+    const endIndex = startIndex + postsPerPage;
+    return posts.slice(startIndex, endIndex);
+  };
 
   const goToPage = (page: number) => {
-    setCurrentPage(page)
-  }
+    setCurrentPage(page);
+  };
 
   return (
     <section className="py-20 bg-gradient-to-br from-gray-50 to-white">
@@ -79,9 +94,12 @@ export default function BlogGrid() {
           <Badge className="mb-4 bg-gradient-to-r from-green-500 to-blue-500 text-white px-4 py-2 text-sm font-semibold">
             LATEST ARTICLES
           </Badge>
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">Recent Insights</h2>
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+            Recent Insights
+          </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Stay up-to-date with our latest research, market analysis, and investment insights from industry experts.
+            Stay up-to-date with our latest research, market analysis, and
+            investment insights from industry experts.
           </p>
         </div>
 
@@ -93,7 +111,7 @@ export default function BlogGrid() {
             >
               <div className="relative">
                 <Image
-                  src={post.image || "/placeholder.svg"}
+                  src={post.img || "/placeholder.svg"}
                   alt={post.title}
                   width={400}
                   height={300}
@@ -110,7 +128,12 @@ export default function BlogGrid() {
                 <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-blue-600 transition-colors line-clamp-2">
                   {post.title}
                 </h3>
-                <p className="text-gray-600 leading-relaxed mb-4 line-clamp-3">{post.excerpt}</p>
+                <span className="text-gray-600 leading-relaxed mb-4 line-clamp-3">
+                  <div
+                    className="prose prose-lg max-w-none mb-12"
+                    dangerouslySetInnerHTML={{ __html: post.excerpt }}
+                  />
+                </span>
 
                 <div className="flex items-center gap-4 text-sm text-gray-500 mb-4">
                   <div className="flex items-center gap-1">
@@ -132,12 +155,16 @@ export default function BlogGrid() {
                         .join("")}
                     </div>
                     <div>
-                      <div className="font-semibold text-gray-900 text-sm">{post.author}</div>
-                      <div className="text-xs text-gray-500">{post.authorRole}</div>
+                      <div className="font-semibold text-gray-900 text-sm">
+                        {post.author}
+                      </div>
+                      <div className="text-xs text-gray-500">
+                        {post.authorRole}
+                      </div>
                     </div>
                   </div>
 
-                  <Link href={`/blog/${post.slug}`}>
+                  <Link href={`/blogs/${post.slug}`}>
                     <button className="flex items-center gap-1 text-blue-600 font-semibold hover:text-blue-700 transition-colors group text-sm">
                       Read
                       <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -162,18 +189,22 @@ export default function BlogGrid() {
             </Button>
 
             <div className="flex items-center gap-2">
-              {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
-                <Button
-                  key={page}
-                  variant={currentPage === page ? "default" : "outline"}
-                  onClick={() => goToPage(page)}
-                  className={`w-10 h-10 ${
-                    currentPage === page ? "bg-gradient-to-r from-blue-500 to-purple-500 text-white" : "text-gray-600"
-                  }`}
-                >
-                  {page}
-                </Button>
-              ))}
+              {Array.from({ length: totalPages }, (_, i) => i + 1).map(
+                (page) => (
+                  <Button
+                    key={page}
+                    variant={currentPage === page ? "default" : "outline"}
+                    onClick={() => goToPage(page)}
+                    className={`w-10 h-10 ${
+                      currentPage === page
+                        ? "bg-gradient-to-r from-blue-500 to-purple-500 text-white"
+                        : "text-gray-600"
+                    }`}
+                  >
+                    {page}
+                  </Button>
+                ),
+              )}
             </div>
 
             <Button
@@ -189,5 +220,5 @@ export default function BlogGrid() {
         )}
       </div>
     </section>
-  )
+  );
 }

@@ -1,7 +1,14 @@
-"use client"
+"use client";
 
-import { Badge } from "@/components/ui/badge"
-import { TrendingUp, BookOpen, Shield, Lightbulb, Globe, BarChart3 } from "lucide-react"
+import { Badge } from "@/components/ui/badge";
+import {
+  TrendingUp,
+  BookOpen,
+  Shield,
+  Lightbulb,
+  Globe,
+  BarChart3,
+} from "lucide-react";
 
 const categories = [
   {
@@ -46,7 +53,7 @@ const categories = [
     color: "from-indigo-500 to-purple-500",
     description: "International investment opportunities",
   },
-]
+];
 
 export default function BlogCategories() {
   return (
@@ -56,21 +63,26 @@ export default function BlogCategories() {
           <Badge className="mb-4 bg-gradient-to-r from-purple-500 to-pink-500 text-white px-4 py-2 text-sm font-semibold">
             EXPLORE TOPICS
           </Badge>
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">Browse by Category</h2>
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+            Browse by Category
+          </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Find articles tailored to your interests and investment goals across our comprehensive topic categories.
+            Find articles tailored to your interests and investment goals across
+            our comprehensive topic categories.
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {categories.map((category, index) => {
-            const IconComponent = category.icon
+            const IconComponent = category.icon;
             return (
               <button
                 key={index}
                 className="group p-8 bg-white rounded-2xl border-2 border-gray-100 hover:border-gray-200 hover:shadow-xl transition-all duration-300 hover:-translate-y-2 text-left"
               >
-                <div className={`inline-flex p-4 rounded-2xl bg-gradient-to-r ${category.color} text-white mb-6`}>
+                <div
+                  className={`inline-flex p-4 rounded-2xl bg-gradient-to-r ${category.color} text-white mb-6`}
+                >
                   <IconComponent className="w-8 h-8" />
                 </div>
 
@@ -83,12 +95,14 @@ export default function BlogCategories() {
                   </Badge>
                 </div>
 
-                <p className="text-gray-600 leading-relaxed">{category.description}</p>
+                <p className="text-gray-600 leading-relaxed">
+                  {category.description}
+                </p>
               </button>
-            )
+            );
           })}
         </div>
       </div>
     </section>
-  )
+  );
 }

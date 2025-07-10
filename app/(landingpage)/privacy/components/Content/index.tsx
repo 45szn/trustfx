@@ -1,8 +1,18 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { Card, CardContent } from "@/components/ui/card"
-import { ChevronDown, Shield, Eye, Lock, Users, Globe, FileText, AlertTriangle, Mail } from "lucide-react"
+import { useState } from "react";
+import { Card, CardContent } from "@/components/ui/card";
+import {
+  ChevronDown,
+  Shield,
+  Eye,
+  Lock,
+  Users,
+  Globe,
+  FileText,
+  AlertTriangle,
+  Mail,
+} from "lucide-react";
 
 const sections = [
   {
@@ -291,25 +301,32 @@ const sections = [
       <p>Our Data Protection Officer can be reached at <a href="mailto:dpo@trustfx.com" class="text-blue-600 hover:text-blue-700">dpo@trustfx.com</a> for specific privacy concerns or regulatory inquiries.</p>
     `,
   },
-]
+];
 
 export default function PrivacyContent() {
-  const [openSections, setOpenSections] = useState<string[]>(["overview"])
+  const [openSections, setOpenSections] = useState<string[]>(["overview"]);
 
   const toggleSection = (sectionId: string) => {
-    setOpenSections((prev) => (prev.includes(sectionId) ? prev.filter((id) => id !== sectionId) : [...prev, sectionId]))
-  }
+    setOpenSections((prev) =>
+      prev.includes(sectionId)
+        ? prev.filter((id) => id !== sectionId)
+        : [...prev, sectionId],
+    );
+  };
 
   return (
     <section className="py-20 bg-gradient-to-br from-gray-50 to-white">
       <div className="container mx-auto px-4 max-w-4xl">
         <div className="space-y-6">
           {sections.map((section) => {
-            const IconComponent = section.icon
-            const isOpen = openSections.includes(section.id)
+            const IconComponent = section.icon;
+            const isOpen = openSections.includes(section.id);
 
             return (
-              <Card key={section.id} className="border-2 border-gray-100 hover:border-gray-200 transition-colors">
+              <Card
+                key={section.id}
+                className="border-2 border-gray-100 hover:border-gray-200 transition-colors"
+              >
                 <CardContent className="p-0">
                   <button
                     onClick={() => toggleSection(section.id)}
@@ -320,7 +337,9 @@ export default function PrivacyContent() {
                         <div className="p-3 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 text-white">
                           <IconComponent className="w-6 h-6" />
                         </div>
-                        <h2 className="text-xl md:text-2xl font-bold text-gray-900">{section.title}</h2>
+                        <h2 className="text-xl md:text-2xl font-bold text-gray-900">
+                          {section.title}
+                        </h2>
                       </div>
                       <ChevronDown
                         className={`w-6 h-6 text-gray-400 transition-transform duration-300 flex-shrink-0 ${
@@ -332,7 +351,9 @@ export default function PrivacyContent() {
 
                   <div
                     className={`overflow-hidden transition-all duration-500 ease-out ${
-                      isOpen ? "max-h-[2000px] opacity-100" : "max-h-0 opacity-0"
+                      isOpen
+                        ? "max-h-[2000px] opacity-100"
+                        : "max-h-0 opacity-0"
                     }`}
                   >
                     <div className="px-6 pb-6">
@@ -346,17 +367,21 @@ export default function PrivacyContent() {
                   </div>
                 </CardContent>
               </Card>
-            )
+            );
           })}
         </div>
 
         {/* Quick Summary */}
         <Card className="mt-16 bg-gradient-to-r from-blue-50 to-purple-50 border-2 border-blue-100">
           <CardContent className="p-8">
-            <h3 className="text-2xl font-bold text-gray-900 mb-6 text-center">Privacy Policy Summary</h3>
+            <h3 className="text-2xl font-bold text-gray-900 mb-6 text-center">
+              Privacy Policy Summary
+            </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
-                <h4 className="font-semibold text-gray-900 mb-3">What We Collect</h4>
+                <h4 className="font-semibold text-gray-900 mb-3">
+                  What We Collect
+                </h4>
                 <ul className="text-sm text-gray-700 space-y-1">
                   <li>• Account and identity information</li>
                   <li>• Financial and investment data</li>
@@ -365,7 +390,9 @@ export default function PrivacyContent() {
                 </ul>
               </div>
               <div>
-                <h4 className="font-semibold text-gray-900 mb-3">How We Protect It</h4>
+                <h4 className="font-semibold text-gray-900 mb-3">
+                  How We Protect It
+                </h4>
                 <ul className="text-sm text-gray-700 space-y-1">
                   <li>• Bank-level encryption</li>
                   <li>• Strict access controls</li>
@@ -378,5 +405,5 @@ export default function PrivacyContent() {
         </Card>
       </div>
     </section>
-  )
+  );
 }

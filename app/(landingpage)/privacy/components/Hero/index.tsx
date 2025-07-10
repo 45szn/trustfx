@@ -1,7 +1,7 @@
-"use client"
+"use client";
 
-import { Badge } from "@/components/ui/badge"
-import { Shield, Calendar, FileText } from "lucide-react"
+import { Badge } from "@/components/ui/badge";
+import { Shield, Calendar, FileText } from "lucide-react";
 
 export default function PrivacyHero() {
   return (
@@ -13,11 +13,14 @@ export default function PrivacyHero() {
           </Badge>
           <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6 leading-tight">
             Privacy
-            <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"> Policy</span>
+            <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+              {" "}
+              Policy
+            </span>
           </h1>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-12 leading-relaxed">
-            Your privacy is fundamental to our relationship. Learn how we collect, use, and protect your personal
-            information at TrustFx.
+            Your privacy is fundamental to our relationship. Learn how we
+            collect, use, and protect your personal information at TrustFx.
           </p>
 
           {/* Key Info */}
@@ -36,7 +39,9 @@ export default function PrivacyHero() {
                 <Shield className="w-5 h-5" />
               </div>
               <div className="text-left">
-                <div className="font-semibold text-gray-900">GDPR Compliant</div>
+                <div className="font-semibold text-gray-900">
+                  GDPR Compliant
+                </div>
                 <div className="text-sm text-gray-600">EU Data Protection</div>
               </div>
             </div>
@@ -53,5 +58,5 @@ export default function PrivacyHero() {
         </div>
       </div>
     </section>
-  )
+  );
 }

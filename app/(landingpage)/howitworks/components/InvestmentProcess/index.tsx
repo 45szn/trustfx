@@ -1,9 +1,16 @@
-"use client"
+"use client";
 
-import { useEffect, useState, useRef } from "react"
-import { Card, CardContent } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { UserPlus, CreditCard, TrendingUp, Wallet, BarChart3, Shield } from "lucide-react"
+import { useEffect, useState, useRef } from "react";
+import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import {
+  UserPlus,
+  CreditCard,
+  TrendingUp,
+  Wallet,
+  BarChart3,
+  Shield,
+} from "lucide-react";
 
 const processSteps = [
   {
@@ -26,7 +33,8 @@ const processSteps = [
     id: 2,
     icon: CreditCard,
     title: "Fund Your Account",
-    description: "Deposit funds using your preferred payment method. All transactions are encrypted and secure.",
+    description:
+      "Deposit funds using your preferred payment method. All transactions are encrypted and secure.",
     details: [
       "Multiple payment options available",
       "Bank transfer, credit/debit cards",
@@ -41,7 +49,8 @@ const processSteps = [
     id: 3,
     icon: TrendingUp,
     title: "Choose Your Plan",
-    description: "Select an investment plan that matches your risk tolerance and financial goals.",
+    description:
+      "Select an investment plan that matches your risk tolerance and financial goals.",
     details: [
       "6 different investment plans",
       "Risk levels from low to high",
@@ -56,7 +65,8 @@ const processSteps = [
     id: 4,
     icon: BarChart3,
     title: "AI Optimization",
-    description: "Our advanced AI algorithms optimize your portfolio for maximum returns while managing risk.",
+    description:
+      "Our advanced AI algorithms optimize your portfolio for maximum returns while managing risk.",
     details: [
       "Real-time market analysis",
       "Automated portfolio rebalancing",
@@ -71,7 +81,8 @@ const processSteps = [
     id: 5,
     icon: Shield,
     title: "Monitor & Protect",
-    description: "Track your investments with real-time updates and comprehensive security measures.",
+    description:
+      "Track your investments with real-time updates and comprehensive security measures.",
     details: [
       "Live portfolio dashboard",
       "Performance analytics",
@@ -86,7 +97,8 @@ const processSteps = [
     id: 6,
     icon: Wallet,
     title: "Withdraw Profits",
-    description: "Access your profits anytime with our flexible withdrawal system and multiple payout options.",
+    description:
+      "Access your profits anytime with our flexible withdrawal system and multiple payout options.",
     details: [
       "Flexible withdrawal schedules",
       "Multiple payout methods",
@@ -97,11 +109,11 @@ const processSteps = [
     bgGradient: "from-indigo-50 to-purple-50",
     duration: "1-3 days",
   },
-]
+];
 
 export default function InvestmentProcess() {
-  const [visibleSteps, setVisibleSteps] = useState<number[]>([])
-  const sectionRef = useRef<HTMLDivElement>(null)
+  const [visibleSteps, setVisibleSteps] = useState<number[]>([]);
+  const sectionRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -110,21 +122,21 @@ export default function InvestmentProcess() {
           if (entry.isIntersecting) {
             processSteps.forEach((step, index) => {
               setTimeout(() => {
-                setVisibleSteps((prev) => [...prev, step.id])
-              }, index * 200)
-            })
+                setVisibleSteps((prev) => [...prev, step.id]);
+              }, index * 200);
+            });
           }
-        })
+        });
       },
       { threshold: 0.1 },
-    )
+    );
 
     if (sectionRef.current) {
-      observer.observe(sectionRef.current)
+      observer.observe(sectionRef.current);
     }
 
-    return () => observer.disconnect()
-  }, [])
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <section className="py-20 bg-gradient-to-br from-gray-50 to-white">
@@ -133,27 +145,36 @@ export default function InvestmentProcess() {
           <Badge className="mb-4 bg-gradient-to-r from-green-500 to-blue-500 text-white px-4 py-2 text-sm font-semibold">
             INVESTMENT PROCESS
           </Badge>
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">How Your Money Works for You</h2>
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+            How Your Money Works for You
+          </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Our streamlined process makes investing accessible to everyone. Follow these simple steps to start building
-            your wealth.
+            Our streamlined process makes investing accessible to everyone.
+            Follow these simple steps to start building your wealth.
           </p>
         </div>
 
-        <div ref={sectionRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div
+          ref={sectionRef}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+        >
           {processSteps.map((step) => {
-            const IconComponent = step.icon
-            const isVisible = visibleSteps.includes(step.id)
+            const IconComponent = step.icon;
+            const isVisible = visibleSteps.includes(step.id);
 
             return (
               <Card
                 key={step.id}
                 className={`relative overflow-hidden transition-all duration-1000 hover:shadow-2xl hover:-translate-y-2 ${
-                  isVisible ? "opacity-100 translate-y-0 scale-100" : "opacity-0 translate-y-12 scale-95"
+                  isVisible
+                    ? "opacity-100 translate-y-0 scale-100"
+                    : "opacity-0 translate-y-12 scale-95"
                 }`}
               >
                 {/* Background Gradient */}
-                <div className={`absolute inset-0 bg-gradient-to-br ${step.bgGradient} opacity-50`} />
+                <div
+                  className={`absolute inset-0 bg-gradient-to-br ${step.bgGradient} opacity-50`}
+                />
 
                 {/* Step Number */}
                 <div className="absolute top-4 right-4">
@@ -171,12 +192,18 @@ export default function InvestmentProcess() {
                     <IconComponent className="w-8 h-8" />
                   </div>
 
-                  <h3 className="text-2xl font-bold text-gray-900 mb-4">{step.title}</h3>
-                  <p className="text-gray-700 leading-relaxed mb-6">{step.description}</p>
+                  <h3 className="text-2xl font-bold text-gray-900 mb-4">
+                    {step.title}
+                  </h3>
+                  <p className="text-gray-700 leading-relaxed mb-6">
+                    {step.description}
+                  </p>
 
                   <div className="mb-6">
                     <div className="flex items-center justify-between mb-3">
-                      <span className="text-sm font-semibold text-gray-600">PROCESS TIME</span>
+                      <span className="text-sm font-semibold text-gray-600">
+                        PROCESS TIME
+                      </span>
                       <span
                         className={`text-sm font-bold bg-gradient-to-r ${step.gradient} bg-clip-text text-transparent`}
                       >
@@ -187,7 +214,10 @@ export default function InvestmentProcess() {
 
                   <ul className="space-y-2">
                     {step.details.map((detail, index) => (
-                      <li key={index} className="flex items-start gap-2 text-sm text-gray-600">
+                      <li
+                        key={index}
+                        className="flex items-start gap-2 text-sm text-gray-600"
+                      >
                         <div
                           className={`w-1.5 h-1.5 rounded-full bg-gradient-to-r ${step.gradient} mt-2 flex-shrink-0`}
                         />
@@ -197,10 +227,10 @@ export default function InvestmentProcess() {
                   </ul>
                 </CardContent>
               </Card>
-            )
+            );
           })}
         </div>
       </div>
     </section>
-  )
+  );
 }

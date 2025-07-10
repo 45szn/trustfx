@@ -12,5 +12,5 @@ export default function LegalPage() {
         <LegalContact />
       </div>
     </PageTransition>
-  )
+  );
 }
