@@ -6,7 +6,7 @@ interface PageProps {
   params: { slug: string };
 }
 
-export default function BlogPostPage({ params }: PageProps) {
+export default async function BlogPostPage({ params }: PageProps) {
   return (
     <>
       <BlogPost slug={params.slug} />
@@ -15,3 +15,4 @@ export default function BlogPostPage({ params }: PageProps) {
     </>
   );
 }
+
