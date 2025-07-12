@@ -57,7 +57,7 @@ export default function Login() {
       toast({
         description: "Logged in successfully!",
       });
-      router.push("/Dashboard");
+      router.push("/dashboard");
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {

@@ -105,12 +105,12 @@ export default function ContactForm() {
               </p>
               <p className="text-gray-600">
                 For urgent matters, feel free to call us at{" "}
-                <a
+                {/* <a
                   href="tel:+15551234567"
                   className="text-blue-600 font-semibold hover:underline"
                 >
                   +1 (555) 123-4567
-                </a>
+                </a> */}
               </p>
             </CardContent>
           </Card>
