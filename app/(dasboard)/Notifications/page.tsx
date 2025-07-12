@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import useAuth from "@/hooks/useAuth";
-import DashHead from "@/components/DashHead";
+import DashHead from "@/app/(dasboard)/components/DashHead";
 
 const Notifications = () => {
   const { user } = useAuth();

@@ -2,7 +2,7 @@
 
 import React from "react";
 import useAuth from "@/hooks/useAuth";
-import DashHead from "@/components/DashHead";
+import DashHead from "@/app/(dasboard)/components/DashHead";
 // import { useSearchParams } from "next/navigation";
 
 const Investments = () => {
