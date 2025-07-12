@@ -1,67 +1,93 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { useState } from "react";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Checkbox } from "@/components/ui/checkbox";
-import { Badge } from "@/components/ui/badge"
-import { DollarSign, Clock, TrendingUp, Shield, AlertCircle } from "lucide-react"
+import { Badge } from "@/components/ui/badge";
+import {
+  DollarSign,
+  Clock,
+  TrendingUp,
+  Shield,
+  AlertCircle,
+} from "lucide-react";
 
 interface InvestmentPlan {
-  id: string
-  name: string
-  icon: string
-  minAmount: number
-  duration: string
-  expectedReturn: number
-  riskLevel: "low" | "medium" | "high"
-  features: string[]
-  description: string
+  id: string;
+  name: string;
+  icon: string;
+  minAmount: number;
+  duration: string;
+  expectedReturn: number;
+  riskLevel: "low" | "medium" | "high";
+  features: string[];
+  description: string;
 }
 
 interface InvestmentModalProps {
-  isOpen: boolean
-  onClose: () => void
-  plan: InvestmentPlan | null
-  userBalance: number
+  isOpen: boolean;
+  onClose: () => void;
+  plan: InvestmentPlan | null;
+  userBalance: number;
 }
 
-export function InvestmentModal({ isOpen, onClose, plan, userBalance }: InvestmentModalProps) {
-  const [amount, setAmount] = useState("")
-  const [fundingSource, setFundingSource] = useState("")
-  const [agreedToTerms, setAgreedToTerms] = useState(false)
-  const [isSubmitting, setIsSubmitting] = useState(false)
+export function InvestmentModal({
+  isOpen,
+  onClose,
+  plan,
+  userBalance,
+}: InvestmentModalProps) {
+  const [amount, setAmount] = useState("");
+  const [fundingSource, setFundingSource] = useState("");
+  const [agreedToTerms, setAgreedToTerms] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  if (!plan) return null
+  if (!plan) return null;
 
-  const investmentAmount = Number.parseFloat(amount) || 0
-  const expectedPayout = investmentAmount * (1 + plan.expectedReturn / 100)
-  const isValidAmount = investmentAmount >= plan.minAmount && investmentAmount <= userBalance
-  const canSubmit = isValidAmount && fundingSource && agreedToTerms
+  const investmentAmount = Number.parseFloat(amount) || 0;
+  const expectedPayout = investmentAmount * (1 + plan.expectedReturn / 100);
+  const isValidAmount =
+    investmentAmount >= plan.minAmount && investmentAmount <= userBalance;
+  const canSubmit = isValidAmount && fundingSource && agreedToTerms;
 
   const handleSubmit = async () => {
-    if (!canSubmit) return
+    if (!canSubmit) return;
 
-    setIsSubmitting(true)
+    setIsSubmitting(true);
     // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 2000))
-    setIsSubmitting(false)
-    onClose()
+    await new Promise((resolve) => setTimeout(resolve, 2000));
+    setIsSubmitting(false);
+    onClose();
     // You would handle the actual investment logic here
-  }
+  };
 
   const getRiskBadge = (risk: string) => {
     const riskConfig = {
       low: { label: "Low Risk", className: "bg-green-100 text-green-800" },
-      medium: { label: "Medium Risk", className: "bg-yellow-100 text-yellow-800" },
+      medium: {
+        label: "Medium Risk",
+        className: "bg-yellow-100 text-yellow-800",
+      },
       high: { label: "High Risk", className: "bg-red-100 text-red-800" },
-    }
-    const config = riskConfig[risk as keyof typeof riskConfig]
-    return <Badge className={config.className}>{config.label}</Badge>
-  }
+    };
+    const config = riskConfig[risk as keyof typeof riskConfig];
+    return <Badge className={config.className}>{config.label}</Badge>;
+  };
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
@@ -81,7 +107,9 @@ export function InvestmentModal({ isOpen, onClose, plan, userBalance }: Investme
                 <DollarSign className="h-4 w-4 text-green-600" />
                 <div>
                   <p className="text-gray-600">Min Amount</p>
-                  <p className="font-semibold">${plan.minAmount.toLocaleString()}</p>
+                  <p className="font-semibold">
+                    ${plan.minAmount.toLocaleString()}
+                  </p>
                 </div>
               </div>
               <div className="flex items-center space-x-2">
@@ -125,7 +153,9 @@ export function InvestmentModal({ isOpen, onClose, plan, userBalance }: Investme
             <div className="flex justify-between text-sm text-gray-600">
               <span>Available Balance: ${userBalance.toLocaleString()}</span>
               {investmentAmount > 0 && (
-                <span className="text-green-600">Expected Payout: ${expectedPayout.toLocaleString()}</span>
+                <span className="text-green-600">
+                  Expected Payout: ${expectedPayout.toLocaleString()}
+                </span>
               )}
             </div>
             {amount && !isValidAmount && (
@@ -148,7 +178,9 @@ export function InvestmentModal({ isOpen, onClose, plan, userBalance }: Investme
                 <SelectValue placeholder="Select funding source" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="wallet">Wallet Balance (${userBalance.toLocaleString()})</SelectItem>
+                <SelectItem value="wallet">
+                  Wallet Balance (${userBalance.toLocaleString()})
+                </SelectItem>
                 <SelectItem value="card">Credit/Debit Card</SelectItem>
                 <SelectItem value="bank">Bank Transfer</SelectItem>
               </SelectContent>
@@ -160,29 +192,41 @@ export function InvestmentModal({ isOpen, onClose, plan, userBalance }: Investme
             <Checkbox
               id="terms"
               checked={agreedToTerms}
-              onCheckedChange={(checked: boolean) => setAgreedToTerms(checked as boolean)}
+              onCheckedChange={(checked: boolean) =>
+                setAgreedToTerms(checked as boolean)
+              }
             />
             <Label htmlFor="terms" className="text-sm leading-relaxed">
               I agree to the{" "}
               <a href="#" className="text-blue-600 hover:underline">
                 Terms and Conditions
               </a>{" "}
-              and understand the risks associated with this investment. I confirm that I have read and understood the
-              investment details.
+              and understand the risks associated with this investment. I
+              confirm that I have read and understood the investment details.
             </Label>
           </div>
 
           {/* Action Buttons */}
           <div className="flex space-x-3 pt-4">
-            <Button variant="outline" onClick={onClose} className="flex-1 bg-transparent">
+            <Button
+              variant="outline"
+              onClick={onClose}
+              className="flex-1 bg-transparent"
+            >
               Cancel
             </Button>
-            <Button onClick={handleSubmit} disabled={!canSubmit || isSubmitting} className="flex-1">
-              {isSubmitting ? "Processing..." : `Invest $${investmentAmount.toLocaleString()}`}
+            <Button
+              onClick={handleSubmit}
+              disabled={!canSubmit || isSubmitting}
+              className="flex-1"
+            >
+              {isSubmitting
+                ? "Processing..."
+                : `Invest $${investmentAmount.toLocaleString()}`}
             </Button>
           </div>
         </div>
       </DialogContent>
     </Dialog>
-  )
+  );
 }

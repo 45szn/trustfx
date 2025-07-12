@@ -1,19 +1,27 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog"
-import { Button } from "@/components/ui/button"
-import { Switch } from "@/components/ui/switch"
-import { Label } from "@/components/ui/label"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Bell, Mail, Smartphone, Gift, Settings } from "lucide-react"
+import { useState } from "react";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
+import { Switch } from "@/components/ui/switch";
+import { Label } from "@/components/ui/label";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Bell, Mail, Smartphone, Gift, Settings } from "lucide-react";
 
 interface NotificationSettingsModalProps {
-  isOpen: boolean
-  onClose: () => void
+  isOpen: boolean;
+  onClose: () => void;
 }
 
-export function NotificationSettingsModal({ isOpen, onClose }: NotificationSettingsModalProps) {
+export function NotificationSettingsModal({
+  isOpen,
+  onClose,
+}: NotificationSettingsModalProps) {
   const [settings, setSettings] = useState({
     emailAlerts: true,
     pushNotifications: true,
@@ -23,17 +31,17 @@ export function NotificationSettingsModal({ isOpen, onClose }: NotificationSetti
     transactionAlerts: true,
     systemAlerts: true,
     marketingEmails: false,
-  })
+  });
 
   const handleSettingChange = (key: string, value: boolean) => {
-    setSettings((prev) => ({ ...prev, [key]: value }))
-  }
+    setSettings((prev) => ({ ...prev, [key]: value }));
+  };
 
   const handleSave = () => {
     // Save settings to API
-    console.log("Saving notification settings:", settings)
-    onClose()
-  }
+    console.log("Saving notification settings:", settings);
+    onClose();
+  };
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
@@ -59,13 +67,17 @@ export function NotificationSettingsModal({ isOpen, onClose }: NotificationSetti
                     <Label htmlFor="email-alerts" className="font-medium">
                       Email Alerts
                     </Label>
-                    <p className="text-sm text-gray-600">Receive notifications via email</p>
+                    <p className="text-sm text-gray-600">
+                      Receive notifications via email
+                    </p>
                   </div>
                 </div>
                 <Switch
                   id="email-alerts"
                   checked={settings.emailAlerts}
-                  onCheckedChange={(checked) => handleSettingChange("emailAlerts", checked)}
+                  onCheckedChange={(checked) =>
+                    handleSettingChange("emailAlerts", checked)
+                  }
                 />
               </div>
 
@@ -76,13 +88,17 @@ export function NotificationSettingsModal({ isOpen, onClose }: NotificationSetti
                     <Label htmlFor="push-notifications" className="font-medium">
                       Push Notifications
                     </Label>
-                    <p className="text-sm text-gray-600">Browser and mobile push notifications</p>
+                    <p className="text-sm text-gray-600">
+                      Browser and mobile push notifications
+                    </p>
                   </div>
                 </div>
                 <Switch
                   id="push-notifications"
                   checked={settings.pushNotifications}
-                  onCheckedChange={(checked) => handleSettingChange("pushNotifications", checked)}
+                  onCheckedChange={(checked) =>
+                    handleSettingChange("pushNotifications", checked)
+                  }
                 />
               </div>
 
@@ -93,13 +109,17 @@ export function NotificationSettingsModal({ isOpen, onClose }: NotificationSetti
                     <Label htmlFor="in-app-alerts" className="font-medium">
                       In-App Alerts
                     </Label>
-                    <p className="text-sm text-gray-600">Show notifications within the app</p>
+                    <p className="text-sm text-gray-600">
+                      Show notifications within the app
+                    </p>
                   </div>
                 </div>
                 <Switch
                   id="in-app-alerts"
                   checked={settings.inAppAlerts}
-                  onCheckedChange={(checked) => handleSettingChange("inAppAlerts", checked)}
+                  onCheckedChange={(checked) =>
+                    handleSettingChange("inAppAlerts", checked)
+                  }
                 />
               </div>
             </CardContent>
@@ -116,12 +136,16 @@ export function NotificationSettingsModal({ isOpen, onClose }: NotificationSetti
                   <Label htmlFor="investment-updates" className="font-medium">
                     Investment Updates
                   </Label>
-                  <p className="text-sm text-gray-600">Maturity alerts, returns, and plan updates</p>
+                  <p className="text-sm text-gray-600">
+                    Maturity alerts, returns, and plan updates
+                  </p>
                 </div>
                 <Switch
                   id="investment-updates"
                   checked={settings.investmentUpdates}
-                  onCheckedChange={(checked) => handleSettingChange("investmentUpdates", checked)}
+                  onCheckedChange={(checked) =>
+                    handleSettingChange("investmentUpdates", checked)
+                  }
                 />
               </div>
 
@@ -130,12 +154,16 @@ export function NotificationSettingsModal({ isOpen, onClose }: NotificationSetti
                   <Label htmlFor="transaction-alerts" className="font-medium">
                     Transaction Alerts
                   </Label>
-                  <p className="text-sm text-gray-600">Deposits, withdrawals, and transfers</p>
+                  <p className="text-sm text-gray-600">
+                    Deposits, withdrawals, and transfers
+                  </p>
                 </div>
                 <Switch
                   id="transaction-alerts"
                   checked={settings.transactionAlerts}
-                  onCheckedChange={(checked) => handleSettingChange("transactionAlerts", checked)}
+                  onCheckedChange={(checked) =>
+                    handleSettingChange("transactionAlerts", checked)
+                  }
                 />
               </div>
 
@@ -144,12 +172,16 @@ export function NotificationSettingsModal({ isOpen, onClose }: NotificationSetti
                   <Label htmlFor="system-alerts" className="font-medium">
                     System Alerts
                   </Label>
-                  <p className="text-sm text-gray-600">Security alerts and system maintenance</p>
+                  <p className="text-sm text-gray-600">
+                    Security alerts and system maintenance
+                  </p>
                 </div>
                 <Switch
                   id="system-alerts"
                   checked={settings.systemAlerts}
-                  onCheckedChange={(checked) => handleSettingChange("systemAlerts", checked)}
+                  onCheckedChange={(checked) =>
+                    handleSettingChange("systemAlerts", checked)
+                  }
                 />
               </div>
 
@@ -160,13 +192,17 @@ export function NotificationSettingsModal({ isOpen, onClose }: NotificationSetti
                     <Label htmlFor="promo-alerts" className="font-medium">
                       Promotional Alerts
                     </Label>
-                    <p className="text-sm text-gray-600">New plans, bonuses, and special offers</p>
+                    <p className="text-sm text-gray-600">
+                      New plans, bonuses, and special offers
+                    </p>
                   </div>
                 </div>
                 <Switch
                   id="promo-alerts"
                   checked={settings.promoAlerts}
-                  onCheckedChange={(checked) => handleSettingChange("promoAlerts", checked)}
+                  onCheckedChange={(checked) =>
+                    handleSettingChange("promoAlerts", checked)
+                  }
                 />
               </div>
             </CardContent>
@@ -174,7 +210,11 @@ export function NotificationSettingsModal({ isOpen, onClose }: NotificationSetti
 
           {/* Action Buttons */}
           <div className="flex space-x-3 pt-4">
-            <Button variant="outline" onClick={onClose} className="flex-1 bg-transparent">
+            <Button
+              variant="outline"
+              onClick={onClose}
+              className="flex-1 bg-transparent"
+            >
               Cancel
             </Button>
             <Button onClick={handleSave} className="flex-1">
@@ -184,5 +224,5 @@ export function NotificationSettingsModal({ isOpen, onClose }: NotificationSetti
         </div>
       </DialogContent>
     </Dialog>
-  )
+  );
 }

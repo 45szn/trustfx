@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import useAuth from "@/hooks/useAuth";
-import DashHead from "@/app/(dasboard)/components/DashHead";
+import DashHead from "../components/DashHead";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import {

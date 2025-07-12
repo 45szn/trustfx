@@ -1,16 +1,33 @@
-"use client"
+"use client";
 
-import { useState, useMemo } from "react"
-import useAuth from "@/hooks/useAuth"
+import { useState, useMemo } from "react";
+import useAuth from "@/hooks/useAuth";
 import DashHead from "../components/DashHead";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
-import { Input } from "@/components/ui/input"
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Calendar } from "@/components/ui/calendar"
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Input } from "@/components/ui/input";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Calendar } from "@/components/ui/calendar";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 import {
   DollarSign,
   ArrowUpRight,
@@ -23,8 +40,9 @@ import {
   CalendarIcon,
   Filter,
   Loader2,
-} from "lucide-react"
+} from "lucide-react";
 import { format } from "date-fns";
+import { DateRange } from "react-day-picker";
 
 // Mock data - replace with real data from your API
 const transactionsData = [
@@ -118,35 +136,36 @@ const transactionsData = [
     status: "failed",
     balanceAfter: 14050,
   },
-]
+];
 
 const Transactions = () => {
-  const { user, loading } = useAuth()
-  const [searchTerm, setSearchTerm] = useState("")
-  const [typeFilter, setTypeFilter] = useState("all")
-  const [statusFilter, setStatusFilter] = useState("all")
-  const [dateRange, setDateRange] = useState<{ from?: Date; to?: Date }>({})
-  const [currentPage, setCurrentPage] = useState(1)
-  const itemsPerPage = 10
+  const { user, loading } = useAuth();
+  const [searchTerm, setSearchTerm] = useState("");
+  const [typeFilter, setTypeFilter] = useState("all");
+  const [statusFilter, setStatusFilter] = useState("all");
+  // const [dateRange, setDateRange] = useState<{ from?: Date; to?: Date }>({})
+  const [dateRange, setDateRange] = useState<DateRange | undefined>(undefined);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 10;
 
   // Calculate summary data
   const summaryData = useMemo(() => {
     const deposits = transactionsData
       .filter((t) => t.type === "deposit" && t.status === "completed")
-      .reduce((sum, t) => sum + t.amount, 0)
+      .reduce((sum, t) => sum + t.amount, 0);
 
     const withdrawals = transactionsData
       .filter((t) => t.type === "withdrawal" && t.status === "completed")
-      .reduce((sum, t) => sum + Math.abs(t.amount), 0)
+      .reduce((sum, t) => sum + Math.abs(t.amount), 0);
 
     const returns = transactionsData
       .filter((t) => t.type === "return" && t.status === "completed")
-      .reduce((sum, t) => sum + t.amount, 0)
+      .reduce((sum, t) => sum + t.amount, 0);
 
-    const currentBalance = 10800 // This should come from your API
+    const currentBalance = 10800; // This should come from your API
 
-    return { deposits, withdrawals, returns, currentBalance }
-  }, [])
+    return { deposits, withdrawals, returns, currentBalance };
+  }, []);
 
   // Filter transactions
   const filteredTransactions = useMemo(() => {
@@ -155,22 +174,30 @@ const Transactions = () => {
         searchTerm === "" ||
         transaction.details.toLowerCase().includes(searchTerm.toLowerCase()) ||
         transaction.id.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        transaction.amount.toString().includes(searchTerm)
+        transaction.amount.toString().includes(searchTerm);
 
-      const matchesType = typeFilter === "all" || transaction.type === typeFilter
-      const matchesStatus = statusFilter === "all" || transaction.status === statusFilter
+      const matchesType =
+        typeFilter === "all" || transaction.type === typeFilter;
+      const matchesStatus =
+        statusFilter === "all" || transaction.status === statusFilter;
 
-      const transactionDate = new Date(transaction.date)
+      const transactionDate = new Date(transaction.date);
+      // const matchesDateRange =
+      //   (!dateRange?.from || transactionDate >= dateRange.from) && (!dateRange?.to || transactionDate <= dateRange.to)
       const matchesDateRange =
-        (!dateRange.from || transactionDate >= dateRange.from) && (!dateRange.to || transactionDate <= dateRange.to)
+        (!dateRange?.from || transactionDate >= dateRange.from) &&
+        (!dateRange?.to || transactionDate <= dateRange.to);
 
-      return matchesSearch && matchesType && matchesStatus && matchesDateRange
-    })
-  }, [searchTerm, typeFilter, statusFilter, dateRange])
+      return matchesSearch && matchesType && matchesStatus && matchesDateRange;
+    });
+  }, [searchTerm, typeFilter, statusFilter, dateRange]);
 
   // Pagination
-  const totalPages = Math.ceil(filteredTransactions.length / itemsPerPage)
-  const paginatedTransactions = filteredTransactions.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)
+  const totalPages = Math.ceil(filteredTransactions.length / itemsPerPage);
+  const paginatedTransactions = filteredTransactions.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage,
+  );
 
   const getTransactionIcon = (type: string) => {
     const icons = {
@@ -180,25 +207,39 @@ const Transactions = () => {
       return: <DollarSign className="h-4 w-4 text-green-600" />,
       fee: <ArrowUpRight className="h-4 w-4 text-red-600" />,
       bonus: <DollarSign className="h-4 w-4 text-green-600" />,
-    }
-    return icons[type as keyof typeof icons] || <DollarSign className="h-4 w-4 text-gray-600" />
-  }
+    };
+    return (
+      icons[type as keyof typeof icons] || (
+        <DollarSign className="h-4 w-4 text-gray-600" />
+      )
+    );
+  };
 
   const getStatusBadge = (status: string) => {
     const statusConfig = {
-      completed: { label: "Completed", className: "bg-green-100 text-green-800 hover:bg-green-200" },
-      pending: { label: "Pending", className: "bg-yellow-100 text-yellow-800 hover:bg-yellow-200" },
-      failed: { label: "Failed", className: "bg-red-100 text-red-800 hover:bg-red-200" },
-    }
+      completed: {
+        label: "Completed",
+        className: "bg-green-100 text-green-800 hover:bg-green-200",
+      },
+      pending: {
+        label: "Pending",
+        className: "bg-yellow-100 text-yellow-800 hover:bg-yellow-200",
+      },
+      failed: {
+        label: "Failed",
+        className: "bg-red-100 text-red-800 hover:bg-red-200",
+      },
+    };
 
-    const config = statusConfig[status as keyof typeof statusConfig] || statusConfig.pending
-    return <Badge className={config.className}>{config.label}</Badge>
-  }
+    const config =
+      statusConfig[status as keyof typeof statusConfig] || statusConfig.pending;
+    return <Badge className={config.className}>{config.label}</Badge>;
+  };
 
   const copyTransactionId = (id: string) => {
-    navigator.clipboard.writeText(id)
+    navigator.clipboard.writeText(id);
     // You can add a toast notification here
-  }
+  };
 
   const exportTransactions = () => {
     // Implement CSV export functionality
@@ -214,16 +255,16 @@ const Transactions = () => {
       ]),
     ]
       .map((row) => row.join(","))
-      .join("\n")
+      .join("\n");
 
-    const blob = new Blob([csvContent], { type: "text/csv" })
-    const url = window.URL.createObjectURL(blob)
-    const a = document.createElement("a")
-    a.href = url
-    a.download = "transactions.csv"
-    a.click()
-    window.URL.revokeObjectURL(url)
-  }
+    const blob = new Blob([csvContent], { type: "text/csv" });
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "transactions.csv";
+    a.click();
+    window.URL.revokeObjectURL(url);
+  };
 
   // const displayName = user.displayName || user.email?.split("@")[0] || "User"
 
@@ -236,7 +277,7 @@ const Transactions = () => {
           <span className="text-gray-600">Loading transactions...</span>
         </div>
       </div>
-    )
+    );
   }
 
   // Redirect or show login prompt if user is not authenticated
@@ -244,11 +285,15 @@ const Transactions = () => {
     return (
       <div className="container mx-auto p-6 flex items-center justify-center min-h-[400px]">
         <div className="text-center">
-          <h2 className="text-xl font-semibold text-gray-900 mb-2">Authentication Required</h2>
-          <p className="text-gray-600">Please log in to view your transactions.</p>
+          <h2 className="text-xl font-semibold text-gray-900 mb-2">
+            Authentication Required
+          </h2>
+          <p className="text-gray-600">
+            Please log in to view your transactions.
+          </p>
         </div>
       </div>
-    )
+    );
   }
 
   return (
@@ -258,7 +303,9 @@ const Transactions = () => {
       {/* Page Header */}
       <div className="mb-8">
         <h1 className="text-2xl font-bold text-gray-900">Transactions</h1>
-        <p className="text-gray-600 mt-1">A complete log of your account activity and movement of funds.</p>
+        <p className="text-gray-600 mt-1">
+          A complete log of your account activity and movement of funds.
+        </p>
       </div>
 
       {/* Summary Cards */}
@@ -267,8 +314,12 @@ const Transactions = () => {
           <CardContent className="p-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm font-medium text-gray-600">Total Deposits</p>
-                <p className="text-2xl font-bold text-gray-900">${summaryData.deposits.toLocaleString()}</p>
+                <p className="text-sm font-medium text-gray-600">
+                  Total Deposits
+                </p>
+                <p className="text-2xl font-bold text-gray-900">
+                  ${summaryData.deposits.toLocaleString()}
+                </p>
               </div>
               <div className="h-12 w-12 bg-green-100 rounded-lg flex items-center justify-center">
                 <ArrowDownLeft className="h-6 w-6 text-green-600" />
@@ -281,8 +332,12 @@ const Transactions = () => {
           <CardContent className="p-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm font-medium text-gray-600">Total Withdrawn</p>
-                <p className="text-2xl font-bold text-gray-900">${summaryData.withdrawals.toLocaleString()}</p>
+                <p className="text-sm font-medium text-gray-600">
+                  Total Withdrawn
+                </p>
+                <p className="text-2xl font-bold text-gray-900">
+                  ${summaryData.withdrawals.toLocaleString()}
+                </p>
               </div>
               <div className="h-12 w-12 bg-red-100 rounded-lg flex items-center justify-center">
                 <ArrowUpRight className="h-6 w-6 text-red-600" />
@@ -295,8 +350,12 @@ const Transactions = () => {
           <CardContent className="p-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm font-medium text-gray-600">Total Returns</p>
-                <p className="text-2xl font-bold text-gray-900">${summaryData.returns.toLocaleString()}</p>
+                <p className="text-sm font-medium text-gray-600">
+                  Total Returns
+                </p>
+                <p className="text-2xl font-bold text-gray-900">
+                  ${summaryData.returns.toLocaleString()}
+                </p>
               </div>
               <div className="h-12 w-12 bg-blue-100 rounded-lg flex items-center justify-center">
                 <TrendingUp className="h-6 w-6 text-blue-600" />
@@ -309,8 +368,12 @@ const Transactions = () => {
           <CardContent className="p-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm font-medium text-gray-600">Current Balance</p>
-                <p className="text-2xl font-bold text-gray-900">${summaryData.currentBalance.toLocaleString()}</p>
+                <p className="text-sm font-medium text-gray-600">
+                  Current Balance
+                </p>
+                <p className="text-2xl font-bold text-gray-900">
+                  ${summaryData.currentBalance.toLocaleString()}
+                </p>
               </div>
               <div className="h-12 w-12 bg-purple-100 rounded-lg flex items-center justify-center">
                 <Wallet className="h-6 w-6 text-purple-600" />
@@ -373,12 +436,16 @@ const Transactions = () => {
             {/* Date Range */}
             <Popover>
               <PopoverTrigger asChild>
-                <Button variant="outline" className="justify-start text-left font-normal bg-transparent">
+                <Button
+                  variant="outline"
+                  className="justify-start text-left font-normal bg-transparent"
+                >
                   <CalendarIcon className="mr-2 h-4 w-4" />
-                  {dateRange.from ? (
+                  {dateRange?.from ? (
                     dateRange.to ? (
                       <>
-                        {format(dateRange.from, "LLL dd, y")} - {format(dateRange.to, "LLL dd, y")}
+                        {format(dateRange.from, "LLL dd, y")} -{" "}
+                        {format(dateRange.to, "LLL dd, y")}
                       </>
                     ) : (
                       format(dateRange.from, "LLL dd, y")
@@ -392,11 +459,20 @@ const Transactions = () => {
                 <Calendar
                   initialFocus
                   mode="range"
-                  defaultMonth={dateRange.from}
+                  defaultMonth={dateRange?.from}
                   selected={dateRange}
                   onSelect={setDateRange}
                   numberOfMonths={2}
                 />
+
+                {/* <Calendar
+                  initialFocus
+                  mode="range"
+                  defaultMonth={dateRange.from}
+                  selected={dateRange}
+                  onSelect={setDateRange}
+                  numberOfMonths={2}
+                /> */}
               </PopoverContent>
             </Popover>
           </div>
@@ -433,27 +509,40 @@ const Transactions = () => {
                   <TableRow key={transaction.id} className="hover:bg-gray-50">
                     <TableCell>
                       <div>
-                        <p className="font-medium">{format(new Date(transaction.date), "MMM dd, yyyy")}</p>
-                        <p className="text-xs text-gray-500">{format(new Date(transaction.date), "HH:mm")}</p>
+                        <p className="font-medium">
+                          {format(new Date(transaction.date), "MMM dd, yyyy")}
+                        </p>
+                        <p className="text-xs text-gray-500">
+                          {format(new Date(transaction.date), "HH:mm")}
+                        </p>
                       </div>
                     </TableCell>
                     <TableCell>
                       <div className="flex items-center space-x-2">
                         {getTransactionIcon(transaction.type)}
-                        <span className="capitalize font-medium">{transaction.type}</span>
+                        <span className="capitalize font-medium">
+                          {transaction.type}
+                        </span>
                       </div>
                     </TableCell>
                     <TableCell>{transaction.details}</TableCell>
                     <TableCell>
-                      <span className={`font-semibold ${transaction.amount > 0 ? "text-green-600" : "text-red-600"}`}>
-                        {transaction.amount > 0 ? "+" : ""}${Math.abs(transaction.amount).toLocaleString()}
+                      <span
+                        className={`font-semibold ${transaction.amount > 0 ? "text-green-600" : "text-red-600"}`}
+                      >
+                        {transaction.amount > 0 ? "+" : ""}$
+                        {Math.abs(transaction.amount).toLocaleString()}
                       </span>
                     </TableCell>
                     <TableCell>{getStatusBadge(transaction.status)}</TableCell>
-                    <TableCell className="font-medium">${transaction.balanceAfter.toLocaleString()}</TableCell>
+                    <TableCell className="font-medium">
+                      ${transaction.balanceAfter.toLocaleString()}
+                    </TableCell>
                     <TableCell>
                       <div className="flex items-center space-x-2">
-                        <span className="text-sm text-gray-600">{transaction.id}</span>
+                        <span className="text-sm text-gray-600">
+                          {transaction.id}
+                        </span>
                         <Button
                           variant="ghost"
                           size="sm"
@@ -475,8 +564,11 @@ const Transactions = () => {
             <div className="flex items-center justify-between mt-6">
               <p className="text-sm text-gray-600">
                 Showing {(currentPage - 1) * itemsPerPage + 1} to{" "}
-                {Math.min(currentPage * itemsPerPage, filteredTransactions.length)} of {filteredTransactions.length}{" "}
-                transactions
+                {Math.min(
+                  currentPage * itemsPerPage,
+                  filteredTransactions.length,
+                )}{" "}
+                of {filteredTransactions.length} transactions
               </p>
               <div className="flex space-x-2">
                 <Button
@@ -490,7 +582,9 @@ const Transactions = () => {
                 <Button
                   variant="outline"
                   size="sm"
-                  onClick={() => setCurrentPage(Math.min(totalPages, currentPage + 1))}
+                  onClick={() =>
+                    setCurrentPage(Math.min(totalPages, currentPage + 1))
+                  }
                   disabled={currentPage === totalPages}
                 >
                   Next
@@ -501,13 +595,10 @@ const Transactions = () => {
         </CardContent>
       </Card>
     </div>
-  )
-}
+  );
+};
 
 export default Transactions;
-
-
-
 
 // "use client";
 // import React from "react";
