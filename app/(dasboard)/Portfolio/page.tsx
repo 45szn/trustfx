@@ -13,9 +13,7 @@ const Portfolio = () => {
   return (
     <>
       <DashHead title="Portfolio" />
-      <h1 className="text-xl font-bold">
-        Welcome {user.displayName || user.email}!
-      </h1>
+      <h1 className="text-xl font-bold"></h1>
     </>
   );
 };

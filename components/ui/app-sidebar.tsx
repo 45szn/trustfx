@@ -26,6 +26,7 @@ import {
   DropdownMenuContent, 
   DropdownMenuItem
 } from "@/components/ui/dropdown-menu";
+import useAuth from "@/hooks/useAuth";
 
 const items = [
   {
@@ -62,7 +63,12 @@ const items = [
 
 export function AppSidebar() {
   const { state } = useSidebar()
+  const { user } = useAuth();
 
+    if (!user) {
+    return null;
+  }
+  
   return (
     <Sidebar collapsible="icon">
       <SidebarHeader className="p-4 mt-6">
@@ -96,7 +102,7 @@ export function AppSidebar() {
               <DropdownMenuTrigger asChild>
                 <SidebarMenuButton className="w-full transition-all duration-200 ease-in-out hover:bg-sidebar-accent focus:outline-none">
                   <User2 />
-                  <span className="flex-1 text-left">Username</span>
+                  <span className="flex-1 text-left">{user.displayName || user.email}</span>
                   <ChevronUp className={`ml-auto transition-transform duration-200 ${state === "expanded" ? "rotate-180" : ""}`} />
                 </SidebarMenuButton>
               </DropdownMenuTrigger>

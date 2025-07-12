@@ -82,7 +82,7 @@ export default function FooterMain() {
         <div>
           <h4 className="text-xl font-semibold mb-6 text-white">Company</h4>
           <ul className="space-y-3">
-            {["About Us", "How It Works", "Security"].map((label) => (
+            {["About", "How It Works", "Security"].map((label) => (
               <li key={label}>
                 <Link
                   href={`/${label.toLowerCase().replace(/\s+/g, "")}`}
