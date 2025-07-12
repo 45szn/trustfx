@@ -46,7 +46,7 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
       <SidebarProvider>
         <AppSidebar />
         <SidebarInset className="container">
-          <header className="flex fixed w-full backdrop-blur-md shrink-0 items-center justify-between p-4 border-b pl-1 lg:justify-normal lg:h-5">
+          <header className="flex fixed w-full backdrop-blur-md z-50 shrink-0 items-center justify-between p-4 border-b pl-1 lg:justify-normal lg:h-5">
             <SidebarTrigger className="" />
 
             <Breadcrumb className="hidden lg:block">
@@ -88,7 +88,7 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
             </div>
           </header>
           <PageTransition>
-            <div className="p-4">{children}</div>
+            <div className="p-4 montserrat">{children}</div>
           </PageTransition>
         </SidebarInset>
       </SidebarProvider>

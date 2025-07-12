@@ -9,7 +9,7 @@ interface HeaderProps {
 
 const DashHead: React.FC<HeaderProps> = ({ title }) => {
   return (
-    <div className="flex justify-between w-full mt-7">
+    <div className="flex justify-between w-full mt-16 lg:mt-7">
       <h1 className="text-xl font-bold">{title}</h1>
 
       <div className="hidden gap-3 lg:flex">
