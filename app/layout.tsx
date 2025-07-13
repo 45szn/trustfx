@@ -2,10 +2,12 @@ import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "@/components/ui/toaster";
-import Providers from "../components/Providers.tsx";
+import Providers from "../components/Providers";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
+  display: "swap",
+  weight: ["400", "500", "600", "700"],
   variable: "--font-montserrat",
 });
 
