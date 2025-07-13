@@ -155,7 +155,7 @@ const Settings = () => {
         orientation="vertical"
         className="flex flex-col md:flex-row"
       >
-        <TabsList className="flex flex-row md:flex-col md:w-48 md:h-auto justify-start p-2 space-x-2 md:space-x-0 md:space-y-2 bg-gray-100 rounded-lg">
+        <TabsList className="flex flex-col justify-start p-2 space-x-2 bg-gray-100 rounded-lg h-full md:w-48 md:h-auto md:space-x-0 md:space-y-2">
           <TabsTrigger
             value="profile"
             className="flex items-center justify-start w-full px-4 py-2"
@@ -179,7 +179,7 @@ const Settings = () => {
           </TabsTrigger>
           <TabsTrigger
             value="preferences"
-            className="flex items-center justify-start w-full px-4 py-2"
+            className="flex items-center justify-start w-full p-2 md:text-xs"
           >
             <TrendingUp className="h-5 w-5 mr-2" />
             Investment Preferences

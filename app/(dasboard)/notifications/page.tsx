@@ -1,24 +1,5 @@
 // "use client";
 // import React from "react";
-// import useAuth from "@/hooks/useAuth";
-// import DashHead from "@/app/(dasboard)/components/DashHead";
-
-// const Notifications = () => {
-//   const { user } = useAuth();
-
-//   if (!user) {
-//     return null;
-//   }
-
-//   return (
-//     <>
-//       <DashHead title="Notfications" />
-//     </>
-//   );
-// };
-
-// export default Notifications;
-
 "use client";
 
 import { useState, useMemo } from "react";
@@ -229,7 +210,7 @@ const Notifications = () => {
       <DashHead title="Notifications" />
 
       {/* Page Header */}
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col items-start justify-between md:flex-row md:items-center">
         <div>
           <h1 className="text-2xl font-bold text-gray-900 flex items-center space-x-2">
             <span>Notifications</span>
@@ -241,10 +222,11 @@ const Notifications = () => {
             Stay updated on your account activity and investment events.
           </p>
         </div>
+
         <Button
           variant="outline"
           onClick={() => setIsSettingsOpen(true)}
-          className="flex items-center space-x-2 bg-transparent"
+          className="flex items-center space-x-2 bg-transparent mt-3 md:mt-0"
         >
           <Settings className="h-4 w-4" />
           <span>Settings</span>
@@ -257,8 +239,8 @@ const Notifications = () => {
         onValueChange={setActiveTab}
         className="space-y-6"
       >
-        <div className="flex items-center justify-between">
-          <TabsList className="grid grid-cols-5 w-fit">
+        <div className="flex flex-col items-start justify-between md:flex-row md:items-center">
+          <TabsList className="flex flex-col justify-between h-full gap-4 w-fit md:gap-0 md:flex-row">
             <TabsTrigger value="all" className="flex items-center space-x-2">
               <Inbox className="h-4 w-4" />
               <span>All</span>
@@ -295,7 +277,7 @@ const Notifications = () => {
               variant="outline"
               size="sm"
               onClick={markAllAsRead}
-              className="flex items-center space-x-2 bg-transparent"
+              className="flex items-center space-x-2 bg-transparent mt-3 md:mt-0"
             >
               <CheckCircle className="h-4 w-4" />
               <span>Mark All as Read</span>

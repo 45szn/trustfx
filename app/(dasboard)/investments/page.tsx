@@ -283,13 +283,13 @@ const Investments = () => {
         onValueChange={setActiveTab}
         className="space-y-6"
       >
-        <TabsList className="grid w-full grid-cols-3">
-          <TabsTrigger value="plans">Investment Plans</TabsTrigger>
-          <TabsTrigger value="active">
+        <TabsList className="flex justify-between w-full md:flex-col">
+          <TabsTrigger value="plans" className="text-xs md:text-sm">Investment Plans</TabsTrigger>
+          <TabsTrigger value="active" className="text-xs md:text-sm">
             My Investments (
             {activeInvestments.filter((inv) => inv.status === "active").length})
           </TabsTrigger>
-          <TabsTrigger value="history">History</TabsTrigger>
+          <TabsTrigger value="history" className="text-xs md:text-sm">History</TabsTrigger>
         </TabsList>
 
         {/* Investment Plans Tab */}
