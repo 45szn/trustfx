@@ -179,7 +179,7 @@ const Settings = () => {
           </TabsTrigger>
           <TabsTrigger
             value="preferences"
-            className="flex items-center justify-start w-full p-2 md:text-xs"
+            className="flex items-center justify-start w-full p-np2 md:text-xs"
           >
             <TrendingUp className="h-5 w-5 mr-2" />
             Investment Preferences

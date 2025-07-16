@@ -72,7 +72,7 @@ export default function Register() {
       toast({
         description: "Account registered successfully!",
       });
-      router.push("/Dashboard");
+      router.push("/dashboard");
 
       return user;
 
