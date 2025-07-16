@@ -14,7 +14,7 @@ export const createInvestment = async (data: unknown) => {
   return docRef.id
 }
 
-export const getUserInvestments = async (uid: unknown) => {
+export const getUserInvestments = async (uid: string) => {
   const q = query(collection(db, "investments"), where("userId", "==", uid))
   const snapshot = await getDocs(q)
   return snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }))

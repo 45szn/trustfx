@@ -2,8 +2,8 @@
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-// import { Label } from "@/components/ui/label";
-// import Link from "next/link";
+import { db } from "@/lib/firebase";
+import { doc, setDoc, serverTimestamp } from "firebase/firestore";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -55,24 +55,29 @@ export default function Register() {
   const onSubmit = async (data: RegisterFormValues) => {
     setServerError(null);
     try {
-      // Create user in Firebase
+      // Create user in Firebase Auth
       const userCredential = await createUserWithEmailAndPassword(
         auth,
         data.email,
         data.password,
       );
       const user = userCredential.user;
-      console.log("User registered:", user);
 
-      // Update the user's profile with the display name
+      // Update the user's display name
       await updateProfile(user, {
-        displayName: data.name, // Correctly reference `data.name`
+        displayName: data.name,
+      });
+
+      // ✅ Save user data in Firestore
+      await setDoc(doc(db, "users", user.uid), {
+        uid: user.uid,
+        name: data.name,
+        email: data.email,
+        createdAt: serverTimestamp(),
       });
 
       reset();
-      toast({
-        description: "Account registered successfully!",
-      });
+      toast({ description: "Account registered successfully!" });
       router.push("/dashboard");
 
       return user;

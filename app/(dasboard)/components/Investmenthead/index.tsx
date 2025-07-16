@@ -188,7 +188,7 @@ export function InvestmentModal({
           </div>
 
           {/* Terms Agreement */}
-          <div className="flex items-start space-x-2">
+          <div className="flex items-center space-x-2">
             <Checkbox
               id="terms"
               checked={agreedToTerms}
