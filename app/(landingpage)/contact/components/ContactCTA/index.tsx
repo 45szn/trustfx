@@ -6,7 +6,7 @@ import { Card, CardContent } from "../../../../../components/ui/card";
 // import { Button } from "@/components/ui/button";
 import { Button } from "../../../../../components/ui/button";
 import { HelpCircle, ArrowRight, MessageCircle, Phone } from "lucide-react";
-import Link from "next/link";
+import LinkWithLoader from "@/components/LinkWithLoader";
 
 export default function ContactCTA() {
   const [isVisible, setIsVisible] = useState(false);
@@ -56,15 +56,15 @@ export default function ContactCTA() {
 
                 {/* CTA Buttons */}
                 <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
-                  <Link href="/faq">
+                  <LinkWithLoader href="/faq">
                     <Button className="bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white font-semibold px-8 py-4 text-lg transition-all duration-300 hover:scale-105 group">
                       Check FAQ Section
                       <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
                     </Button>
-                  </Link>
+                  </LinkWithLoader>
                   <Button
                     variant="outline"
-                    className="border-2 border-white/30 text-white hover:bg-white/10 backdrop-blur-sm px-8 py-4 text-lg transition-all duration-300"
+                    className="border-2 border-white/30 text-gray-900 hover:bg-white/10 backdrop-blur-sm px-8 py-4 text-lg transition-all duration-300"
                     onClick={() =>
                       window.scrollTo({ top: 0, behavior: "smooth" })
                     }
@@ -77,7 +77,7 @@ export default function ContactCTA() {
                 <div className="grid md:grid-cols-2 gap-4 max-w-md mx-auto">
                   <Button
                     variant="outline"
-                    className="border border-white/30 text-white hover:bg-white/10 backdrop-blur-sm transition-all duration-300 group"
+                    className="border border-white/30 text-gray-900 hover:bg-white/10 backdrop-blur-sm transition-all duration-300 group"
                     onClick={() => window.open("tel:+15551234567")}
                   >
                     <Phone className="w-4 h-4 mr-2 group-hover:scale-110 transition-transform" />
@@ -85,7 +85,7 @@ export default function ContactCTA() {
                   </Button>
                   <Button
                     variant="outline"
-                    className="border border-white/30 text-white hover:bg-white/10 backdrop-blur-sm transition-all duration-300 group"
+                    className="border border-white/30 text-gray-900 hover:bg-white/10 backdrop-blur-sm transition-all duration-300 group"
                     onClick={() => window.open("mailto:support@trustfx.com")}
                   >
                     <MessageCircle className="w-4 h-4 mr-2 group-hover:scale-110 transition-transform" />

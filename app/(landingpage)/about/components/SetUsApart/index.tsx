@@ -4,7 +4,7 @@ import { useEffect, useState, useRef } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { BarChart3, Shield, Handshake, CheckCircle } from "lucide-react";
-import Link from "next/link";
+import LinkWithLoader from "@/components/LinkWithLoader";
 
 export default function SetUsApart() {
   const [visibleCards, setVisibleCards] = useState<number[]>([]);
@@ -161,11 +161,11 @@ export default function SetUsApart() {
                 secure, transparent, and profitable investing.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Link href={"/register"}>
+                <LinkWithLoader href={"/register"}>
                   <button className="px-8 py-4 bg-white text-blue-600 font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
                     Start Investing Today
                   </button>
-                </Link>
+                </LinkWithLoader>
 
                 <button className="px-8 py-4 border-2 border-white text-white font-semibold rounded-xl hover:bg-white/10 transition-all duration-300">
                   Schedule a Consultation

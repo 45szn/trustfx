@@ -79,8 +79,8 @@ function ResetPasswordForm() {
   return (
     <div className="space-y-6">
       <div className="space-y-2">
-        <h1 className="text-3xl text-gray-100 font-bold">Reset Password</h1>
-        <p className="text-gray-200 dark:text-gray-400">
+        <h1 className="text-3xl text-gray-900 font-bold">Reset Password</h1>
+        <p className="text-gray-900 dark:text-gray-400">
           Enter your new password below
         </p>
       </div>
@@ -95,13 +95,13 @@ function ResetPasswordForm() {
               type={passwordVisible ? "password" : "text"}
               {...register("newPassword")}
               className={`${
-                errors.newPassword ? "border-red-500" : "border-gray-300"
+                errors.newPassword ? "border-red-500" : "border-gray-900"
               } focus:ring-0 focus:border-b border-b rounded-none text-white`}
             />
             <button
               type="button"
               onClick={() => setPasswordVisible(!passwordVisible)}
-              className="absolute inset-y-0 right-0 flex items-center px-3 text-gray-500 hover:text-gray-700"
+              className="absolute inset-y-0 right-0 flex items-center px-3 text-gray-900 hover:text-gray-600"
               tabIndex={-1}
             >
               {passwordVisible ? (
@@ -125,13 +125,13 @@ function ResetPasswordForm() {
               {...register("confirmPassword")}
               type={passwordVisible ? "password" : "text"}
               className={`${
-                errors.confirmPassword ? "border-red-500" : "border-gray-300"
+                errors.confirmPassword ? "border-red-500" : "border-gray-900"
               } focus:ring-0 focus:border-b border-b rounded-none text-white`}
             />
             <button
               type="button"
               onClick={() => setPasswordVisible(!passwordVisible)}
-              className="absolute inset-y-0 right-0 flex items-center px-3 text-gray-500 hover:text-gray-700"
+              className="absolute inset-y-0 right-0 flex items-center px-3 text-gray-900 hover:text-gray-700"
               tabIndex={-1}
             >
               {passwordVisible ? (
@@ -156,7 +156,7 @@ function ResetPasswordForm() {
         )}
 
         <Button
-          className="w-full mt-16 bg-gray-100 text-[#161616] hover:bg-[#b0b0b0]"
+          className="w-full mt-16 bg-gray-900 text-[#ffffff] hover:bg-[#b0b0b0]"
           type="submit"
           disabled={isSubmitting}
         >
@@ -171,7 +171,7 @@ function ResetPasswordForm() {
         </Button>
       </form>
 
-      <div className="text-center text-sm text-gray-100">
+      <div className="text-center text-sm text-gray-900">
         Remember your password?{" "}
         <Link className="underline" href="/login">
           Login

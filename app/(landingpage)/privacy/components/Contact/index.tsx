@@ -4,7 +4,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Mail, Phone, MapPin, Shield, FileText, Clock } from "lucide-react";
-import Link from "next/link";
+import LinkWithLoader from "@/components/LinkWithLoader";
 
 export default function PrivacyContact() {
   return (
@@ -151,7 +151,7 @@ export default function PrivacyContact() {
             Additional Resources
           </h3>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/terms">
+            <LinkWithLoader href="/terms">
               <Button
                 variant="outline"
                 size="lg"
@@ -159,8 +159,8 @@ export default function PrivacyContact() {
               >
                 Terms of Service
               </Button>
-            </Link>
-            <Link href="/security">
+            </LinkWithLoader>
+            <LinkWithLoader href="/security">
               <Button
                 variant="outline"
                 size="lg"
@@ -168,8 +168,8 @@ export default function PrivacyContact() {
               >
                 Security Information
               </Button>
-            </Link>
-            <Link href="/help">
+            </LinkWithLoader>
+            <LinkWithLoader href="/helpcenter">
               <Button
                 variant="outline"
                 size="lg"
@@ -177,7 +177,7 @@ export default function PrivacyContact() {
               >
                 Help Center
               </Button>
-            </Link>
+            </LinkWithLoader>
           </div>
         </div>
       </div>

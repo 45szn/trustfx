@@ -1,10 +1,10 @@
 // file: components/help/FAQSupport.tsx
 "use client";
 
-import Link from "next/link";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { MessageCircle, Mail, Phone } from "lucide-react";
+import LinkWithLoader from "@/components/LinkWithLoader";
 
 export default function FAQSupport() {
   return (
@@ -24,14 +24,14 @@ export default function FAQSupport() {
         </p>
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Link href="/contact#livechat">
+          <LinkWithLoader href="/contact#livechat">
             <Button className="bg-gradient-to-r from-blue-500 to-purple-500 text-white font-semibold px-8 py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 group">
               <MessageCircle className="w-5 h-5 mr-2 group-hover:scale-110 transition-transform" />
               Live Chat Support
             </Button>
-          </Link>
+          </LinkWithLoader>
 
-          <Link href="/contact#emailsupport">
+          <LinkWithLoader href="/contact#emailsupport">
             <Button
               variant="outline"
               className="border-2 border-gray-300 text-gray-700 font-semibold px-8 py-3 rounded-xl hover:border-gray-400 hover:bg-gray-50 transition-all duration-300 group"
@@ -39,9 +39,9 @@ export default function FAQSupport() {
               <Mail className="w-5 h-5 mr-2 group-hover:scale-110 transition-transform" />
               Email Support
             </Button>
-          </Link>
+          </LinkWithLoader>
 
-          <Link href="/contact#callus">
+          <LinkWithLoader href="/contact#callus">
             <Button
               variant="outline"
               className="border-2 border-gray-300 text-gray-700 font-semibold px-8 py-3 rounded-xl hover:border-gray-400 hover:bg-gray-50 transition-all duration-300 group"
@@ -49,7 +49,7 @@ export default function FAQSupport() {
               <Phone className="w-5 h-5 mr-2 group-hover:scale-110 transition-transform" />
               Call Us
             </Button>
-          </Link>
+          </LinkWithLoader>
         </div>
       </CardContent>
     </Card>

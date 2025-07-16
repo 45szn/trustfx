@@ -4,9 +4,9 @@ import Navbar from "@/components/Navbar";
 import Image from "next/image";
 import buildings4 from "@/public/buildings4.jpg";
 import AnimatedText from "../../components/AnimatedText";
-import Link from "next/link";
 import { Button } from "../../components/ui/button";
 import Footer from "../../components/Footer";
+import LinkWithLoader from "@/components/LinkWithLoader";
 
 export default function LandingPageLayout({
   children,
@@ -40,11 +40,11 @@ export default function LandingPageLayout({
                   "RESULTS.",
                   <br key="br" />,
                   <div key={"link"}>
-                    <Link href={"/register"}>
+                    <LinkWithLoader href={"/register"}>
                       <Button className="bg-white w-80 text-gray-900 hover:text-gray-50 hover:bg-gray-800 font-semibold transition-all mt-8 py-8 text-xl lg:mt-16">
                         Get Started
                       </Button>
-                    </Link>
+                    </LinkWithLoader>
                   </div>,
                 ]}
                 className="text-5xl font-bold leading-[5rem] text-white lg:text-7xl"

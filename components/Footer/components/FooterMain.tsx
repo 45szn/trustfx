@@ -1,8 +1,8 @@
 // file: components/layout/footer/FooterMain.tsx
 "use client";
 
-import Link from "next/link";
 import { MapPin, Phone, Mail, Shield, Award, Clock, TrendingUp } from "lucide-react";
+import LinkWithLoader from "@/components/LinkWithLoader";
 
 export default function FooterMain() {
   return (
@@ -67,12 +67,12 @@ export default function FooterMain() {
               { href: "/plans#fixedreturn", label: "Fixed Return Plan" },
             ].map(({ href, label }) => (
               <li key={label}>
-                <Link
+                <LinkWithLoader
                   href={href}
                   className="text-gray-300 hover:text-blue-400 transition-colors"
                 >
                   {label}
-                </Link>
+                </LinkWithLoader>
               </li>
             ))}
           </ul>
@@ -84,12 +84,12 @@ export default function FooterMain() {
           <ul className="space-y-3">
             {["About", "How It Works", "Security"].map((label) => (
               <li key={label}>
-                <Link
+                <LinkWithLoader
                   href={`/${label.toLowerCase().replace(/\s+/g, "")}`}
                   className="text-gray-300 hover:text-blue-400 transition-colors"
                 >
                   {label}
-                </Link>
+                </LinkWithLoader>
               </li>
             ))}
           </ul>
@@ -107,12 +107,12 @@ export default function FooterMain() {
               { href: "/webinars", label: "Webinars" },
             ].map(({ href, label }) => (
               <li key={label}>
-                <Link
+                <LinkWithLoader
                   href={href}
                   className="text-gray-300 hover:text-blue-400 transition-colors"
                 >
                   {label}
-                </Link>
+                </LinkWithLoader>
               </li>
             ))}
           </ul>

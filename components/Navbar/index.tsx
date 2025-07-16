@@ -1,9 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
+// import Link from "next/link";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import LinkWithLoader from "../LinkWithLoader";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -26,12 +27,12 @@ export default function Navbar() {
         <div className="flex container mx-auto items-center justify-between h-16">
           {/* Logo */}
           <div className="flex-shrink-0">
-            <Link
+            <LinkWithLoader
               href="/"
               className="text-[#161616] font-bold text-xl tracking-wider transition-colors duration-300 lg:text-2xl"
             >
               TrustFx
-            </Link>
+            </LinkWithLoader>
           </div>
 
           {/* Desktop Navigation */}
@@ -39,13 +40,13 @@ export default function Navbar() {
             <div className="ml-10 flex items-baseline space-x-8">
               {navItems.map((item, index) =>
                 item.name === "Register" ? (
-                  <Link key={item.name} href={item.href}>
+                  <LinkWithLoader key={item.name} href={item.href}>
                     <Button className="bg-white text-gray-900 hover:text-gray-50 hover:bg-gray-800 font-semibold  transition-all">
                       {item.name}
                     </Button>
-                  </Link>
+                  </LinkWithLoader>
                 ) : (
-                  <Link
+                  <LinkWithLoader
                     key={item.name}
                     href={item.href}
                     className="relative px-3 py-2 text-sm text-[#161616] font-medium transition-all duration-300 group lg:text-base"
@@ -53,7 +54,7 @@ export default function Navbar() {
                   >
                     {item.name}
                     <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#161616] transition-all duration-300 group-hover:w-full"></span>
-                  </Link>
+                  </LinkWithLoader>
                 )
               )}
             </div>
@@ -93,7 +94,7 @@ export default function Navbar() {
         <div className="px-2 pt-2 pb-3 space-y-2 sm:px-3 border-t border-gray-800">
           {navItems.map((item, index) =>
             item.name === "Register" ? (
-              <Link
+              <LinkWithLoader
                 key={item.name}
                 href={item.href}
                 onClick={() => setIsOpen(false)}
@@ -105,9 +106,9 @@ export default function Navbar() {
                 style={{ transitionDelay: isOpen ? `${index * 100}ms` : "0ms" }}
               >
                 {item.name}
-              </Link>
+              </LinkWithLoader>
             ) : (
-              <Link
+              <LinkWithLoader
                 key={item.name}
                 href={item.href}
                 onClick={() => setIsOpen(false)}
@@ -119,7 +120,7 @@ export default function Navbar() {
                 style={{ transitionDelay: isOpen ? `${index * 100}ms` : "0ms" }}
               >
                 {item.name}
-              </Link>
+              </LinkWithLoader>
             )
           )}
         </div>

@@ -3,7 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 // import { Label } from "@/components/ui/label";
-import Link from "next/link";
+// import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -14,6 +14,7 @@ import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth } from "@/lib/firebase";
 import { useRouter } from "next/navigation";
 import { Loader, Eye, EyeOff } from "lucide-react";
+import LinkWithLoader from "@/components/LinkWithLoader";
 
 const registerSchema = z
   .object({
@@ -86,8 +87,8 @@ export default function Register() {
   return (
     <div className="space-y-6">
       <div className="space-y-2">
-        <h1 className="text-3xl text-gray-100 font-bold">Create an account</h1>
-        <p className="text-gray-200 dark:text-gray-400">
+        <h1 className="text-3xl text-gray-900 font-bold">Create an account</h1>
+        <p className="text-gray-900 dark:text-gray-400">
           Enter your information below to create your account
         </p>
       </div>
@@ -100,8 +101,8 @@ export default function Register() {
             {...register("name")}
             placeholder="John Doe"
             className={`${
-              errors.name ? "border-red-500" : "border-gray-300"
-            } focus:ring-0 focus:border-b border-b rounded-none text-white`}
+              errors.name ? "border-red-500" : "border-gray-900"
+            } focus:ring-0 focus:border-b border-b rounded-none text-gray-900`}
           />
           {errors.name && (
             <p className="text-red-500 text-sm">{errors.name.message}</p>
@@ -116,8 +117,8 @@ export default function Register() {
             placeholder="m@example.com"
             type="email"
             className={`${
-              errors.email ? "border-red-500" : "border-gray-300"
-            } focus:ring-0 focus:border-b border-b rounded-none text-white`}
+              errors.email ? "border-red-500" : "border-gray-900"
+            } focus:ring-0 focus:border-b border-b rounded-none text-gray-900`}
           />
           {errors.email && (
             <p className="text-red-500 text-sm">{errors.email.message}</p>
@@ -133,8 +134,8 @@ export default function Register() {
               {...register("password")}
               placeholder="Enter your password"
               className={`${
-                errors.password ? "border-red-500" : "border-gray-300"
-              } focus:ring-0 focus:border-b border-b rounded-none text-white`}
+                errors.password ? "border-red-500" : "border-gray-900"
+              } focus:ring-0 focus:border-b border-b rounded-none text-gray-900`}
             />
             <button
               type="button"
@@ -163,8 +164,8 @@ export default function Register() {
               placeholder="Confirm your password"
               type={passwordVisible ? "password" : "true"}
               className={`${
-                errors.confirmPassword ? "border-red-500" : "border-gray-300"
-              } focus:ring-0 focus:border-b border-b rounded-none text-white`}
+                errors.confirmPassword ? "border-red-500" : "border-gray-900"
+              } focus:ring-0 focus:border-b border-b rounded-none text-gray-900`}
             />
             <button
               type="button"
@@ -193,7 +194,7 @@ export default function Register() {
         )}
 
         <Button
-          className="w-full mt-10 bg-gray-100 text-[#161616] hover:bg-[#b0b0b0]"
+          className="w-full mt-10 bg-gray-900 text-[#ffffff] hover:bg-[#808080]"
           type="submit"
           disabled={isSubmitting}
         >
@@ -208,11 +209,11 @@ export default function Register() {
         </Button>
       </form>
 
-      <div className="text-center text-sm text-gray-100">
+      <div className="text-center text-sm text-gray-900 md:text-base">
         Already have an account?{" "}
-        <Link className="underline" href="/login">
+        <LinkWithLoader className="underline" href="/login">
           Login
-        </Link>
+        </LinkWithLoader>
       </div>
     </div>
   );
