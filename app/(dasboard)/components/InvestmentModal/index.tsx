@@ -26,6 +26,9 @@ import {
   Shield,
   AlertCircle,
 } from "lucide-react";
+import { auth, db } from "@/lib/firebase";
+import { doc, updateDoc, arrayUnion, getDoc } from "firebase/firestore";
+import { useToast } from "@/hooks/use-toast";
 
 interface InvestmentPlan {
   id: string;
@@ -37,6 +40,7 @@ interface InvestmentPlan {
   riskLevel: "low" | "medium" | "high";
   features: string[];
   description: string;
+  renewable: boolean;
 }
 
 interface InvestmentModalProps {
@@ -44,6 +48,7 @@ interface InvestmentModalProps {
   onClose: () => void;
   plan: InvestmentPlan | null;
   userBalance: number;
+  setUserBalance: (value: number) => void;
 }
 
 export function InvestmentModal({
@@ -51,11 +56,13 @@ export function InvestmentModal({
   onClose,
   plan,
   userBalance,
+  setUserBalance,
 }: InvestmentModalProps) {
   const [amount, setAmount] = useState("");
   const [fundingSource, setFundingSource] = useState("");
   const [agreedToTerms, setAgreedToTerms] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const { toast } = useToast();
 
   if (!plan) return null;
 
@@ -69,11 +76,61 @@ export function InvestmentModal({
     if (!canSubmit) return;
 
     setIsSubmitting(true);
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 2000));
-    setIsSubmitting(false);
-    onClose();
-    // You would handle the actual investment logic here
+
+    try {
+      const user = auth.currentUser;
+      if (!user) throw new Error("User not authenticated");
+
+      const userRef = doc(db, "users", user.uid);
+      const userSnap = await getDoc(userRef);
+      if (!userSnap.exists()) throw new Error("User data not found");
+
+      const userData = userSnap.data();
+      const currentBalance = userData?.balance || 0;
+      if (investmentAmount > currentBalance) {
+        throw new Error("Insufficient balance");
+      }
+
+      const investment = {
+        id: crypto.randomUUID(),
+        amount: investmentAmount,
+        duration: plan.duration,
+        plan: plan.name,
+        renewable: plan.renewable,
+        return: expectedPayout,
+        startedAt: new Date().toISOString(),
+        status: "active",
+      };
+
+      // Update user balance and push new investment
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const updateData: Record<string, any> = {
+        investments: arrayUnion(investment),
+      };
+
+      if (fundingSource === "wallet") {
+        updateData.balance = currentBalance - investmentAmount;
+        const newBalance = updateData.balance;
+        setUserBalance(newBalance);
+      }
+
+      toast({
+        description: `You've invested ${investmentAmount} successfully!`,
+      });
+
+      await updateDoc(userRef, updateData);
+      // Reset form
+      setAmount("");
+      setFundingSource("");
+      setAgreedToTerms(false);
+      onClose();
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
+      console.error("Investment error:", error.message);
+      alert(error.message || "Failed to invest");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const getRiskBadge = (risk: string) => {
@@ -198,7 +255,11 @@ export function InvestmentModal({
             />
             <Label htmlFor="terms" className="text-sm leading-relaxed">
               I agree to the{" "}
-              <a href="#" className="text-blue-600 hover:underline">
+              <a
+                href="/termsofservices"
+                target="_blank"
+                className="text-blue-600 hover:underline"
+              >
                 Terms and Conditions
               </a>{" "}
               and understand the risks associated with this investment. I

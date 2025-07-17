@@ -9,24 +9,31 @@ import {
   Star,
   TrendingUp,
 } from "lucide-react";
-import React, { useState } from "react";
-import {
-  activeInvestments,
-  investmentPlans,
-  userBalance,
-} from "../../investment";
+import React, { useEffect, useState } from "react";
+import { investmentPlans } from "../../investment";
+import { useUserInvestments } from "@/hooks/useUserInvestments";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { InvestmentModal } from "@/app/(dasboard)/components/Investmenthead";
+import { InvestmentModal } from "@/app/(dasboard)/components/InvestmentModal";
 import { Badge } from "@/components/ui/badge";
 
 export const Plans = () => {
+  const { balance, activeInvestments, loading } = useUserInvestments();
   const [selectedPlan, setSelectedPlan] = useState<
     (typeof investmentPlans)[0] | null
   >(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [activeTab, setActiveTab] = useState("plans");
+  const [userBalance, setUserBalance] = useState<number>(0);
+
+  useEffect(() => {
+    if (balance !== undefined && balance !== null) {
+      setUserBalance(balance);
+    }
+  }, [balance]);
+
+  console.log("userBalance", userBalance);
 
   const handleStartInvestment = (plan: (typeof investmentPlans)[0]) => {
     setSelectedPlan(plan);
@@ -36,6 +43,7 @@ export const Plans = () => {
   const hasActiveInvestments =
     activeInvestments.filter((inv) => inv.status === "active").length > 0;
 
+  if (loading) return <p>Loading...</p>;
   return (
     <>
       <TabsContent value="plans" className="space-y-6">
@@ -43,7 +51,9 @@ export const Plans = () => {
           {investmentPlans.map((plan) => (
             <Card
               key={plan.id}
-              className={`relative hover:shadow-lg transition-shadow ${plan.popular ? "ring-2 ring-blue-500" : ""}`}
+              className={`relative hover:shadow-lg transition-shadow ${
+                plan.popular ? "ring-2 ring-blue-500" : ""
+              }`}
             >
               {plan.popular && (
                 <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
@@ -128,9 +138,9 @@ export const Plans = () => {
                 <Button
                   onClick={() => handleStartInvestment(plan)}
                   className="w-full"
-                  disabled={userBalance < plan.minAmount}
+                  disabled={(userBalance ?? 0) < plan.minAmount}
                 >
-                  {userBalance < plan.minAmount ? (
+                  {(userBalance ?? 0) < plan.minAmount ? (
                     <>
                       <AlertCircle className="h-4 w-4 mr-2" />
                       Insufficient Balance
@@ -176,7 +186,8 @@ export const Plans = () => {
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         plan={selectedPlan}
-        userBalance={userBalance}
+        userBalance={userBalance ?? 0}
+        setUserBalance={setUserBalance}
       />
     </>
   );

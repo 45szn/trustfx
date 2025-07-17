@@ -19,6 +19,7 @@ export const investmentPlans = [
     description:
       "Perfect for beginners looking to start their investment journey with minimal risk.",
     popular: false,
+    renewable: true,
   },
   {
     id: "growth",
@@ -37,6 +38,7 @@ export const investmentPlans = [
     description:
       "Ideal for investors seeking steady growth with moderate risk exposure.",
     popular: true,
+    renewable: true,
   },
   {
     id: "premium",
@@ -55,6 +57,7 @@ export const investmentPlans = [
     description:
       "For experienced investors looking for higher returns with professional management.",
     popular: false,
+    renewable: true,
   },
   {
     id: "elite",
@@ -73,6 +76,7 @@ export const investmentPlans = [
     description:
       "Our highest tier plan for serious investors seeking maximum growth potential.",
     popular: false,
+    renewable: true,
   },
 ];
 
