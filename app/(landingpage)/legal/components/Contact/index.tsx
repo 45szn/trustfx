@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { Mail, Phone, MapPin, Clock, FileText, Shield } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import LinkWithLoader from "@/components/LinkWithLoader";
 
 export function LegalContact() {
   return (
@@ -133,29 +134,35 @@ export function LegalContact() {
               </h3>
 
               <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                <Button
-                  variant="outline"
-                  className="h-auto p-4 flex flex-col items-center"
-                >
-                  <FileText className="h-6 w-6 mb-2 text-blue-600" />
-                  <span className="text-sm">Terms of Service</span>
-                </Button>
+                <LinkWithLoader href={"/termsofservices"}>
+                  <Button
+                    variant="outline"
+                    className="h-auto p-4 flex flex-col items-center"
+                  >
+                    <FileText className="h-6 w-6 mb-2 text-blue-600" />
+                    <span className="text-sm">Terms of Service</span>
+                  </Button>
+                </LinkWithLoader>
 
-                <Button
-                  variant="outline"
-                  className="h-auto p-4 flex flex-col items-center"
-                >
-                  <Shield className="h-6 w-6 mb-2 text-green-600" />
-                  <span className="text-sm">Privacy Policy</span>
-                </Button>
+                <LinkWithLoader href="/privacy">
+                  <Button
+                    variant="outline"
+                    className="h-auto p-4 flex flex-col items-center"
+                  >
+                    <Shield className="h-6 w-6 mb-2 text-green-600" />
+                    <span className="text-sm">Privacy Policy</span>
+                  </Button>
+                </LinkWithLoader>
 
-                <Button
-                  variant="outline"
-                  className="h-auto p-4 flex flex-col items-center"
-                >
-                  <Mail className="h-6 w-6 mb-2 text-purple-600" />
-                  <span className="text-sm">Data Request</span>
-                </Button>
+                <LinkWithLoader href="/#">
+                  <Button
+                    variant="outline"
+                    className="h-auto p-4 flex flex-col items-center"
+                  >
+                    <Mail className="h-6 w-6 mb-2 text-purple-600" />
+                    <span className="text-sm">Data Request</span>
+                  </Button>
+                </LinkWithLoader>
 
                 <Button
                   variant="outline"

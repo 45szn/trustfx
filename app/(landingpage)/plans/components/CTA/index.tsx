@@ -132,7 +132,7 @@ export default function PlansCTA() {
             </p>
             <Button
               variant="outline"
-              className="border-2 border-white/30 text-white hover:bg-white/10 backdrop-blur-sm transition-all duration-300"
+              className="border-2 border-white/30 text-gray-900 hover:bg-white backdrop-blur-sm transition-all duration-300"
             >
               Get Personalized Recommendations
             </Button>

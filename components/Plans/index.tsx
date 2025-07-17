@@ -9,8 +9,8 @@ import {
 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import useAuth from "@/hooks/useAuth";
-import Link from "next/link";
 import { plans } from "./plans";
+import LinkWithLoader from "../LinkWithLoader";
 
 const getRiskColor = (risk: string) => {
   switch (risk) {
@@ -34,7 +34,7 @@ export default function InvestmentPlans() {
   const { user, loading } = useAuth(); // get auth state
 
   const handleGetStarted = (planName: string) => {
-    if (loading) return; // optionally block routing until auth finishes
+    if (loading) return;
 
     const encodedPlan = encodeURIComponent(planName); // just in case
 
@@ -192,20 +192,20 @@ export default function InvestmentPlans() {
               timeline.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href={"/contact"}>
+              <LinkWithLoader href={"/contact"}>
                 <Button variant="outline" size="lg" className="font-semibold">
                   Schedule Consultation
                 </Button>
-              </Link>
+              </LinkWithLoader>
 
-              <Link href="/plans#compare">
+              <LinkWithLoader href="/plans#compare">
                 <Button
                   size="lg"
                   className="bg-gradient-to-r from-blue-500 to-purple-600 text-white font-semibold"
                 >
                   Compare All Plans
                 </Button>
-              </Link>
+              </LinkWithLoader>
             </div>
           </div>
         </div>

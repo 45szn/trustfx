@@ -2,7 +2,6 @@
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -12,6 +11,7 @@ import { useToast } from "@/hooks/use-toast";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { sendPasswordResetEmail } from "firebase/auth";
 import { auth } from "@/lib/firebase";
+import LinkWithLoader from "@/components/LinkWithLoader";
 
 const forgotPasswordSchema = z.object({
   email: z.string().email({ message: "Invalid email address" }),
@@ -65,8 +65,8 @@ export default function ForgotPasswordPage() {
   return (
     <div className="space-y-6">
       <div className="space-y-2">
-        <h1 className="text-3xl text-gray-100 font-bold">Forgot Password</h1>
-        <p className="text-gray-200 dark:text-gray-400">
+        <h1 className="text-3xl text-gray-900 font-bold">Forgot Password</h1>
+        <p className="text-gray-900 dark:text-gray-400">
           Enter your email address and we&apos;ll send you a link to reset your
           password.
         </p>
@@ -80,7 +80,7 @@ export default function ForgotPasswordPage() {
             placeholder="m@example.com"
             type="email"
             className={`${
-              errors.email ? "border-red-500" : "border-gray-300"
+              errors.email ? "border-red-500" : "border-gray-900"
             } focus:ring-0 focus:border-b border-b rounded-none text-white`}
           />
           {errors.email && (
@@ -95,7 +95,7 @@ export default function ForgotPasswordPage() {
         )}
 
         <Button
-          className="w-full mt-10 bg-gray-100 text-[#161616] hover:bg-[#b0b0b0]"
+          className="w-full mt-10 bg-gray-900 text-[#ffffff] hover:bg-[#b0b0b0]"
           type="submit"
           disabled={isSubmitting}
         >
@@ -109,11 +109,11 @@ export default function ForgotPasswordPage() {
           )}
         </Button>
       </form>
-      <div className="text-center text-sm text-gray-100">
+      <div className="text-center text-sm text-gray-900">
         Remember your password?{" "}
-        <Link className="underline" href="/login">
+        <LinkWithLoader className="underline" href="/login">
           Login
-        </Link>
+        </LinkWithLoader>
       </div>
     </div>
   );

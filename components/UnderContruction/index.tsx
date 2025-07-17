@@ -6,8 +6,8 @@ import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Construction, Clock, ArrowLeft, Mail, Bell } from "lucide-react"
-import Link from "next/link"
 import { useState } from "react"
+import LinkWithLoader from "../LinkWithLoader"
 
 interface UnderConstructionProps {
   pageName: string
@@ -147,7 +147,7 @@ export default function UnderConstruction({
         {/* Navigation Options */}
         <div className="text-center space-y-6">
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/">
+            <LinkWithLoader href="/">
               <Button
                 variant="outline"
                 size="lg"
@@ -156,18 +156,18 @@ export default function UnderConstruction({
                 <ArrowLeft className="w-5 h-5" />
                 Back to Home
               </Button>
-            </Link>
+            </LinkWithLoader>
 
-            <Link href="/help">
+            <LinkWithLoader href="/helpcenter">
               <Button
                 size="lg"
                 className="bg-gradient-to-r from-blue-500 to-purple-500 text-white font-semibold hover:opacity-90 transition-opacity"
               >
                 Visit Help Center
               </Button>
-            </Link>
+            </LinkWithLoader>
 
-            <Link href="/contact">
+            <LinkWithLoader href="/contact">
               <Button
                 variant="outline"
                 size="lg"
@@ -176,7 +176,7 @@ export default function UnderConstruction({
                 <Mail className="w-5 h-5" />
                 Contact Support
               </Button>
-            </Link>
+            </LinkWithLoader>
           </div>
 
           <p className="text-sm text-gray-500 max-w-2xl mx-auto">

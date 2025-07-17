@@ -69,8 +69,8 @@ export default function Login() {
   return (
     <div className="space-y-6">
       <div className="space-y-2">
-        <h1 className="text-3xl text-gray-100 font-bold">Login</h1>
-        <p className="text-gray-200 dark:text-gray-400">
+        <h1 className="text-3xl text-gray-900 font-bold">Login</h1>
+        <p className="text-gray-900 dark:text-gray-400">
           Enter your details below to login to your account.
         </p>
       </div>
@@ -84,8 +84,8 @@ export default function Login() {
             {...register("email")}
             placeholder="Email"
             className={`${
-              errors.email ? "border-red-500" : "border-gray-300"
-            } focus:ring-0 focus:border-b border-b rounded-none text-white`}
+              errors.email ? "border-red-500" : "border-gray-900"
+            } focus:ring-0 focus:border-b border-b rounded-none text-gray-900`}
           />
           {errors.email && (
             <p className="text-sm text-red-500">{errors.email.message}</p>
@@ -101,13 +101,13 @@ export default function Login() {
               {...register("password")}
               placeholder="Password"
               className={`${
-                errors.password ? "border-red-500" : "border-gray-300"
-              } focus:ring-0 focus:border-b border-b rounded-none text-white`}
+                errors.password ? "border-red-500" : "border-gray-900"
+              } focus:ring-0 focus:border-b border-b rounded-none text-gray-900`}
             />
             <button
               type="button"
               onClick={() => setPasswordVisible(!passwordVisible)}
-              className="absolute inset-y-0 right-0 flex items-center px-3 text-gray-500 hover:text-gray-700"
+              className="absolute inset-y-0 right-0 flex items-center px-3 text-gray-900 hover:text-gray-600"
               tabIndex={-1}
             >
               {passwordVisible ? (
@@ -130,7 +130,7 @@ export default function Login() {
 
         <Button
           type="submit"
-          className="w-full mt-10 bg-gray-100 text-[#161616] hover:bg-[#b0b0b0]"
+          className="w-full mt-10 bg-gray-900 text-[#ffffff] hover:bg-[#b0b0b0]"
           disabled={isSubmitting}
         >
           {isSubmitting ? (
@@ -143,13 +143,13 @@ export default function Login() {
         </Button>
       </form>
 
-      <div className="text-center text-sm">
-        <Link className="underline text-gray-100" href="/forgotPassword">
+      <div className="text-center text-sm lg:text-base">
+        <Link className="underline text-gray-900" href="/forgotPassword">
           Forgot password?
         </Link>
       </div>
 
-      <div className="text-center text-sm text-gray-100">
+      <div className="text-center text-sm lg:text-base text-gray-900">
         Don&apos;t have an account?{" "}
         <Link className="underline" href="/register">
           Register

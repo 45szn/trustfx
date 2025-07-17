@@ -13,11 +13,11 @@ import {
   Lock,
   CheckCircle,
 } from "lucide-react";
-import Link from "next/link";
 import InvestmentProcess from "./components/InvestmentProcess";
 import { Card, CardContent } from "@/components/ui/card";
 import SecurityProcess from "./components/SecurityProcess";
 import FAQSection from "@/components/FAQs";
+import LinkWithLoader from "@/components/LinkWithLoader";
 
 const features = [
   {
@@ -86,7 +86,7 @@ export default function HowItWorksHero() {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-            <Link href="/register">
+            <LinkWithLoader href="/register">
               <Button
                 size="lg"
                 className="bg-gradient-to-r from-blue-500 to-purple-500 text-white px-8 py-4 text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
@@ -94,7 +94,7 @@ export default function HowItWorksHero() {
                 Start Your Journey
                 <ArrowRight className="w-5 h-5 ml-2" />
               </Button>
-            </Link>
+            </LinkWithLoader>
 
             <Button
               variant="outline"
@@ -234,7 +234,7 @@ export default function HowItWorksHero() {
                     <div className="text-gray-600">Monthly Returns</div>
                   </div>
 
-                  <Link href="/register">
+                  <LinkWithLoader href="/register">
                     <Button
                       size="lg"
                       className="w-full bg-gradient-to-r from-blue-500 to-purple-500 text-white px-8 py-4 text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
@@ -242,7 +242,7 @@ export default function HowItWorksHero() {
                       Create Account Now
                       <ArrowRight className="w-5 h-5 ml-2" />
                     </Button>
-                  </Link>
+                  </LinkWithLoader>
 
                   <p className="text-sm text-gray-500 mt-4">
                     Account setup takes less than 3 minutes

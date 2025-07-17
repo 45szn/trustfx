@@ -27,6 +27,7 @@ import {
   DropdownMenuItem
 } from "@/components/ui/dropdown-menu";
 import useAuth from "@/hooks/useAuth";
+import LinkWithLoader from '../LinkWithLoader';
 
 const items = [
   {
@@ -84,10 +85,10 @@ export function AppSidebar() {
               {items.map((item) => (
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton asChild className='text-base text-gray-800 h-10 hover:bg-gray-200'>
-                    <a href={item.url}>
+                    <LinkWithLoader href={item.url} className="flex items-center gap-2">
                       <item.icon />
                       <span>{item.title}</span>
-                    </a>
+                    </LinkWithLoader>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               ))}
