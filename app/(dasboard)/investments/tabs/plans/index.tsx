@@ -44,6 +44,7 @@ export const Plans = () => {
     activeInvestments.filter((inv) => inv.status === "active").length > 0;
 
   if (loading) return <p>Loading...</p>;
+  
   return (
     <>
       <TabsContent value="plans" className="space-y-6">

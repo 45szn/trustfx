@@ -115,7 +115,7 @@ export function InvestmentModal({
       }
 
       toast({
-        description: `You've invested ${investmentAmount} successfully!`,
+        description: `You've invested ${investmentAmount.toLocaleString()} successfully!`,
       });
 
       await updateDoc(userRef, updateData);

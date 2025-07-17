@@ -1,7 +1,6 @@
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { TabsContent } from "@/components/ui/tabs";
 import React, { useState } from "react";
-import { activeInvestments } from "../../investment";
 import { Button } from "@/components/ui/button";
 import {
   Table,
@@ -15,8 +14,10 @@ import { format, parseISO, differenceInDays } from "date-fns";
 import { Progress } from "@/components/ui/progress";
 import { AlertCircle, Eye } from "lucide-react";
 import { getStatusBadge } from "../../page";
+import { useUserInvestments } from "@/hooks/useUserInvestments";
 
 export default function ActiveInvestments() {
+  const { activeInvestments, loading } = useUserInvestments();
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [activeTab, setActiveTab] = useState("plans");
 
@@ -26,6 +27,8 @@ export default function ActiveInvestments() {
     return Math.max(0, differenceInDays(maturity, today));
   };
 
+  if (loading) return <p>Loading...</p>;
+  
   return (
     <>
       <TabsContent value="active" className="space-y-6">
@@ -65,7 +68,7 @@ export default function ActiveInvestments() {
                       .filter((inv) => inv.status === "active")
                       .map((investment) => {
                         const daysRemaining = calculateDaysRemaining(
-                          investment.maturityDate,
+                          investment.maturityDate
                         );
                         return (
                           <TableRow
@@ -88,7 +91,7 @@ export default function ActiveInvestments() {
                             <TableCell>
                               {format(
                                 parseISO(investment.dateStarted),
-                                "MMM dd, yyyy",
+                                "MMM dd, yyyy"
                               )}
                             </TableCell>
                             <TableCell>{investment.duration}</TableCell>
@@ -97,7 +100,7 @@ export default function ActiveInvestments() {
                                 <p>
                                   {format(
                                     parseISO(investment.maturityDate),
-                                    "MMM dd, yyyy",
+                                    "MMM dd, yyyy"
                                   )}
                                 </p>
                                 <p className="text-xs text-gray-500">
@@ -144,7 +147,7 @@ export default function ActiveInvestments() {
         {activeInvestments.some(
           (inv) =>
             calculateDaysRemaining(inv.maturityDate) <= 7 &&
-            inv.status === "active",
+            inv.status === "active"
         ) && (
           <Card className="border-orange-200 bg-orange-50">
             <CardContent className="p-4">

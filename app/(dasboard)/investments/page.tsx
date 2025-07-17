@@ -6,10 +6,10 @@ import DashHead from "../components/DashHead";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Clock, CheckCircle, Loader2 } from "lucide-react";
-import { activeInvestments } from "./investment";
 import { Plans } from "./tabs/plans";
 import ActiveInvestments from "./tabs/active";
 import { History } from "./tabs/history";
+import { useUserInvestments } from "@/hooks/useUserInvestments";
 
 export const getStatusBadge = (status: string) => {
   const statusConfig = {
@@ -40,6 +40,7 @@ export const getStatusBadge = (status: string) => {
 };
 
 const Investments = () => {
+  const { activeInvestments } = useUserInvestments();
   const { user, loading } = useAuth();
   const [activeTab, setActiveTab] = useState("plans");
 
