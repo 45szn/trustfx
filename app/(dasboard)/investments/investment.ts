@@ -1,5 +1,5 @@
 // Mock data - replace with real data from your API
-export const userBalance = 15000; // This should come from your API
+// export const userBalance = 15000;
 
 export const investmentPlans = [
   {
@@ -80,68 +80,68 @@ export const investmentPlans = [
   },
 ];
 
-export const activeInvestments = [
-  {
-    id: "INV001",
-    planName: "Growth Plan",
-    planIcon: "📈",
-    investedAmount: 2500,
-    dateStarted: "2025-05-15",
-    duration: "90 days",
-    maturityDate: "2025-08-13",
-    status: "active",
-    expectedReturn: 2800,
-    progress: 65,
-  },
-  {
-    id: "INV002",
-    planName: "Premium Plan",
-    planIcon: "💎",
-    investedAmount: 5000,
-    dateStarted: "2025-06-01",
-    duration: "180 days",
-    maturityDate: "2025-11-28",
-    status: "active",
-    expectedReturn: 6000,
-    progress: 25,
-  },
-  {
-    id: "INV003",
-    planName: "Starter Plan",
-    planIcon: "🌱",
-    investedAmount: 1000,
-    dateStarted: "2025-04-10",
-    duration: "30 days",
-    maturityDate: "2025-05-10",
-    status: "completed",
-    expectedReturn: 1050,
-    progress: 100,
-  },
-];
+// export const activeInvestments = [
+//   {
+//     id: "INV001",
+//     planName: "Growth Plan",
+//     planIcon: "📈",
+//     investedAmount: 2500,
+//     dateStarted: "2025-05-15",
+//     duration: "90 days",
+//     maturityDate: "2025-08-13",
+//     status: "active",
+//     expectedReturn: 2800,
+//     progress: 65,
+//   },
+//   {
+//     id: "INV002",
+//     planName: "Premium Plan",
+//     planIcon: "💎",
+//     investedAmount: 5000,
+//     dateStarted: "2025-06-01",
+//     duration: "180 days",
+//     maturityDate: "2025-11-28",
+//     status: "active",
+//     expectedReturn: 6000,
+//     progress: 25,
+//   },
+//   {
+//     id: "INV003",
+//     planName: "Starter Plan",
+//     planIcon: "🌱",
+//     investedAmount: 1000,
+//     dateStarted: "2025-04-10",
+//     duration: "30 days",
+//     maturityDate: "2025-05-10",
+//     status: "completed",
+//     expectedReturn: 1050,
+//     progress: 100,
+//   },
+// ];
 
-export const investmentHistory = [
-  {
-    id: "INV004",
-    planName: "Growth Plan",
-    planIcon: "📈",
-    investedAmount: 1500,
-    dateStarted: "2025-02-15",
-    dateCompleted: "2025-05-16",
-    duration: "90 days",
-    status: "completed",
-    actualReturn: 1680,
-    profit: 180,
-  },
-  {
-    id: "INV005",
-    planName: "Starter Plan",
-    planIcon: "🌱",
-    investedAmount: 500,
-    dateStarted: "2025-01-20",
-    dateCompleted: "2025-02-19",
-    duration: "30 days",
-    status: "completed",
-    actualReturn: 525,
-    profit: 25,
-  },
-];
+// export const investmentHistory = [
+//   {
+//     id: "INV004",
+//     planName: "Growth Plan",
+//     planIcon: "📈",
+//     investedAmount: 1500,
+//     dateStarted: "2025-02-15",
+//     dateCompleted: "2025-05-16",
+//     duration: "90 days",
+//     status: "completed",
+//     actualReturn: 1680,
+//     profit: 180,
+//   },
+//   {
+//     id: "INV005",
+//     planName: "Starter Plan",
+//     planIcon: "🌱",
+//     investedAmount: 500,
+//     dateStarted: "2025-01-20",
+//     dateCompleted: "2025-02-19",
+//     duration: "30 days",
+//     status: "completed",
+//     actualReturn: 525,
+//     profit: 25,
+//   },
+// ];

@@ -3,41 +3,12 @@
 import { useState } from "react";
 import useAuth from "@/hooks/useAuth";
 import DashHead from "../components/DashHead";
-import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
-import { Clock, CheckCircle, Loader2 } from "lucide-react";
+import { Loader2 } from "lucide-react";
 import { Plans } from "./tabs/plans";
 import ActiveInvestments from "./tabs/active";
 import { History } from "./tabs/history";
 import { useUserInvestments } from "@/hooks/useUserInvestments";
-
-export const getStatusBadge = (status: string) => {
-  const statusConfig = {
-    active: {
-      label: "Active",
-      className: "bg-blue-100 text-blue-800 hover:bg-blue-100",
-      icon: <Loader2 className="h-3 w-3" />,
-    },
-    completed: {
-      label: "Completed",
-      className: "bg-green-100 text-green-800",
-      icon: <CheckCircle className="h-3 w-3" />,
-    },
-    pending: {
-      label: "Pending",
-      className: "bg-yellow-100 text-yellow-800",
-      icon: <Clock className="h-3 w-3" />,
-    },
-  };
-
-  const config = statusConfig[status as keyof typeof statusConfig];
-  return (
-    <Badge className={`${config.className} flex items-center space-x-1`}>
-      {config.icon}
-      <span>{config.label}</span>
-    </Badge>
-  );
-};
 
 const Investments = () => {
   const { activeInvestments } = useUserInvestments();

@@ -600,23 +600,3 @@ const Transactions = () => {
 
 export default Transactions;
 
-// "use client";
-// import React from "react";
-// import useAuth from "@/hooks/useAuth";
-// import DashHead from "@/app/(dasboard)/components/DashHead";
-
-// const Transactions = () => {
-//   const { user } = useAuth();
-
-//   if (!user) {
-//     return null;
-//   }
-
-//   return (
-//     <>
-//       <DashHead title="Transactions" />
-//     </>
-//   );
-// };
-
-// export default Transactions;
