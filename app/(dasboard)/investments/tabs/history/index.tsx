@@ -10,10 +10,13 @@ import {
   TableBody,
   TableCell,
 } from "@/components/ui/table";
-import { investmentHistory } from "../../investment";
+import { useUserInvestments } from "@/hooks/useUserInvestments";
 import { getStatusBadge } from "../../page";
 
 export const History = () => {
+  const { investmentHistory, loading } = useUserInvestments();
+
+  if (loading) return <p>Loading...</p>;
   return (
     <>
       <TabsContent value="history" className="space-y-6">

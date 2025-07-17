@@ -4,7 +4,7 @@ import { useState } from "react";
 import useAuth from "@/hooks/useAuth";
 import DashHead from "../components/DashHead";
 import { Badge } from "@/components/ui/badge";
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Clock, CheckCircle, Loader2 } from "lucide-react";
 import { Plans } from "./tabs/plans";
 import ActiveInvestments from "./tabs/active";
@@ -15,7 +15,7 @@ export const getStatusBadge = (status: string) => {
   const statusConfig = {
     active: {
       label: "Active",
-      className: "bg-blue-100 text-blue-800",
+      className: "bg-blue-100 text-blue-800 hover:bg-blue-100",
       icon: <Loader2 className="h-3 w-3" />,
     },
     completed: {
@@ -44,7 +44,6 @@ const Investments = () => {
   const { user, loading } = useAuth();
   const [activeTab, setActiveTab] = useState("plans");
 
-  // Show loading spinner while authentication is being checked
   if (loading) {
     return (
       <div className="container mx-auto p-6 flex items-center justify-center min-h-[400px]">
@@ -56,7 +55,6 @@ const Investments = () => {
     );
   }
 
-  // Redirect or show login prompt if user is not authenticated
   if (!user) {
     return (
       <div className="container mx-auto p-6 flex items-center justify-center min-h-[400px]">
@@ -76,7 +74,6 @@ const Investments = () => {
     <div className="container mx-auto space-y-6">
       <DashHead title="Investments" />
 
-      {/* Page Header */}
       <div className="mb-8">
         <h1 className="text-2xl font-bold text-gray-900">Investments</h1>
         <p className="text-gray-600 mt-1">
@@ -102,14 +99,21 @@ const Investments = () => {
           </TabsTrigger>
         </TabsList>
 
-        {/* Investment Plans Tab */}
-        <Plans />
-
-        {/* Active Investments Tab */}
-        <ActiveInvestments />
-
-        {/* Investment History Tab */}
-        <History />
+        {activeTab === "plans" && (
+          <TabsContent value="plans">
+            <Plans />
+          </TabsContent>
+        )}
+        {activeTab === "active" && (
+          <TabsContent value="active">
+            <ActiveInvestments />
+          </TabsContent>
+        )}
+        {activeTab === "history" && (
+          <TabsContent value="history">
+            <History />
+          </TabsContent>
+        )}
       </Tabs>
     </div>
   );

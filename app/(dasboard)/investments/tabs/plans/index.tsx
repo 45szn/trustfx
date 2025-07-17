@@ -24,7 +24,6 @@ export const Plans = () => {
   >(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [activeTab, setActiveTab] = useState("plans");
   const [userBalance, setUserBalance] = useState<number>(0);
 
   useEffect(() => {
@@ -44,7 +43,7 @@ export const Plans = () => {
     activeInvestments.filter((inv) => inv.status === "active").length > 0;
 
   if (loading) return <p>Loading...</p>;
-  
+
   return (
     <>
       <TabsContent value="plans" className="space-y-6">
@@ -171,9 +170,7 @@ export const Plans = () => {
                   Start your investment journey today.
                 </p>
                 <div className="flex space-x-3 justify-center">
-                  <Button onClick={() => setActiveTab("plans")}>
-                    Browse Plans
-                  </Button>
+                  <Button>Browse Plans</Button>
                   <Button variant="outline">Schedule Consultation</Button>
                 </div>
               </div>
