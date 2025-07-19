@@ -1,10 +1,10 @@
 import { TabsContent } from "@/components/ui/tabs";
 import {
-  AlertCircle,
   ArrowRight,
   CheckCircle,
   Clock,
   DollarSign,
+  Loader2,
   Shield,
   Star,
   TrendingUp,
@@ -14,7 +14,7 @@ import { investmentPlans } from "../../investment";
 import { useUserInvestments } from "@/hooks/useUserInvestments";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { InvestmentModal } from "@/app/(dasboard)/components/InvestmentModal";
+import { InvestmentModal } from "@/app/(dasboard)/investments/InvestmentModal";
 import { Badge } from "@/components/ui/badge";
 
 export const Plans = () => {
@@ -42,7 +42,17 @@ export const Plans = () => {
   const hasActiveInvestments =
     activeInvestments.filter((inv) => inv.status === "active").length > 0;
 
-  if (loading) return <p>Loading...</p>;
+  // Show loading spinner while authentication is being checked
+  if (loading) {
+    return (
+      <div className="container mx-auto p-6 flex items-center justify-center min-h-[400px]">
+        <div className="flex items-center space-x-2">
+          <Loader2 className="h-6 w-6 animate-spin" />
+          <span className="text-gray-600">Loading plans...</span>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <>
@@ -138,9 +148,13 @@ export const Plans = () => {
                 <Button
                   onClick={() => handleStartInvestment(plan)}
                   className="w-full"
-                  disabled={(userBalance ?? 0) < plan.minAmount}
+                  // disabled={(userBalance ?? 0) < plan.minAmount}
                 >
-                  {(userBalance ?? 0) < plan.minAmount ? (
+                  <>
+                    Start Investment
+                    <ArrowRight className="h-4 w-4 ml-2" />
+                  </>
+                  {/* {(userBalance ?? 0) < plan.minAmount ? (
                     <>
                       <AlertCircle className="h-4 w-4 mr-2" />
                       Insufficient Balance
@@ -150,7 +164,7 @@ export const Plans = () => {
                       Start Investment
                       <ArrowRight className="h-4 w-4 ml-2" />
                     </>
-                  )}
+                  )} */}
                 </Button>
               </CardContent>
             </Card>

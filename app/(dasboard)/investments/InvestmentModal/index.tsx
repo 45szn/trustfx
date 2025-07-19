@@ -69,7 +69,8 @@ export function InvestmentModal({
   const investmentAmount = Number.parseFloat(amount) || 0;
   const expectedPayout = investmentAmount * (1 + plan.expectedReturn / 100);
   const isValidAmount =
-    investmentAmount >= plan.minAmount && investmentAmount <= userBalance;
+    investmentAmount >= plan.minAmount &&
+    (fundingSource !== "wallet" || investmentAmount <= userBalance);
   const canSubmit = isValidAmount && fundingSource && agreedToTerms;
 
   const handleSubmit = async () => {
@@ -87,7 +88,8 @@ export function InvestmentModal({
 
       const userData = userSnap.data();
       const currentBalance = userData?.balance || 0;
-      if (investmentAmount > currentBalance) {
+
+      if (fundingSource === "wallet" && investmentAmount > currentBalance) {
         throw new Error("Insufficient balance");
       }
 
@@ -102,10 +104,24 @@ export function InvestmentModal({
         status: "active",
       };
 
+      const transaction = {
+        id: crypto.randomUUID(),
+        type: "investment",
+        amount: investmentAmount,
+        balance:
+          fundingSource === "wallet"
+            ? currentBalance - investmentAmount
+            : currentBalance,
+        status: "completed",
+        date: new Date().toISOString(),
+        details: `Invested in ${plan.name}`,
+      };
+
       // Update user balance and push new investment
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const updateData: Record<string, any> = {
         investments: arrayUnion(investment),
+        transactions: arrayUnion(transaction),
       };
 
       if (fundingSource === "wallet") {
@@ -114,20 +130,21 @@ export function InvestmentModal({
         setUserBalance(newBalance);
       }
 
+      await updateDoc(userRef, updateData);
+
       toast({
         description: `You've invested ${investmentAmount.toLocaleString()} successfully!`,
       });
 
-      await updateDoc(userRef, updateData);
       // Reset form
       setAmount("");
       setFundingSource("");
       setAgreedToTerms(false);
       onClose();
+
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       console.error("Investment error:", error.message);
-      alert(error.message || "Failed to invest");
     } finally {
       setIsSubmitting(false);
     }
@@ -215,15 +232,24 @@ export function InvestmentModal({
                 </span>
               )}
             </div>
-            {amount && !isValidAmount && (
-              <div className="flex items-center space-x-2 text-red-600 text-sm">
-                <AlertCircle className="h-4 w-4" />
-                <span>
-                  {investmentAmount < plan.minAmount
-                    ? `Minimum investment is $${plan.minAmount.toLocaleString()}`
-                    : "Insufficient balance"}
-                </span>
-              </div>
+            {amount && (
+              <>
+                {investmentAmount < plan.minAmount && (
+                  <div className="flex items-center space-x-2 text-red-600 text-sm">
+                    <AlertCircle className="h-4 w-4" />
+                    <span>
+                      Minimum investment is ${plan.minAmount.toLocaleString()}
+                    </span>
+                  </div>
+                )}
+                {fundingSource === "wallet" &&
+                  investmentAmount > userBalance && (
+                    <div className="flex items-center space-x-2 text-red-600 text-sm">
+                      <AlertCircle className="h-4 w-4" />
+                      <span>Insufficient balance</span>
+                    </div>
+                  )}
+              </>
             )}
           </div>
 
