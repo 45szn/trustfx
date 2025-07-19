@@ -20,7 +20,7 @@ interface Props {
   } | null;
 }
 
-export default function PortfolioSummaryCards({
+export default function SummaryCards({
   totalValue,
   totalReturns,
   activeInvestments,

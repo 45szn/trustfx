@@ -4,16 +4,16 @@ import { useState } from "react";
 import useAuth from "@/hooks/useAuth";
 import DashHead from "../components/DashHead";
 import { Loader2 } from "lucide-react";
-import PortfolioSummaryCards from "./components/SummaryCards";
+import SummaryCards from "../components/SummaryCards";
 import InvestmentPlansTable from "./components/InvestmentsTable";
-import RecentActivity from "./components/RecentActivity";
-import NextSteps from "./components/NextSteps";
+import RecentActivity from "../components/RecentActivity";
 import { useUserInvestments } from "@/hooks/useUserInvestments";
 import { parseISO, differenceInDays } from "date-fns";
 import { usePortfolioPerformance } from "@/hooks/usePortfolioPerformance";
 import type { ChartPeriod } from "@/hooks/usePortfolioPerformance";
-import PortfolioGraph from "./components/PortfolioGraph";
+import PortfolioGraph from "../components/PortfolioGraph";
 import AssetAllocation from "./components/AssetAllocation";
+import { Recommendations } from "../components/Reccomendations";
 
 const Portfolio = () => {
   const { user, loading } = useAuth();
@@ -97,7 +97,7 @@ const Portfolio = () => {
       </div>
 
       {/* Portfolio Summary Cards */}
-      <PortfolioSummaryCards
+      <SummaryCards
         totalValue={totalPortfolioValue}
         totalReturns={totalReturns}
         activeInvestments={activeInvestments}
@@ -123,7 +123,7 @@ const Portfolio = () => {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <RecentActivity transactions={transactions} />
 
-        <NextSteps />
+        <Recommendations />
       </div>
     </div>
   );
