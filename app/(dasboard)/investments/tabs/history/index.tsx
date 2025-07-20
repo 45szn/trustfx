@@ -45,7 +45,17 @@ const getStatusBadge = (status: string) => {
 export const History = () => {
   const { investmentHistory, loading } = useUserInvestments();
 
-  if (loading) return <p>Loading...</p>;
+  // Show loading spinner while authentication is being checked
+  if (loading) {
+    return (
+      <div className="container mx-auto p-6 flex items-center justify-center min-h-[400px]">
+        <div className="flex items-center space-x-2">
+          <Loader2 className="h-6 w-6 animate-spin" />
+          <span className="text-gray-600">Loading history...</span>
+        </div>
+      </div>
+    );
+  }
   return (
     <>
       <TabsContent value="history" className="space-y-6">
