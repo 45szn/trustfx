@@ -29,6 +29,7 @@ import {
 import { auth, db } from "@/lib/firebase";
 import { doc, updateDoc, arrayUnion, getDoc } from "firebase/firestore";
 import { useToast } from "@/hooks/use-toast";
+import { sendNotification } from "@/lib/sendNotification";
 
 interface InvestmentPlan {
   id: string;
@@ -131,6 +132,17 @@ export function InvestmentModal({
       }
 
       await updateDoc(userRef, updateData);
+
+      if (auth.currentUser) {
+        await sendNotification(auth.currentUser.uid, {
+          title: "Investment Successful",
+          message: `You have successfully invested ${investmentAmount} in the ${plan.name}.`,
+          type: "investment",
+          icon: "CheckCircle",
+          cta: "View Investment",
+          ctaLink: "investments",
+        });
+      }
 
       toast({
         description: `You've invested ${investmentAmount.toLocaleString()} successfully!`,
