@@ -1,8 +1,6 @@
-// "use client";
-// import React from "react";
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import useAuth from "@/hooks/useAuth";
 import DashHead from "../components/DashHead";
 import { NotificationSettingsModal } from "../components/NotificationSettings";
@@ -21,114 +19,74 @@ import {
   Eye,
   Loader2,
   Inbox,
+  Info,
+  XCircle,
 } from "lucide-react";
-import { formatDistanceToNow, parseISO } from "date-fns";
+import { formatDistanceToNow } from "date-fns";
+import {
+  collection,
+  query,
+  orderBy,
+  onSnapshot,
+  doc,
+  updateDoc,
+  writeBatch,
+} from "firebase/firestore";
+import { db } from "@/lib/firebase";
+import { Timestamp } from "firebase/firestore";
 
-// Mock data - replace with real data from your API
-const notificationsData = [
-  {
-    id: "1",
-    type: "investment",
-    title: "Investment Completed",
-    message:
-      "Your Growth Plan has matured successfully. You earned $125 in returns.",
-    timestamp: "2025-07-12T14:30:00Z",
-    isRead: false,
-    icon: "💰",
-    cta: "View Investment",
-    ctaLink: "/portfolio",
-  },
-  {
-    id: "2",
-    type: "transaction",
-    title: "Deposit Confirmed",
-    message:
-      "Your deposit of $2,500 has been successfully processed and added to your wallet.",
-    timestamp: "2025-07-12T10:15:00Z",
-    isRead: false,
-    icon: "💳",
-    cta: "View Transaction",
-    ctaLink: "/transactions",
-  },
-  {
-    id: "3",
-    type: "system",
-    title: "Security Alert",
-    message:
-      "New login detected from Chrome on Windows. If this wasn't you, please secure your account.",
-    timestamp: "2025-07-11T18:45:00Z",
-    isRead: true,
-    icon: "🔒",
-    cta: "Review Security",
-    ctaLink: "/settings",
-  },
-  {
-    id: "4",
-    type: "investment",
-    title: "Investment Maturity Alert",
-    message:
-      "Your Premium Plan will mature in 3 days. Expected return: $6,000.",
-    timestamp: "2025-07-11T09:20:00Z",
-    isRead: false,
-    icon: "⏰",
-    cta: "View Details",
-    ctaLink: "/portfolio",
-  },
-  {
-    id: "5",
-    type: "promotion",
-    title: "New Elite Plan Available",
-    message:
-      "Introducing our Elite Plan with up to 35% returns. Limited time offer for premium members.",
-    timestamp: "2025-07-10T16:30:00Z",
-    isRead: true,
-    icon: "🎉",
-    cta: "Explore Plan",
-    ctaLink: "/investments",
-  },
-  {
-    id: "6",
-    type: "transaction",
-    title: "Withdrawal Processed",
-    message:
-      "Your withdrawal request of $800 has been processed and sent to your bank account.",
-    timestamp: "2025-07-10T11:10:00Z",
-    isRead: true,
-    icon: "💸",
-    cta: "View Transaction",
-    ctaLink: "/transactions",
-  },
-  {
-    id: "7",
-    type: "investment",
-    title: "Monthly Returns Credited",
-    message:
-      "Your Starter Plan has generated $42 in returns this month. Keep growing!",
-    timestamp: "2025-07-09T08:00:00Z",
-    isRead: true,
-    icon: "📈",
-    cta: "View Portfolio",
-    ctaLink: "/portfolio",
-  },
-  {
-    id: "8",
-    type: "system",
-    title: "Scheduled Maintenance",
-    message:
-      "System maintenance scheduled for tonight 2:00 AM - 4:00 AM EST. Services may be temporarily unavailable.",
-    timestamp: "2025-07-08T15:45:00Z",
-    isRead: true,
-    icon: "🔧",
-    cta: null,
-    ctaLink: null,
-  },
-];
+type Notification = {
+  id: string;
+  title: string;
+  type: string;
+  message: string;
+  read: boolean;
+  time: Timestamp;
+  icon?: string;
+  cta?: string;
+  ctaLink?: string;
+};
 
 const Notifications = () => {
-  const { user, loading } = useAuth();
+  const { user } = useAuth();
   const [activeTab, setActiveTab] = useState("all");
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
-  const [notifications, setNotifications] = useState(notificationsData);
+  const [notifications, setNotifications] = useState<Notification[]>([]);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    if (!user) return;
+
+    setLoading(true);
+
+    const q = query(
+      collection(db, `users/${user.uid}/notifications`),
+      orderBy("time", "desc"),
+    );
+
+    const unsubscribe = onSnapshot(q, (snapshot) => {
+      const notifList: Notification[] = snapshot.docs.map((doc) => {
+        const data = doc.data() as Notification;
+
+        return {
+          id: doc.id,
+          title: data.title,
+          message: data.message,
+          read: data.read,
+          time: data.time,
+          type: data.type,
+          icon: data.icon,
+          cta: data.cta,
+          ctaLink: data.ctaLink,
+        };
+      });
+
+      setNotifications(notifList);
+      setLoading(false);
+    });
+
+    return () => unsubscribe();
+  }, [user]);
 
   // Filter notifications based on active tab
   const filteredNotifications = useMemo(() => {
@@ -139,16 +97,50 @@ const Notifications = () => {
   }, [notifications, activeTab]);
 
   // Count unread notifications
-  const unreadCount = notifications.filter((n) => !n.isRead).length;
+  const unreadCount = notifications.filter((n) => !n.read).length;
 
-  const markAsRead = (id: string) => {
-    setNotifications((prev) =>
-      prev.map((n) => (n.id === id ? { ...n, isRead: true } : n)),
-    );
+  const markAsRead = async (id: string) => {
+    if (!user) return;
+
+    try {
+      // Optimistically update UI
+      setNotifications((prev) =>
+        prev.map((n) => (n.id === id ? { ...n, read: true } : n)),
+      );
+
+      // Persist change in Firestore
+      const notifRef = doc(db, `users/${user.uid}/notifications`, id);
+      await updateDoc(notifRef, { read: true });
+    } catch (error) {
+      console.error("Error updating notification:", error);
+    }
   };
 
-  const markAllAsRead = () => {
-    setNotifications((prev) => prev.map((n) => ({ ...n, isRead: true })));
+  const markAllAsRead = async () => {
+    if (!user) return;
+
+    const batch = writeBatch(db);
+    const unread = notifications.filter((n) => !n.read);
+
+    unread.forEach((n) => {
+      const ref = doc(db, `users/${user.uid}/notifications`, n.id);
+      batch.update(ref, { read: true });
+    });
+
+    try {
+      await batch.commit();
+      setNotifications((prev) => prev.map((n) => ({ ...n, read: true })));
+    } catch (err) {
+      console.error("Failed to mark all notifications as read:", err);
+    }
+  };
+
+  const iconMap: Record<string, JSX.Element> = {
+    Bell: <Bell className="w-5 h-5 text-gray-500" />,
+    CheckCircle: <CheckCircle className="w-5 h-5 text-green-500" />,
+    XCircle: <XCircle className="w-5 h-5 text-red-500" />,
+    AlertTriangle: <AlertTriangle className="w-5 h-5 text-yellow-500" />,
+    Info: <Info className="w-5 h-5 text-blue-500" />,
   };
 
   const getNotificationIcon = (type: string) => {
@@ -315,12 +307,12 @@ const Notifications = () => {
                 <Card
                   key={notification.id}
                   className={`transition-all hover:shadow-md cursor-pointer ${
-                    !notification.isRead
+                    !notification.read
                       ? "border-blue-200 bg-blue-50/30"
                       : "hover:bg-gray-50"
                   }`}
                   onClick={() =>
-                    !notification.isRead && markAsRead(notification.id)
+                    !notification.read && markAsRead(notification.id)
                   }
                 >
                   <CardContent className="p-4">
@@ -329,9 +321,11 @@ const Notifications = () => {
                       <div className="flex-shrink-0">
                         <div className="relative">
                           <div className="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center">
-                            <span className="text-xl">{notification.icon}</span>
+                            <span className="text-xl">
+                              {iconMap[notification.icon ?? "Bell"]}
+                            </span>
                           </div>
-                          {!notification.isRead && (
+                          {!notification.read && (
                             <div className="absolute -top-1 -right-1 w-3 h-3 bg-blue-500 rounded-full"></div>
                           )}
                         </div>
@@ -343,7 +337,7 @@ const Notifications = () => {
                           <div className="flex-1">
                             <div className="flex items-center space-x-2 mb-1">
                               <h4
-                                className={`font-semibold ${!notification.isRead ? "text-gray-900" : "text-gray-700"}`}
+                                className={`font-semibold ${!notification.read ? "text-gray-900" : "text-gray-700"}`}
                               >
                                 {notification.title}
                               </h4>
@@ -357,7 +351,11 @@ const Notifications = () => {
                             <div className="flex items-center justify-between">
                               <span className="text-xs text-gray-500">
                                 {formatDistanceToNow(
-                                  parseISO(notification.timestamp),
+                                  notification.time instanceof Timestamp
+                                    ? notification.time.toDate()
+                                    : typeof notification.time === "string"
+                                      ? new Date(notification.time)
+                                      : new Date(),
                                   { addSuffix: true },
                                 )}
                               </span>
