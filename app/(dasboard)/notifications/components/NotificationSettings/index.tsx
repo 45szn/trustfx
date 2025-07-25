@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import {
   Dialog,
   DialogContent,
@@ -12,6 +11,8 @@ import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Bell, Mail, Smartphone, Gift, Settings } from "lucide-react";
+import useAuth from "@/hooks/useAuth";
+import { useNotificationSettings } from "../UseNotificationSettings";
 
 interface NotificationSettingsModalProps {
   isOpen: boolean;
@@ -22,25 +23,24 @@ export function NotificationSettingsModal({
   isOpen,
   onClose,
 }: NotificationSettingsModalProps) {
-  const [settings, setSettings] = useState({
-    emailAlerts: true,
-    pushNotifications: true,
-    inAppAlerts: true,
-    promoAlerts: false,
-    investmentUpdates: true,
-    transactionAlerts: true,
-    systemAlerts: true,
-    marketingEmails: false,
-  });
+  const { user } = useAuth(); // assuming user.uid is available
+  const { settings, setSettings, saveSettings, loading } =
+    useNotificationSettings();
 
   const handleSettingChange = (key: string, value: boolean) => {
-    setSettings((prev) => ({ ...prev, [key]: value }));
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    setSettings((prev: any) => ({ ...prev, [key]: value }));
   };
 
-  const handleSave = () => {
-    // Save settings to API
-    console.log("Saving notification settings:", settings);
-    onClose();
+  const handleSave = async () => {
+    if (!user) return;
+
+    try {
+      await saveSettings(settings);
+      onClose();
+    } catch (err) {
+      console.error("Failed to save settings:", err);
+    }
   };
 
   return (
@@ -217,8 +217,9 @@ export function NotificationSettingsModal({
             >
               Cancel
             </Button>
-            <Button onClick={handleSave} className="flex-1">
-              Save Settings
+
+            <Button onClick={handleSave} className="flex-1" disabled={loading}>
+              {loading ? "Saving..." : "Save Settings"}
             </Button>
           </div>
         </div>
