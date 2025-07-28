@@ -1,30 +1,29 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { Input } from "@/components/ui/input";
+import { useInvestmentSettings } from "@/hooks/useInvestmentSettings";
 
 export const InvestmentPref = () => {
-  // Mock state for investment preferences
-  const [investmentPrefs, setInvestmentPrefs] = useState({
-    defaultPlanSuggestion: "Growth Plan",
-    riskLevelPreference: "medium",
-    autoReinvest: false,
-    currency: "USD",
-  });
+  const { settings, setSettings, saveSettings, loading } =
+    useInvestmentSettings();
 
-  const handleInvestmentPrefChange = (key: string, value: string | boolean) => {
-    setInvestmentPrefs((prev) => ({ ...prev, [key]: value }));
+  const handleChange = (key: string, value: string | boolean) => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    setSettings((prev: any) => ({ ...prev, [key]: value }));
   };
 
-  const handleSaveChanges = (section: string) => {
-    // Simulate saving changes
-    console.log(`Saving ${section} changes...`);
-    // In a real app, you'd send this data to your backend
-    alert(`${section} settings saved!`);
+  const handleSave = async () => {
+    try {
+      await saveSettings(settings);
+      alert("Investment preferences saved!");
+    } catch (err) {
+      console.error("Failed to save preferences:", err);
+    }
   };
 
   return (
@@ -40,12 +39,9 @@ export const InvestmentPref = () => {
           <Label htmlFor="defaultPlanSuggestion">Default Plan Suggestion</Label>
           <Input
             id="defaultPlanSuggestion"
-            value={investmentPrefs.defaultPlanSuggestion}
+            value={settings.defaultPlanSuggestion}
             onChange={(e) =>
-              handleInvestmentPrefChange(
-                "defaultPlanSuggestion",
-                e.target.value,
-              )
+              handleChange("defaultPlanSuggestion", e.target.value)
             }
           />
         </div>
@@ -53,9 +49,9 @@ export const InvestmentPref = () => {
           <Label htmlFor="riskLevelPreference">Risk Level Preference</Label>
           <Input
             id="riskLevelPreference"
-            value={investmentPrefs.riskLevelPreference}
+            value={settings.riskLevelPreference}
             onChange={(e) =>
-              handleInvestmentPrefChange("riskLevelPreference", e.target.value)
+              handleChange("riskLevelPreference", e.target.value)
             }
           />
         </div>
@@ -68,24 +64,20 @@ export const InvestmentPref = () => {
           </div>
           <Switch
             id="autoReinvest"
-            checked={investmentPrefs.autoReinvest}
-            onCheckedChange={(checked) =>
-              handleInvestmentPrefChange("autoReinvest", checked)
-            }
+            checked={settings.autoReinvest}
+            onCheckedChange={(checked) => handleChange("autoReinvest", checked)}
           />
         </div>
         <div className="space-y-2">
           <Label htmlFor="currency">Currency Preference</Label>
           <Input
             id="currency"
-            value={investmentPrefs.currency}
-            onChange={(e) =>
-              handleInvestmentPrefChange("currency", e.target.value)
-            }
+            value={settings.currency}
+            onChange={(e) => handleChange("currency", e.target.value)}
           />
         </div>
-        <Button onClick={() => handleSaveChanges("Investment Preferences")}>
-          Save Changes
+        <Button onClick={handleSave} disabled={loading}>
+          {loading ? "Saving..." : "Save Changes"}
         </Button>
       </CardContent>
     </Card>

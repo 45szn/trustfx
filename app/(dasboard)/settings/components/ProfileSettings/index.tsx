@@ -1,35 +1,87 @@
-import React, { useState } from "react";
+"use client";
+
+import React, { useEffect, useState } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import useAuth from "@/hooks/useAuth";
 import { Button } from "@/components/ui/button";
-import { Camera, CheckCircle } from "lucide-react";
+import { Camera, CheckCircle, Loader2 } from "lucide-react";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
+import { doc, getDoc, setDoc } from "firebase/firestore";
+import { db } from "@/lib/firebase";
 
 export const ProfileSettings = () => {
   const { user } = useAuth();
+  const [loading, setLoading] = useState(true);
 
-  // Mock state for profile settings
   const [profile, setProfile] = useState({
-    fullName: user?.displayName || "John Doe",
-    email: user?.email || "john.doe@example.com",
-    phone: "123-456-7890",
-    country: "USA",
-    profilePhoto: user?.photoURL || "/placeholder.svg?height=100&width=100",
+    fullName: "",
+    email: "",
+    phone: "",
+    country: "",
+    profilePhoto: "",
   });
+
+  useEffect(() => {
+    if (!user) return;
+    const fetchProfile = async () => {
+      const userRef = doc(db, "users", user.uid);
+      const userSnap = await getDoc(userRef);
+
+      const data = userSnap.exists() ? userSnap.data().profile : null;
+
+      setProfile({
+        fullName: data?.fullName || user.displayName || "",
+        email: user.email || "",
+        phone: data?.phone || "",
+        country: data?.country || "",
+        profilePhoto: data?.profilePhoto || user.photoURL || "/placeholder.svg",
+      });
+
+      setLoading(false);
+    };
+
+    fetchProfile();
+  }, [user]);
 
   const handleProfileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { id, value } = e.target;
     setProfile((prev) => ({ ...prev, [id]: value }));
   };
 
-  const handleSaveChanges = (section: string) => {
-    // Simulate saving changes
-    console.log(`Saving ${section} changes...`);
-    // In a real app, you'd send this data to your backend
-    alert(`${section} settings saved!`);
+  const handleSaveChanges = async () => {
+    if (!user) return;
+    try {
+      const userRef = doc(db, "users", user.uid);
+
+      await setDoc(
+        userRef,
+        {
+          profile: {
+            fullName: profile.fullName,
+            phone: profile.phone,
+            country: profile.country,
+            profilePhoto: profile.profilePhoto,
+          },
+        },
+        { merge: true },
+      );
+
+      alert("Profile settings saved!");
+    } catch (error) {
+      console.error("Error saving profile:", error);
+      alert("Something went wrong. Try again.");
+    }
   };
+
+  if (loading)
+    return (
+      <div className="flex items-center p-6">
+        <Loader2 className="animate-spin h-6 w-6 mr-2" />
+        Loading profile settings...
+      </div>
+    );
 
   return (
     <Card>
@@ -42,10 +94,7 @@ export const ProfileSettings = () => {
       <CardContent className="space-y-6">
         <div className="flex items-center space-x-4">
           <Avatar className="h-24 w-24">
-            <AvatarImage
-              src={profile.profilePhoto || "/placeholder.svg"}
-              alt="Profile Picture"
-            />
+            <AvatarImage src={profile.profilePhoto} alt="Profile Picture" />
             <AvatarFallback>{profile.fullName.charAt(0)}</AvatarFallback>
           </Avatar>
           <Button
@@ -63,6 +112,7 @@ export const ProfileSettings = () => {
               id="fullName"
               value={profile.fullName}
               onChange={handleProfileChange}
+              className="border border-gray-500 w-5/6"
             />
           </div>
           <div className="space-y-2">
@@ -71,7 +121,7 @@ export const ProfileSettings = () => {
               id="email"
               value={profile.email}
               disabled
-              className="bg-gray-100 cursor-not-allowed"
+              className="bg-gray-100 cursor-not-allowed border border-gray-500 w-5/6"
             />
             <p className="text-xs text-gray-500 flex items-center">
               <CheckCircle className="h-3 w-3 mr-1 text-green-500" /> Verified
@@ -83,6 +133,7 @@ export const ProfileSettings = () => {
               id="phone"
               value={profile.phone}
               onChange={handleProfileChange}
+              className="border border-gray-500 w-5/6"
             />
           </div>
           <div className="space-y-2">
@@ -91,11 +142,16 @@ export const ProfileSettings = () => {
               id="country"
               value={profile.country}
               onChange={handleProfileChange}
+              className="border border-gray-500 w-5/6"
             />
           </div>
         </div>
-        <Button onClick={() => handleSaveChanges("Profile")}>
-          Save Changes
+        <Button onClick={handleSaveChanges}>
+          {loading ? (
+            <Loader2 className="animate-spin h-6 w-6 mr-2" />
+          ) : (
+            "Save Changes"
+          )}
         </Button>
       </CardContent>
     </Card>

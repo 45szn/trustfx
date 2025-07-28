@@ -1,24 +1,57 @@
+"use client";
+
 import React from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { LogOut, Trash2 } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
+import { getAuth, signOut, deleteUser } from "firebase/auth";
+import { doc, deleteDoc } from "firebase/firestore";
+import { db } from "@/lib/firebase";
 
 export const AccountActions = () => {
-  const handleLogoutAllDevices = () => {
-    alert("Logging out from all devices...");
-    // Implement actual logout logic
+  const handleLogoutAllDevices = async () => {
+    const auth = getAuth();
+    const user = auth.currentUser;
+
+    try {
+      if (user) {
+        await user.getIdToken(true); // Force refresh
+        await signOut(auth); // Sign out current session
+        alert("Logged out from all devices.");
+      }
+    } catch (err) {
+      console.error("Logout error:", err);
+      alert("Failed to log out from all devices.");
+    }
   };
 
-  const handleDeleteAccount = () => {
+  const handleDeleteAccount = async () => {
     if (
-      window.confirm(
+      !window.confirm(
         "Are you sure you want to delete your account? This action cannot be undone.",
       )
-    ) {
-      alert("Account deletion initiated.");
-      // Implement actual account deletion logic
+    )
+      return;
+
+    const auth = getAuth();
+    const user = auth.currentUser;
+
+    try {
+      if (!user) throw new Error("User not logged in.");
+
+      await deleteDoc(doc(db, "users", user.uid));
+      await deleteUser(user);
+      alert("Your account has been deleted.");
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (err: any) {
+      console.error("Delete account error:", err);
+      if (err.code === "auth/requires-recent-login") {
+        alert("Please log in again to delete your account.");
+      } else {
+        alert("Failed to delete account.");
+      }
     }
   };
 

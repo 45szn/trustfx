@@ -10,6 +10,8 @@ import { User, Lock, Bell, TrendingUp, Trash2, Loader2 } from "lucide-react";
 import { ProfileSettings } from "./components/ProfileSettings";
 import { SecuritySettings } from "./components/SecuritySettings";
 import { NotificationPref } from "./components/NotificationPref";
+import { InvestmentPref } from "./components/InvestmentPref";
+import { AccountActions } from "./components/AccountActions";
 
 const Settings = () => {
   const { user, loading } = useAuth();
@@ -116,10 +118,14 @@ const Settings = () => {
           </TabsContent>
 
           {/* Investment Preferences */}
-          <TabsContent value="preferences"></TabsContent>
+          <TabsContent value="preferences">
+            <InvestmentPref />
+          </TabsContent>
 
           {/* Account Actions */}
-          <TabsContent value="account"></TabsContent>
+          <TabsContent value="account">
+            <AccountActions />
+          </TabsContent>
         </div>
       </Tabs>
     </div>

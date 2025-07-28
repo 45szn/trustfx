@@ -1,32 +1,35 @@
-import React, { useState } from "react";
+import React from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
+import { useNotificationSettings } from "../../../notifications/components/UseNotificationSettings";
+import { Loader2 } from "lucide-react";
 
 export const NotificationPref = () => {
-  // Mock state for notification settings (can be linked to the modal from notifications page)
-  const [notifications, setNotifications] = useState({
-    emailInvestment: true,
-    inAppInvestment: true,
-    emailTransaction: true,
-    inAppTransaction: true,
-    emailSecurity: true,
-    inAppSecurity: true,
-    emailPromotions: false,
-    inAppPromotions: true,
-  });
+  const { settings, setSettings, saveSettings, loading } =
+    useNotificationSettings();
 
   const handleNotificationToggle = (key: string, checked: boolean) => {
-    setNotifications((prev) => ({ ...prev, [key]: checked }));
+    setSettings((prev) => ({ ...prev, [key]: checked }));
   };
 
-  const handleSaveChanges = (section: string) => {
-    // Simulate saving changes
-    console.log(`Saving ${section} changes...`);
-    // In a real app, you'd send this data to your backend
-    alert(`${section} settings saved!`);
+  const handleSaveChanges = async () => {
+    try {
+      await saveSettings(settings);
+      alert("Notification preferences saved!");
+    } catch (err) {
+      console.error("Failed to save notification preferences", err);
+    }
   };
+
+  if (loading)
+    return (
+      <div className="flex items-center p-6">
+        <Loader2 className="animate-spin h-6 w-6 mr-2" />
+        Loading notifications settings...
+      </div>
+    );
 
   return (
     <Card>
@@ -47,7 +50,7 @@ export const NotificationPref = () => {
               </Label>
               <Switch
                 id="email-investment"
-                checked={notifications.emailInvestment}
+                checked={settings.emailInvestment}
                 onCheckedChange={(checked) =>
                   handleNotificationToggle("emailInvestment", checked)
                 }
@@ -59,7 +62,7 @@ export const NotificationPref = () => {
               </Label>
               <Switch
                 id="inapp-investment"
-                checked={notifications.inAppInvestment}
+                checked={settings.inAppInvestment}
                 onCheckedChange={(checked) =>
                   handleNotificationToggle("inAppInvestment", checked)
                 }
@@ -79,7 +82,7 @@ export const NotificationPref = () => {
               </Label>
               <Switch
                 id="email-transaction"
-                checked={notifications.emailTransaction}
+                checked={settings.emailTransaction}
                 onCheckedChange={(checked) =>
                   handleNotificationToggle("emailTransaction", checked)
                 }
@@ -94,7 +97,7 @@ export const NotificationPref = () => {
               </Label>
               <Switch
                 id="inapp-transaction"
-                checked={notifications.inAppTransaction}
+                checked={settings.inAppTransaction}
                 onCheckedChange={(checked) =>
                   handleNotificationToggle("inAppTransaction", checked)
                 }
@@ -111,7 +114,7 @@ export const NotificationPref = () => {
               </Label>
               <Switch
                 id="email-security"
-                checked={notifications.emailSecurity}
+                checked={settings.emailSecurity}
                 onCheckedChange={(checked) =>
                   handleNotificationToggle("emailSecurity", checked)
                 }
@@ -123,7 +126,7 @@ export const NotificationPref = () => {
               </Label>
               <Switch
                 id="inapp-security"
-                checked={notifications.inAppSecurity}
+                checked={settings.inAppSecurity}
                 onCheckedChange={(checked) =>
                   handleNotificationToggle("inAppSecurity", checked)
                 }
@@ -140,7 +143,7 @@ export const NotificationPref = () => {
               </Label>
               <Switch
                 id="email-promotions"
-                checked={notifications.emailPromotions}
+                checked={settings.emailPromotions}
                 onCheckedChange={(checked) =>
                   handleNotificationToggle("emailPromotions", checked)
                 }
@@ -152,7 +155,7 @@ export const NotificationPref = () => {
               </Label>
               <Switch
                 id="inapp-promotions"
-                checked={notifications.inAppPromotions}
+                checked={settings.inAppPromotions}
                 onCheckedChange={(checked) =>
                   handleNotificationToggle("inAppPromotions", checked)
                 }
@@ -160,8 +163,12 @@ export const NotificationPref = () => {
             </div>
           </div>
         </div>
-        <Button onClick={() => handleSaveChanges("Notification")}>
-          Save Changes
+        <Button onClick={handleSaveChanges} disabled={loading}>
+          {loading ? (
+            <div className="animate-spin h-6 w-6 mr-2"></div>
+          ) : (
+            "Save Changes"
+          )}
         </Button>
       </CardContent>
     </Card>
