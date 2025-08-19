@@ -75,7 +75,7 @@ export function NotificationSettingsModal({
                 <Switch
                   id="email-alerts"
                   checked={settings.emailAlerts}
-                  onCheckedChange={(checked) =>
+                  onCheckedChange={(checked: boolean) =>
                     handleSettingChange("emailAlerts", checked)
                   }
                 />
@@ -96,7 +96,7 @@ export function NotificationSettingsModal({
                 <Switch
                   id="push-notifications"
                   checked={settings.pushNotifications}
-                  onCheckedChange={(checked) =>
+                  onCheckedChange={(checked: boolean) =>
                     handleSettingChange("pushNotifications", checked)
                   }
                 />
@@ -117,7 +117,7 @@ export function NotificationSettingsModal({
                 <Switch
                   id="in-app-alerts"
                   checked={settings.inAppAlerts}
-                  onCheckedChange={(checked) =>
+                  onCheckedChange={(checked: boolean) =>
                     handleSettingChange("inAppAlerts", checked)
                   }
                 />
@@ -143,7 +143,7 @@ export function NotificationSettingsModal({
                 <Switch
                   id="investment-updates"
                   checked={settings.investmentUpdates}
-                  onCheckedChange={(checked) =>
+                  onCheckedChange={(checked: boolean) =>
                     handleSettingChange("investmentUpdates", checked)
                   }
                 />
@@ -161,7 +161,7 @@ export function NotificationSettingsModal({
                 <Switch
                   id="transaction-alerts"
                   checked={settings.transactionAlerts}
-                  onCheckedChange={(checked) =>
+                  onCheckedChange={(checked: boolean) =>
                     handleSettingChange("transactionAlerts", checked)
                   }
                 />
@@ -179,7 +179,7 @@ export function NotificationSettingsModal({
                 <Switch
                   id="system-alerts"
                   checked={settings.systemAlerts}
-                  onCheckedChange={(checked) =>
+                  onCheckedChange={(checked: boolean) =>
                     handleSettingChange("systemAlerts", checked)
                   }
                 />
@@ -200,7 +200,7 @@ export function NotificationSettingsModal({
                 <Switch
                   id="promo-alerts"
                   checked={settings.promoAlerts}
-                  onCheckedChange={(checked) =>
+                  onCheckedChange={(checked: boolean) =>
                     handleSettingChange("promoAlerts", checked)
                   }
                 />
