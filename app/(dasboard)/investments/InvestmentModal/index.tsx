@@ -2,11 +2,12 @@
 
 import { useState } from "react";
 import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
+  AlertDialog,
+  AlertDialogContent,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogCancel,
+} from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -25,6 +26,7 @@ import {
   TrendingUp,
   Shield,
   AlertCircle,
+  XIcon,
 } from "lucide-react";
 import { auth, db } from "@/lib/firebase";
 import { doc, updateDoc, arrayUnion, getDoc } from "firebase/firestore";
@@ -52,6 +54,27 @@ interface InvestmentModalProps {
   setUserBalance: (value: number) => void;
 }
 
+const cryptoOptions = [
+  {
+    id: "btc",
+    name: "Bitcoin",
+    network: "BTC",
+    address: "bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh",
+  },
+  {
+    id: "eth",
+    name: "Ethereum",
+    network: "ERC-20",
+    address: "0xAbC1234567890dEF1234567890abCdEf12345678",
+  },
+  {
+    id: "usdt",
+    name: "Tether (USDT)",
+    network: "TRC-20",
+    address: "TQJXU9Bf3YpG7hU2xbW3asLmM6uxHFX123",
+  },
+];
+
 export function InvestmentModal({
   isOpen,
   onClose,
@@ -61,6 +84,7 @@ export function InvestmentModal({
 }: InvestmentModalProps) {
   const [amount, setAmount] = useState("");
   const [fundingSource, setFundingSource] = useState("");
+  const [selectedCoin, setSelectedCoin] = useState<string | null>(null);
   const [agreedToTerms, setAgreedToTerms] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
@@ -176,14 +200,19 @@ export function InvestmentModal({
   };
 
   return (
-    <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-2xl">
-        <DialogHeader>
-          <DialogTitle className="flex items-center space-x-2">
-            <span className="text-2xl">{plan.icon}</span>
-            <span>Invest in {plan.name}</span>
-          </DialogTitle>
-        </DialogHeader>
+    <AlertDialog open={isOpen} onOpenChange={onClose}>
+      <AlertDialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto">
+        <AlertDialogHeader>
+          <div className="flex items-center justify-between">
+            <AlertDialogTitle className="flex items-center space-x-2">
+              <span className="text-2xl">{plan.icon}</span>
+              <span>Invest in {plan.name}</span>
+            </AlertDialogTitle>
+            <AlertDialogCancel className="bg-transparent">
+              <XIcon />
+            </AlertDialogCancel>
+          </div>
+        </AlertDialogHeader>
 
         <div className="space-y-6">
           {/* Plan Summary */}
@@ -268,7 +297,13 @@ export function InvestmentModal({
           {/* Funding Source */}
           <div className="space-y-2">
             <Label htmlFor="funding">Source of Funds</Label>
-            <Select value={fundingSource} onValueChange={setFundingSource}>
+            <Select
+              value={fundingSource}
+              onValueChange={(val) => {
+                setFundingSource(val);
+                if (val !== "crypto") setSelectedCoin(null); // reset if not crypto
+              }}
+            >
               <SelectTrigger>
                 <SelectValue placeholder="Select funding source" />
               </SelectTrigger>
@@ -276,10 +311,61 @@ export function InvestmentModal({
                 <SelectItem value="wallet">
                   Wallet Balance (${userBalance.toLocaleString()})
                 </SelectItem>
-                <SelectItem value="card">Credit/Debit Card</SelectItem>
-                <SelectItem value="bank">Bank Transfer</SelectItem>
+                <SelectItem value="crypto">Crypto Payment</SelectItem>
               </SelectContent>
             </Select>
+
+            {/* Show crypto options if "crypto" is selected */}
+            {fundingSource === "crypto" && (
+              <div className="mt-3 space-y-2">
+                <Label>Select Coin</Label>
+                <Select onValueChange={setSelectedCoin}>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Choose coin" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {cryptoOptions.map((coin) => (
+                      <SelectItem key={coin.id} value={coin.id}>
+                        {coin.name} ({coin.network})
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+
+                {/* Display wallet details when a coin is chosen */}
+                {selectedCoin &&
+                  (() => {
+                    const coin = cryptoOptions.find(
+                      (c) => c.id === selectedCoin,
+                    );
+                    if (!coin) return null;
+                    return (
+                      <div className="p-3 border rounded bg-gray-50 space-y-1">
+                        <p className="text-sm">
+                          Send funds to the address below. Once payment is
+                          received, your investment will be activated. This may
+                          take a few minutes.
+                        </p>
+                        <p>
+                          <strong>Network:</strong> {coin.network}
+                        </p>
+                        <p>
+                          <strong>Wallet Address:</strong> {coin.address}
+                        </p>
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          onClick={() =>
+                            navigator.clipboard.writeText(coin.address)
+                          }
+                        >
+                          Copy Address
+                        </Button>
+                      </div>
+                    );
+                  })()}
+              </div>
+            )}
           </div>
 
           {/* Terms Agreement */}
@@ -316,16 +402,20 @@ export function InvestmentModal({
             </Button>
             <Button
               onClick={handleSubmit}
-              disabled={!canSubmit || isSubmitting}
+              disabled={
+                !canSubmit || isSubmitting || fundingSource === "crypto"
+              }
               className="flex-1"
             >
-              {isSubmitting
-                ? "Processing..."
-                : `Invest $${investmentAmount.toLocaleString()}`}
+              {fundingSource === "crypto"
+                ? "Send funds to address above"
+                : isSubmitting
+                  ? "Processing..."
+                  : `Invest $${investmentAmount.toLocaleString()}`}
             </Button>
           </div>
         </div>
-      </DialogContent>
-    </Dialog>
+      </AlertDialogContent>
+    </AlertDialog>
   );
 }
