@@ -14,6 +14,7 @@ import {
   Award,
 } from "lucide-react";
 import AnimatedCounter from "@/components/AnimatedCounter";
+import CTASection from "@/app/(landingpage)/components/CTA";
 
 export default function TestimonialsStats() {
   const [isVisible, setIsVisible] = useState(false);
@@ -186,29 +187,20 @@ export default function TestimonialsStats() {
         </div>
 
         {/* Bottom Section */}
-        <div
-          className={`mt-16 transition-all duration-1000 delay-1600 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
-        >
-          <Card className="bg-gradient-to-r from-blue-600 to-purple-600 text-white border-0">
-            <CardContent className="p-12 text-center">
-              <h3 className="text-3xl font-bold mb-4">
-                Ready to Join Our Success Story?
-              </h3>
-              <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
-                Become part of a community that&apos;s redefining what it means
-                to invest with confidence and achieve real results.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <button className="px-8 py-4 bg-white text-blue-600 font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
-                  Start Your Investment Journey
-                </button>
-                <button className="px-8 py-4 border-2 border-white text-white font-semibold rounded-xl hover:bg-white/10 transition-all duration-300">
-                  Read More Stories
-                </button>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
+        <CTASection
+          title="Ready to Join Our Success Story?"
+          description="Become part of a community that's redefining what it means
+                    to invest with confidence and achieve real results."
+          primaryAction={{
+            label: "Start Your Investment Journey",
+            href: "/register",
+          }}
+          secondaryAction={{
+            label: "Read More Stories",
+            href: "/testmonials",
+          }}
+          variant="dark"
+        />
       </div>
     </section>
   );

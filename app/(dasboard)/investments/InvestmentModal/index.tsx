@@ -336,7 +336,9 @@ export function InvestmentModal({
                 {/* Display wallet details when a coin is chosen */}
                 {selectedCoin &&
                   (() => {
-                    const coin = cryptoOptions.find((c) => c.id === selectedCoin);
+                    const coin = cryptoOptions.find(
+                      (c) => c.id === selectedCoin,
+                    );
                     if (!coin) return null;
                     return (
                       <div className="p-3 border rounded bg-gray-50 space-y-3">
@@ -367,14 +369,15 @@ export function InvestmentModal({
                         <Button
                           variant="outline"
                           size="sm"
-                          onClick={() => navigator.clipboard.writeText(coin.address)}
+                          onClick={() =>
+                            navigator.clipboard.writeText(coin.address)
+                          }
                         >
                           Copy Address
                         </Button>
                       </div>
                     );
                   })()}
-
               </div>
             )}
           </div>

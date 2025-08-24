@@ -103,22 +103,22 @@ const Dashboard = () => {
         nextPayout={nextPayout}
       />
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div className="">
         <PortfolioGraph
           chartData={chartData}
           chartPeriod={chartPeriod}
           setChartPeriod={setChartPeriod}
         />
-
-        {/* Recent Activity */}
-        <RecentActivity transactions={transactions} />
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        {/* Recent Activity */}
+        <RecentActivity transactions={transactions} />
+
         <Recommendations />
 
         {/* Notifications Preview */}
-        <Card>
+        {/* <Card>
           <CardHeader>
             <CardTitle className="flex items-center justify-between">
               Notifications
@@ -153,7 +153,7 @@ const Dashboard = () => {
               ))}
             </div>
           </CardContent>
-        </Card>
+        </Card> */}
       </div>
 
       {/* Quick Actions */}

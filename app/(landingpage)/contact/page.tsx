@@ -11,7 +11,7 @@ const Contact = () => {
       <HereToHelp />
       <ContactOptions />
       <ContactForm />
-      <ContactInfo />
+      {/* <ContactInfo /> */}
       <ContactCTA />
     </>
   );

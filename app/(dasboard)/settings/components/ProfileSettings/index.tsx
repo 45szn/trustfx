@@ -41,7 +41,9 @@ export const ProfileSettings = () => {
           country: data?.country || "",
         });
       } catch (error) {
-        toast.error("Error loading profile. Please refresh the page and try again.");
+        toast.error(
+          "Error loading profile. Please refresh the page and try again.",
+        );
       } finally {
         setLoading(false);
       }
@@ -69,7 +71,7 @@ export const ProfileSettings = () => {
             country: profile.country,
           },
         },
-        { merge: true }
+        { merge: true },
       );
 
       // update Firebase Auth displayName
@@ -159,14 +161,7 @@ export const ProfileSettings = () => {
   );
 };
 
-
-
-
-
-
-
-
-// don't get rid of this, it's for uploading of picture 
+// don't get rid of this, it's for uploading of picture
 // "use client";
 
 // import React, { useEffect, useRef, useState } from "react";

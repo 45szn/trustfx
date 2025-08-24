@@ -5,6 +5,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { BarChart3, Shield, Handshake, CheckCircle } from "lucide-react";
 import LinkWithLoader from "@/components/LinkWithLoader";
+import CTASection from "@/app/(landingpage)/components/CTA";
 
 export default function SetUsApart() {
   const [visibleCards, setVisibleCards] = useState<number[]>([]);
@@ -150,30 +151,18 @@ export default function SetUsApart() {
         </div>
 
         {/* Bottom CTA */}
-        <div className="mt-16 text-center">
-          <Card className="bg-gradient-to-r from-blue-600 to-purple-600 text-white border-0">
-            <CardContent className="p-12">
-              <h3 className="text-3xl font-bold mb-4">
-                Ready to Experience the Difference?
-              </h3>
-              <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
-                Join thousands of investors who&apos;ve chosen TrustFx for
-                secure, transparent, and profitable investing.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <LinkWithLoader href={"/register"}>
-                  <button className="px-8 py-4 bg-white text-blue-600 font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
-                    Start Investing Today
-                  </button>
-                </LinkWithLoader>
-
-                <button className="px-8 py-4 border-2 border-white text-white font-semibold rounded-xl hover:bg-white/10 transition-all duration-300">
-                  Schedule a Consultation
-                </button>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
+        <CTASection
+          title="Ready to Experience the Difference?"
+          description="Join thousands of investors who've chosen TrustFx for secure, transparent, and profitable investing."
+          primaryAction={{
+            label: "Start Investing Today",
+            href: "/register",
+          }}
+          secondaryAction={{
+            label: "Schedule a Consultation",
+          }}
+          variant="dark"
+        />
       </div>
     </section>
   );

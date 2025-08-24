@@ -1,17 +1,34 @@
 "use client";
 
-import { useState } from "react";
-// import Link from "next/link";
+import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import LinkWithLoader from "../LinkWithLoader";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const [showNavbar, setShowNavbar] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > lastScrollY && window.scrollY > 50) {
+        // scrolling down
+        setShowNavbar(false);
+      } else {
+        // scrolling up
+        setShowNavbar(true);
+      }
+      setLastScrollY(window.scrollY);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [lastScrollY]);
 
   const navItems = [
     { name: "About", href: "/about" },
@@ -22,7 +39,11 @@ export default function Navbar() {
   ];
 
   return (
-    <nav className="fixed top-0 w-full px-4 z-50 backdrop-blur-md border-b border-gray-800 xl:px-0">
+    <nav
+      className={`fixed top-0 w-full px-4 z-50 backdrop-blur-md border-b border-gray-800 xl:px-0 transform transition-transform duration-300 ${
+        showNavbar ? "translate-y-0" : "-translate-y-full"
+      }`}
+    >
       <div className="w-full opacity-100">
         <div className="flex container mx-auto items-center justify-between h-16">
           {/* Logo */}
