@@ -41,6 +41,7 @@ export const ProfileSettings = () => {
           country: data?.country || "",
         });
       } catch (error) {
+        console.log("error fetching profile:", error)
         toast.error(
           "Error loading profile. Please refresh the page and try again.",
         );
