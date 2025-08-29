@@ -1,7 +1,7 @@
 // file: components/layout/footer/FooterMain.tsx
 "use client";
 
-import { MapPin, Phone, Mail, Shield, Award, Clock, TrendingUp } from "lucide-react";
+import { Phone, Mail, Shield, Award, Clock, TrendingUp } from "lucide-react";
 import LinkWithLoader from "@/components/LinkWithLoader";
 
 export default function FooterMain() {
@@ -24,10 +24,10 @@ export default function FooterMain() {
           </div>
 
           <div className="space-y-3">
-            <div className="flex items-center gap-3 text-gray-300">
+            {/* <div className="flex items-center gap-3 text-gray-300">
               <MapPin className="w-5 h-5 text-blue-400" />
               <span>123 Financial District, New York, NY 10004</span>
-            </div>
+            </div> */}
             <div className="flex items-center gap-3 text-gray-300">
               <Phone className="w-5 h-5 text-green-400" />
               <span>+1 (555) 123-4567</span>

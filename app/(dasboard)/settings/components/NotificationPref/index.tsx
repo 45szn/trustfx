@@ -5,6 +5,7 @@ import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { useNotificationSettings } from "../../../notifications/components/UseNotificationSettings";
 import { Loader2 } from "lucide-react";
+import { toast } from "sonner";
 
 export const NotificationPref = () => {
   const { settings, setSettings, saveSettings, loading } =
@@ -17,7 +18,7 @@ export const NotificationPref = () => {
   const handleSaveChanges = async () => {
     try {
       await saveSettings(settings);
-      alert("Notification preferences saved!");
+      toast.success("Notification preferences saved!");
     } catch (err) {
       console.error("Failed to save notification preferences", err);
     }

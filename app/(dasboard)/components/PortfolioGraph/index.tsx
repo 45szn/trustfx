@@ -26,7 +26,7 @@ export default function PortfolioGraph({
   chartData,
 }: Props) {
   return (
-    <Card className="lg:col-span-2">
+    <Card className="h-fit lg:col-span-2">
       <CardHeader>
         <div className="flex items-center justify-between">
           <CardTitle>Portfolio Performance</CardTitle>

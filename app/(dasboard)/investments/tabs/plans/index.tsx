@@ -16,6 +16,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { InvestmentModal } from "@/app/(dasboard)/investments/InvestmentModal";
 import { Badge } from "@/components/ui/badge";
+import { useSearchParams } from "next/navigation";
 
 export const Plans = () => {
   const { balance, activeInvestments, loading } = useUserInvestments();
@@ -32,7 +33,22 @@ export const Plans = () => {
     }
   }, [balance]);
 
-  console.log("userBalance", userBalance);
+  const searchParams = useSearchParams();
+
+  useEffect(() => {
+    const planQuery = searchParams.get("plan");
+    if (planQuery) {
+      const decodedPlan = decodeURIComponent(planQuery);
+      const foundPlan = investmentPlans.find(
+        (p) => p.name.toLowerCase() === decodedPlan.toLowerCase(),
+      );
+
+      if (foundPlan) {
+        setSelectedPlan(foundPlan);
+        setIsModalOpen(true);
+      }
+    }
+  }, [searchParams]);
 
   const handleStartInvestment = (plan: (typeof investmentPlans)[0]) => {
     setSelectedPlan(plan);

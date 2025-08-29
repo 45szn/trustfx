@@ -8,7 +8,7 @@ export const investmentPlans = [
     icon: "🌱",
     minAmount: 100,
     duration: "30 days",
-    expectedReturn: 5,
+    expectedReturn: 15,
     riskLevel: "low" as const,
     features: [
       "Low risk investment",
@@ -27,7 +27,7 @@ export const investmentPlans = [
     icon: "📈",
     minAmount: 500,
     duration: "90 days",
-    expectedReturn: 12,
+    expectedReturn: 32.5,
     riskLevel: "medium" as const,
     features: [
       "Balanced risk-reward",
@@ -46,7 +46,7 @@ export const investmentPlans = [
     icon: "💎",
     minAmount: 2000,
     duration: "180 days",
-    expectedReturn: 20,
+    expectedReturn: 45,
     riskLevel: "medium" as const,
     features: [
       "Higher returns",
@@ -65,7 +65,7 @@ export const investmentPlans = [
     icon: "🏆",
     minAmount: 10000,
     duration: "365 days",
-    expectedReturn: 35,
+    expectedReturn: 65,
     riskLevel: "high" as const,
     features: [
       "Maximum returns",

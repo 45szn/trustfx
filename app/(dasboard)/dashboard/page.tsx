@@ -5,7 +5,7 @@ import useAuth from "@/hooks/useAuth";
 import DashHead from "../components/DashHead";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { TrendingUp, Plus, Minus, FileText, Phone, Bell } from "lucide-react";
+import { TrendingUp, Plus, Minus, FileText, Phone } from "lucide-react";
 import SummaryCards from "../components/SummaryCards";
 import { useUserInvestments } from "@/hooks/useUserInvestments";
 import { differenceInDays, parseISO } from "date-fns";
@@ -14,30 +14,6 @@ import { usePortfolioPerformance } from "@/hooks/usePortfolioPerformance";
 import type { ChartPeriod } from "@/hooks/usePortfolioPerformance";
 import RecentActivity from "../components/RecentActivity";
 import { Recommendations } from "../components/Reccomendations";
-
-const notifications = [
-  {
-    id: 1,
-    title: "New earnings available",
-    description: "Your Growth Plan earned $25",
-    time: "1 hour ago",
-    unread: true,
-  },
-  {
-    id: 2,
-    title: "Investment completed",
-    description: "Premium Plan cycle completed",
-    time: "2 days ago",
-    unread: true,
-  },
-  {
-    id: 3,
-    title: "System maintenance",
-    description: "Scheduled maintenance tonight",
-    time: "3 days ago",
-    unread: false,
-  },
-];
 
 const Dashboard = () => {
   const { user } = useAuth();
@@ -103,22 +79,22 @@ const Dashboard = () => {
         nextPayout={nextPayout}
       />
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div className="">
         <PortfolioGraph
           chartData={chartData}
           chartPeriod={chartPeriod}
           setChartPeriod={setChartPeriod}
         />
-
-        {/* Recent Activity */}
-        <RecentActivity transactions={transactions} />
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        {/* Recent Activity */}
+        <RecentActivity transactions={transactions} />
+
         <Recommendations />
 
         {/* Notifications Preview */}
-        <Card>
+        {/* <Card>
           <CardHeader>
             <CardTitle className="flex items-center justify-between">
               Notifications
@@ -153,7 +129,7 @@ const Dashboard = () => {
               ))}
             </div>
           </CardContent>
-        </Card>
+        </Card> */}
       </div>
 
       {/* Quick Actions */}

@@ -11,7 +11,7 @@ import {
 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import LinkWithLoader from "@/components/LinkWithLoader";
+import CTASection from "../CTA";
 
 const features = [
   {
@@ -225,39 +225,20 @@ export default function WhyTrustFx() {
         </div>
 
         {/* Bottom CTA with animated elements */}
-        <div className="relative">
-          <div className="absolute inset-0 bg-gradient-to-r from-blue-600/5 via-purple-600/5 to-pink-600/5 blur-2xl" />
-          <Card className="relative bg-gradient-to-br from-white to-gray-50 border-2 border-gray-100 shadow-xl">
-            <CardContent className="p-12 text-center">
-              <div className="flex justify-center mb-6">
-                <div className="p-4 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full text-white shadow-lg animate-pulse">
-                  <TrendingUp className="w-8 h-8" />
-                </div>
-              </div>
-              <h3 className="text-3xl font-bold text-gray-900 mb-4">
-                Ready to Start Your Investment Journey?
-              </h3>
-              <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
-                Join thousands of satisfied investors who trust TrustFx with
-                their financial future. Your success is our mission.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <LinkWithLoader href={"/register"}>
-                  <button className="px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-500 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 group">
-                    Start Investing Today
-                    <TrendingUp className="inline-block w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
-                  </button>
-                </LinkWithLoader>
-
-                <LinkWithLoader href={"/security"}>
-                  <button className="px-8 py-4 border-2 border-gray-300 text-gray-700 font-semibold rounded-xl hover:border-gray-400 hover:bg-gray-50 transition-all duration-300">
-                    Learn More About Security
-                  </button>
-                </LinkWithLoader>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
+        <CTASection
+          title="Ready to Start Your Investment Journey?"
+          description="Join thousands of satisfied investors who trust TrustFx with their financial future. Your success is our mission."
+          primaryAction={{
+            label: "Start Investing Today",
+            href: "/register",
+            icon: <TrendingUp className="w-5 h-5" />,
+          }}
+          secondaryAction={{
+            label: "Learn More About Security",
+            href: "/security",
+          }}
+          variant="light"
+        />
       </div>
     </section>
   );

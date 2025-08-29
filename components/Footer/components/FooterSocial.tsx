@@ -1,9 +1,9 @@
 // file: components/layout/footer/FooterSocial.tsx
 "use client";
 
-import Link from "next/link";
+// import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { Facebook, Twitter, Instagram, Linkedin, Youtube, ArrowUp } from "lucide-react";
+import { ArrowUp } from "lucide-react";
 
 interface Props {
   onScrollTop: () => void;
@@ -12,8 +12,8 @@ interface Props {
 export default function FooterSocial({ onScrollTop }: Props) {
   return (
     <div className="py-8 border-t border-gray-800">
-      <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-        <div className="flex items-center gap-4">
+      <div className="flex flex-col md:flex-end items-center justify-between gap-6">
+        {/* <div className="flex items-center gap-4">
           <span className="text-gray-300 font-medium">Follow Us:</span>
           <div className="flex gap-3">
             <Link
@@ -47,7 +47,7 @@ export default function FooterSocial({ onScrollTop }: Props) {
               <Youtube className="w-5 h-5" />
             </Link>
           </div>
-        </div>
+        </div> */}
 
         <Button
           onClick={onScrollTop}
