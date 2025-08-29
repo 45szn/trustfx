@@ -11,6 +11,7 @@ import { db } from "@/lib/firebase"; // adjust based on your setup
 import useAuth from "@/hooks/useAuth";
 import { Loader2 } from "lucide-react";
 // import { Timestamp } from "firebase/firestore";
+import { toast } from "sonner";
 
 export const SecuritySettings = () => {
   const { user } = useAuth();
@@ -25,18 +26,25 @@ export const SecuritySettings = () => {
     if (!user) return;
 
     const fetchSettings = async () => {
-      const ref = doc(db, "users", user.uid, "settings", "security");
-      const snapshot = await getDoc(ref);
+      try {
+        const ref = doc(db, "users", user.uid, "settings", "security");
+        const snapshot = await getDoc(ref);
 
-      if (snapshot.exists()) {
-        const data = snapshot.data();
-        setSecurity({
-          twoFactorAuth: data.twoFactorAuth ?? false,
-          newDeviceAlerts: data.newDeviceAlerts ?? false,
-          lastLogin: data.lastLogin?.toDate().toLocaleString() ?? "N/A",
-        });
+        if (snapshot.exists()) {
+          const data = snapshot.data();
+          setSecurity({
+            twoFactorAuth: data.twoFactorAuth ?? false,
+            newDeviceAlerts: data.newDeviceAlerts ?? false,
+            lastLogin: data.lastLogin?.toDate().toLocaleString() ?? "N/A",
+          });
+        }
+      } catch (error) {
+        toast.error(
+          "Error saving changes. Please refresh the page and try again.",
+        );
+      } finally {
+        setLoading(false);
       }
-      setLoading(false);
     };
 
     fetchSettings();
@@ -47,7 +55,7 @@ export const SecuritySettings = () => {
   };
 
   const handleChangePassword = () => {
-    alert("Trigger Firebase password reset or open modal");
+    toast("Trigger Firebase password reset or open modal");
   };
 
   const handleSaveChanges = async () => {
@@ -61,7 +69,7 @@ export const SecuritySettings = () => {
       lastLogin: serverTimestamp(), // store fresh login timestamp
     });
 
-    alert("Security settings saved!");
+    toast.success("Your security changes have been saved successfully.");
   };
 
   if (loading)

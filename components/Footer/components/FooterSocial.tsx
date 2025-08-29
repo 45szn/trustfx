@@ -1,9 +1,9 @@
 // file: components/layout/footer/FooterSocial.tsx
 "use client";
 
-import Link from "next/link";
+// import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { Facebook, Twitter, Instagram, Linkedin, Youtube, ArrowUp } from "lucide-react";
+import { ArrowUp } from "lucide-react";
 
 interface Props {
   onScrollTop: () => void;

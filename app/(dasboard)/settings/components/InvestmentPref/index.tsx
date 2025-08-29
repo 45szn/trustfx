@@ -7,6 +7,7 @@ import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { Input } from "@/components/ui/input";
 import { useInvestmentSettings } from "@/hooks/useInvestmentSettings";
+import { toast } from "sonner";
 
 export const InvestmentPref = () => {
   const { settings, setSettings, saveSettings, loading } =
@@ -20,7 +21,7 @@ export const InvestmentPref = () => {
   const handleSave = async () => {
     try {
       await saveSettings(settings);
-      alert("Investment preferences saved!");
+      toast.success("Investment preferences saved!");
     } catch (err) {
       console.error("Failed to save preferences:", err);
     }

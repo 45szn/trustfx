@@ -1,7 +1,7 @@
 // file: components/layout/footer/FooterMain.tsx
 "use client";
 
-import { MapPin, Phone, Mail, Shield, Award, Clock, TrendingUp } from "lucide-react";
+import { Phone, Mail, Shield, Award, Clock, TrendingUp } from "lucide-react";
 import LinkWithLoader from "@/components/LinkWithLoader";
 
 export default function FooterMain() {

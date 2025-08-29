@@ -9,6 +9,7 @@ import { Separator } from "@/components/ui/separator";
 import { getAuth, signOut, deleteUser } from "firebase/auth";
 import { doc, deleteDoc } from "firebase/firestore";
 import { db } from "@/lib/firebase";
+import { toast } from "sonner";
 
 export const AccountActions = () => {
   const handleLogoutAllDevices = async () => {
@@ -19,11 +20,11 @@ export const AccountActions = () => {
       if (user) {
         await user.getIdToken(true); // Force refresh
         await signOut(auth); // Sign out current session
-        alert("Logged out from all devices.");
+        toast.error("Logged out from all devices.");
       }
     } catch (err) {
       console.error("Logout error:", err);
-      alert("Failed to log out from all devices.");
+      toast.error("Failed to log out from all devices.");
     }
   };
 
