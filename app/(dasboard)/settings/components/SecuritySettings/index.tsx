@@ -42,6 +42,7 @@ export const SecuritySettings = () => {
         toast.error(
           "Error saving changes. Please refresh the page and try again.",
         );
+        console.log(error);
       } finally {
         setLoading(false);
       }

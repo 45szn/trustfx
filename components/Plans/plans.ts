@@ -2,8 +2,8 @@ import {
   TrendingUp,
   Shield,
   Globe,
-  Bot,
-  Lock,
+  // Bot,
+  // Lock,
   Star,
 } from "lucide-react";
 
