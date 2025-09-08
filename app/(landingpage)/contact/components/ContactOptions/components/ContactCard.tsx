@@ -66,7 +66,7 @@ export default function ContactCard({ option, isVisible }: Props) {
             {option.id === 1 && (
               <Button
                 className={`w-full bg-gradient-to-r ${option.gradient} text-white font-semibold transition-all duration-300 hover:scale-105`}
-                onClick={() => window.open("mailto:support@trustfx.com")}
+                onClick={() => window.open("mailto:trustradefxcustomerservice@gmail.com")}
               >
                 Send Email
                 <ExternalLink className="w-4 h-4 ml-2" />
@@ -76,7 +76,7 @@ export default function ContactCard({ option, isVisible }: Props) {
               <div className="space-y-2">
                 <Button
                   className={`w-full bg-gradient-to-r ${option.gradient} text-white font-semibold transition-all duration-300 hover:scale-105`}
-                  onClick={() => window.open("tel:+15551234567")}
+                  onClick={() => window.open("tel:+18458666018")}
                 >
                   Call Now
                   <Phone className="w-4 h-4 ml-2" />
@@ -84,7 +84,7 @@ export default function ContactCard({ option, isVisible }: Props) {
                 <Button
                   variant="outline"
                   className="w-full border-2 border-green-500 text-green-600 hover:bg-green-50"
-                  onClick={() => window.open("https://wa.me/15559876543")}
+                  onClick={() => window.open("https://wa.me/18458666018")}
                 >
                   WhatsApp
                   <MessageCircle className="w-4 h-4 ml-2" />

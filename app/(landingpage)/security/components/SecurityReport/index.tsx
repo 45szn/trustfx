@@ -99,13 +99,13 @@ export default function SecurityReport() {
                         Security Email
                       </h4>
                     </div>
-                    <p className="text-red-200 mb-3">security@trustfx.com</p>
+                    <p className="text-red-200 mb-3">trustradefxcustomerservice@gmail.com</p>
                     <p className="text-sm text-gray-300">
                       Monitored 24/7 for immediate response
                     </p>
                     <Button
                       className="w-full mt-4 bg-red-500 hover:bg-red-600 text-white font-semibold transition-all duration-300"
-                      onClick={() => window.open("mailto:security@trustfx.com")}
+                      onClick={() => window.open("mailto:trustradefxcustomerservice@gmail.com")}
                     >
                       Send Security Email
                       <Mail className="w-4 h-4 ml-2" />
@@ -119,13 +119,13 @@ export default function SecurityReport() {
                         Emergency Hotline
                       </h4>
                     </div>
-                    <p className="text-red-200 mb-3">+1 (555) 911-SAFE</p>
+                    <p className="text-red-200 mb-3">+1 (845) 866-6018</p>
                     <p className="text-sm text-gray-300">
                       Available 24/7 for urgent security matters
                     </p>
                     <Button
                       className="w-full mt-4 bg-red-500 hover:bg-red-600 text-white font-semibold transition-all duration-300"
-                      onClick={() => window.open("tel:+15559115723")}
+                      onClick={() => window.open("tel:+18458666018")}
                     >
                       Call Emergency Line
                       <Phone className="w-4 h-4 ml-2" />
