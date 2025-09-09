@@ -30,11 +30,11 @@ export default function FooterMain() {
             </div> */}
             <div className="flex items-center gap-3 text-gray-300">
               <Phone className="w-5 h-5 text-green-400" />
-              <span>+1 (555) 123-4567</span>
+              <span>+1 (845) 866-6018</span>
             </div>
             <div className="flex items-center gap-3 text-gray-300">
               <Mail className="w-5 h-5 text-purple-400" />
-              <span>support@trustfx.com</span>
+              <span>trustradefxcustomerservice@gmail.com</span>
             </div>
           </div>
 

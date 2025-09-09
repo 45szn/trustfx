@@ -12,12 +12,12 @@ export const contactOptions: ContactOption[] = [
     details: [
       {
         label: "General Support",
-        value: "support@trustfx.com",
+        value: "trustradefxcustomerservice@gmail.com",
         note: "Responds within 24 hours",
       },
       {
         label: "Investment Inquiries",
-        value: "invest@trustfx.com",
+        value: "trustradefxcustomerservice@gmail.com",
         note: "For partnership/investment questions",
       },
     ],
@@ -33,12 +33,12 @@ export const contactOptions: ContactOption[] = [
     details: [
       {
         label: "Phone",
-        value: "+1 (555) 123-4567",
+        value: "+1 (845) 866-6018",
         note: "Business hours support",
       },
       {
         label: "WhatsApp",
-        value: "+1 (555) 987-6543",
+        value: "+1 (845) 866-6018",
         note: "Quick messaging support",
       },
     ],
