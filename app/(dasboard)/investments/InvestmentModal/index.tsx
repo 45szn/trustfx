@@ -60,19 +60,19 @@ const cryptoOptions = [
     id: "btc",
     name: "Bitcoin",
     network: "BTC",
-    address: "bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh",
+    address: "bc1q2gcdfzujgm20amhe69xpyhhm3l3r9crs458qqv",
   },
   {
     id: "eth",
     name: "Ethereum",
     network: "ERC-20",
-    address: "0xAbC1234567890dEF1234567890abCdEf12345678",
+    address: "0x4E1Ab521fD29C6b6ceedCEc12345887F4E855F4f",
   },
   {
     id: "usdt",
     name: "Tether (USDT)",
     network: "TRC-20",
-    address: "TQJXU9Bf3YpG7hU2xbW3asLmM6uxHFX123",
+    address: "0x4E1Ab521fD29C6b6ceedCEc12345887F4E855F4f",
   },
 ];
 
