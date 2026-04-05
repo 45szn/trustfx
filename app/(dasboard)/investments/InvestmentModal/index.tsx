@@ -60,19 +60,19 @@ const cryptoOptions = [
     id: "btc",
     name: "Bitcoin",
     network: "BTC",
-    address: "bc1q2gcdfzujgm20amhe69xpyhhm3l3r9crs458qqv",
+    address: "bc1q52j78xeyuxc98yhaydwjxs0mwg0efh23lq5fvk",
   },
   {
     id: "eth",
     name: "Ethereum",
     network: "ERC-20",
-    address: "0x4E1Ab521fD29C6b6ceedCEc12345887F4E855F4f",
+    address: "0x5b43e67f651C5773BC723663bF8A1d9A4909e656",
   },
   {
     id: "usdt",
     name: "Tether (USDT)",
     network: "TRC-20",
-    address: "0x4E1Ab521fD29C6b6ceedCEc12345887F4E855F4f",
+    address: "0x5b43e67f651C5773BC723663bF8A1d9A4909e656",
   },
 ];
 
@@ -333,7 +333,6 @@ export function InvestmentModal({
                   </SelectContent>
                 </Select>
 
-                {/* Display wallet details when a coin is chosen */}
                 {selectedCoin &&
                   (() => {
                     const coin = cryptoOptions.find(
