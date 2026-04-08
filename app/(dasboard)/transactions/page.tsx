@@ -178,10 +178,10 @@ const Transactions = () => {
 
   return (
     <div className="container mx-auto space-y-6">
-      <DashHead title="Transactions" />
+      {/* <DashHead title="Transactions" /> */}
 
       {/* Page Header */}
-      <div className="mb-8">
+      <div className="my-6">
         <h1 className="text-2xl font-bold text-gray-900">Transactions</h1>
         <p className="text-gray-600 mt-1">
           A complete log of your account activity and movement of funds.

@@ -81,7 +81,7 @@ export default function ForgotPasswordPage() {
             type="email"
             className={`${
               errors.email ? "border-red-500" : "border-gray-900"
-            } focus:ring-0 focus:border-b border-b rounded-none text-white`}
+            } focus:ring-0 focus:border-b border-b rounded-none text-gray-900`}
           />
           {errors.email && (
             <p className="text-red-500 text-sm">{errors.email.message}</p>

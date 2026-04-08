@@ -47,10 +47,10 @@ const Settings = () => {
 
   return (
     <div className="container mx-auto space-y-6">
-      <DashHead title="Settings" />
+      {/* <DashHead title="Settings" /> */}
 
       {/* Page Header */}
-      <div className="mb-8">
+      <div className="my-8">
         <h1 className="text-2xl font-bold text-gray-900">Settings</h1>
         <p className="text-gray-600 mt-1">
           Manage your account preferences and security.

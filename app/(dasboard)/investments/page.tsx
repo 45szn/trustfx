@@ -5,9 +5,9 @@ import useAuth from "@/hooks/useAuth";
 import DashHead from "../components/DashHead";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Loader2 } from "lucide-react";
-import { Plans } from "./tabs/plans";
-import ActiveInvestments from "./tabs/active";
-import { History } from "./tabs/history";
+import { Plans } from "./components/tabs/plans";
+import ActiveInvestments from "./components/tabs/active";
+import { History } from "./components/tabs/history";
 import { useUserInvestments } from "@/hooks/useUserInvestments";
 
 const Investments = () => {
@@ -43,9 +43,9 @@ const Investments = () => {
 
   return (
     <div className="container mx-auto space-y-6">
-      <DashHead title="Investments" />
+      {/* <DashHead title="Investments" /> */}
 
-      <div className="mb-8">
+      <div className="my-8">
         <h1 className="text-2xl font-bold text-gray-900">Investments</h1>
         <p className="text-gray-600 mt-1">
           Explore investment plans, start new ones, and manage your portfolio.
