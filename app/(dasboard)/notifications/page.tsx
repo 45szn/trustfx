@@ -99,10 +99,10 @@ const Notifications = () => {
 
   return (
     <div className="container mx-auto space-y-6">
-      <DashHead title="Notifications" />
+      {/* <DashHead title="Notifications" /> */}
 
       {/* Page Header */}
-      <div className="flex flex-col items-start justify-between md:flex-row md:items-center">
+      <div className="flex flex-col items-start justify-between md:flex-row md:items-center mt-6">
         <div>
           <h1 className="text-2xl font-bold text-gray-900 flex items-center space-x-2">
             <span>Notifications</span>

@@ -84,10 +84,10 @@ const Portfolio = () => {
 
   return (
     <div className="container mx-auto space-y-6">
-      <DashHead title="Portfolio" />
+      {/* <DashHead title="Portfolio" /> */}
 
       {/* Portfolio Overview */}
-      <div className="mb-8">
+      <div className="my-8">
         <h1 className="text-2xl font-bold text-gray-900">
           {displayName}&apos;s Portfolio
         </h1>

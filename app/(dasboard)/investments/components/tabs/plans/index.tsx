@@ -10,7 +10,7 @@ import {
   TrendingUp,
 } from "lucide-react";
 import React, { useEffect, useState } from "react";
-import { investmentPlans } from "../../investment";
+import { investmentPlans } from "../../../investment";
 import { useUserInvestments } from "@/hooks/useUserInvestments";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";

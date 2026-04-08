@@ -59,10 +59,10 @@ const Dashboard = () => {
 
   return (
     <div className="container mx-auto space-y-6">
-      <DashHead title="Dashboard" />
+      {/* <DashHead title="Dashboard" /> */}
 
       {/* Welcome Section */}
-      <div className="mb-8">
+      <div className="my-8">
         <h1 className="text-2xl font-bold text-gray-900">
           Welcome {user.displayName || user.email}!
         </h1>
